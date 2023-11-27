@@ -87,6 +87,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\DrawableEntity.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\DrawableEntity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include "src/DrawableEntity.h"
 
 constexpr float cubeSpeed = 500.f;
 
@@ -16,6 +17,10 @@ int main()
 	rectangle.setFillColor(sf::Color::Red);
 	rectangle.setPosition(640, 360);
 	rectangle.setSize(sf::Vector2f(128, 128));
+
+	Entities::Player player = Entities::Player(rectangle);
+
+
 
 	sf::Clock frameClock;
 
@@ -64,7 +69,8 @@ int main()
 		window.clear();
 
 		// Tout le rendu va se dérouler ici
-		window.draw(rectangle);
+		//window.draw(rectangle);
+		player.Draw(window);
 
 		// On présente la fenêtre sur l'écran
 		window.display();
