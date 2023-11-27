@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-#include "src/DrawableEntity.h"
+#include "src/entities/Entites.h"
 
 constexpr float cubeSpeed = 500.f;
 
