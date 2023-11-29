@@ -4,9 +4,10 @@
 #include <vector>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
+#include "src/entities/Player.h"
 
 
-constexpr float cubeSpeed = 500.f;
+
 
 int main()
 {
@@ -22,6 +23,7 @@ int main()
 	player.SetColor(sf::Color::Transparent, sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 	rectangle.setSize(sf::Vector2f(128, 128));
+	player.SetPosition(sf::Vector2f((window.getSize().x / 2), (window.getSize().y / 2)));
 
 
 	
@@ -59,9 +61,9 @@ int main()
 					break;
 			}
 		}
+		
 
-		float deltaTime = frameClock.restart().asSeconds();
-		std::cout << 1.f / deltaTime << " FPS" << std::endl;
+		player.MovePlayer();
 
 		// Logique
 		sf::Vector2f moveVector;
@@ -71,8 +73,6 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			moveVector.y = 1;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			moveVector.x =  -1;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			moveVector.x = 1;

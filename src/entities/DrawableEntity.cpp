@@ -4,8 +4,10 @@ namespace Entities
 {
 	DrawableEntity::DrawableEntity(sf::Shape& shape) : shape(shape){}
 
-	void DrawableEntity::Draw(sf::RenderWindow& window) {
-		window.draw(this->shape);
+	void DrawableEntity::Draw(sf::RenderWindow& Window) {
+		Window.draw(this->shape);
+		windowWidth = Window.getSize().x;
+		windowHeight = Window.getSize().y;
 	}
 
 	void DrawableEntity::Move(sf::Vector2f vectorMove, float deltaTime) {

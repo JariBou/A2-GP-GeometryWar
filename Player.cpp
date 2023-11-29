@@ -1,0 +1,69 @@
+#include "src/entities/Player.h"
+#include "src/entities/DrawableEntity.h"
+#include "src/utils.h"
+#include <iostream>
+
+namespace Entities 
+{
+	using namespace std;
+	sf::Clock frameClock;
+	Player::Player(sf::Shape& shape) : DrawableEntity(shape){
+	}
+	
+
+	void Player::MovePlayer()
+	{
+		sf::FloatRect boundingBox = shape.getLocalBounds();
+		playerWidth = boundingBox.width;
+		playerHeight = boundingBox.height;
+
+		//cout << "player Witdh : " << playerHeight << ", player Height : " << playerHeight << endl;
+		//cout << "x : " << shape.getPosition().x << ", y :" << shape.getPosition().y << endl;
+		//cout << "Window Height : " << windowHeight << ", Window Width : " << windowWidth << endl << endl;
+		sf::Vector2f moveVector;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+			if (shape.getPosition().y - 1 > 0) {
+				moveVector.y = -1;
+			}
+			/*moveVector.y = -1;*/
+		}
+
+			
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			if ((shape.getPosition().y + playerHeight) + 1 < windowHeight) {
+				moveVector.y = 1;
+			}
+			/*moveVector.y = 1;*/
+		}	
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+			if (shape.getPosition().x - 1 > 0)
+			{
+				moveVector.x = -1;
+			}
+			/*moveVector.x = -1;*/
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			if ((shape.getPosition().x + playerWidth) + 1 < windowWidth)
+			{
+				moveVector.x = 1;
+			}
+			//moveVector.x = 1;
+		}
+
+			
+
+		float deltaTime = frameClock.restart().asSeconds();
+		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
+		Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
+	}
+
+	void Player::ShootPlayer()
+	{
+
+	}
+}
+
+
+

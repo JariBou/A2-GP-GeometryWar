@@ -6,6 +6,13 @@
 namespace Entities
 {
 
+	enum class ShapeType   
+	{
+		FILLED = 0,
+		OUTLINED = 1,
+	};
+
+
 	class DrawableEntity {
 
 		public:
@@ -24,6 +31,9 @@ namespace Entities
 
 
 			sf::Shape& shape;
+			int windowWidth;
+			int windowHeight;
+
 	};
 }
 
