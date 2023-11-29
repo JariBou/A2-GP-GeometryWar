@@ -32,9 +32,4 @@ namespace Entities
 			ShapeType shapeType;
 	};
 }
-enum class ShapeType
-{
-	FILLED = 0,
-	OUTLINED = 1,
-};
 

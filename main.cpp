@@ -13,11 +13,10 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars");
 	window.setVerticalSyncEnabled(true);
-
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
 	Entities::Player player = Entities::Player(rectangle);
-	player.SetShapeType(ShapeType::OUTLINED);
+	player.SetShapeType(Entities::ShapeType::OUTLINED);
 	player.SetColor(sf::Color::Green);
 	rectangle.setSize(sf::Vector2f(128, 128));
 
