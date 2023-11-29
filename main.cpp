@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <list>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
 
@@ -11,8 +12,10 @@ int main()
 {
 	// Initialisation
 
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars");
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars", sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
+	
+
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
 	sf::RectangleShape rectangleEnemy;
@@ -25,6 +28,8 @@ int main()
 	enemy.SetColor(sf::Color::Red);
 	rectangle.setSize(sf::Vector2f(128, 128));
 	rectangleEnemy.setSize(sf::Vector2f(64, 64));
+
+
 
 
 
@@ -57,6 +62,7 @@ int main()
 		sf::Vector2f moveVector;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 			moveVector.y = -1;
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			moveVector.y = 1;
 

@@ -2,19 +2,17 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
-#include "DrawableEntity.h"
+#include "Foe.h"
 
 namespace Entities
 
 {
 
-	class LinearFoe : public DrawableEntity {
+	class LinearFoe : public Foe {
 
 	public:
 		
-		int health = 20;
 		sf::Vector2f direction;
-		float speed = 5;
 
 		LinearFoe(sf::Shape& shape, float speed);
 
@@ -22,12 +20,7 @@ namespace Entities
 		bool isDead();
 		void SetDirection(sf::Vector2f direction);
 
-		void Hit(float value);
-
-
-
-
-
+		void GetHit(float value);
 
 	};
 }

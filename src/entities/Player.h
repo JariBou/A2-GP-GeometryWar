@@ -14,7 +14,9 @@ namespace Entities
 
 		int lives;
 
-		Player(sf::Shape& shape) : DrawableEntity(shape) {}
+		Player(sf::Shape& shape) : DrawableEntity(shape) {
+			lives = 3;
+		}
 
 
 

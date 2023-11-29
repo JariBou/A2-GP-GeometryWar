@@ -3,3 +3,4 @@
 #include "DrawableEntity.h"
 #include "Player.h"
 #include "LinearFoe.h"
+#include "Foe.h"

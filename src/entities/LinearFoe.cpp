@@ -1,12 +1,10 @@
-#include "src/entities/DrawableEntity.h"
-#include "src/entities/LinearFoe.h"
+#include "DrawableEntity.h"
+#include "LinearFoe.h"
 
 namespace Entities
 {
 
-	LinearFoe::LinearFoe(sf::Shape& shape, float speed) : DrawableEntity(shape) {
-		this->speed = speed;
-		this->health = 20;
+	LinearFoe::LinearFoe(sf::Shape& shape, float speed) : Foe(shape, speed) {
 	}
 
 	void LinearFoe::Update() {
@@ -24,7 +22,7 @@ namespace Entities
 		this->direction = direction;
 	}
 
-	void LinearFoe::Hit(float value) {
+	void LinearFoe::GetHit(float value) {
 		this->health -= value;
 		if (health <= 0) {
 			//Die();
