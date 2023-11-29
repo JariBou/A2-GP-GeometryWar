@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-#include <list>
+#include <vector>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
 
@@ -18,20 +18,25 @@ int main()
 
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
-	sf::RectangleShape rectangleEnemy;
 	Entities::Player player = Entities::Player(rectangle);
-	Entities::LinearFoe enemy = Entities::LinearFoe(rectangleEnemy, 5);
 	player.SetColor(sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
-	enemy.SetPosition(sf::Vector2f(640 - 32, 0));
-	enemy.SetDirection(sf::Vector2f(0, 1));
-	enemy.SetColor(sf::Color::Red);
 	rectangle.setSize(sf::Vector2f(128, 128));
-	rectangleEnemy.setSize(sf::Vector2f(64, 64));
 
 
+	
+	std::vector<Entities::Foe*> foeList;
 
-
+	for (int i = 0; i < 5; i++)
+	{
+		sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
+		Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1);
+		enemy->SetPosition(sf::Vector2f(64 + 64*i, 0));
+		enemy->SetDirection(sf::Vector2f(0, 1));
+		enemy->SetColor(sf::Color::Red);
+		rectangleEnemy->setSize(sf::Vector2f(64, 64));
+		foeList.push_back(enemy);
+	}
 
 
 	sf::Clock frameClock;
@@ -73,7 +78,9 @@ int main()
 			moveVector.x = 1;
 
 		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
-		if (!enemy.isDead()) enemy.Update();
+		for (Entities::Foe *en : foeList) {
+			en->Update();
+		};
 
 		// Affichage
 		
@@ -83,10 +90,11 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		player.Draw(window);
-		if (!enemy.isDead()) {
-			enemy.Draw(window);
-			std::cout << "PUTE" << std::endl;
+
+		for (Entities::Foe *en : foeList) {
+			en->Draw(window);
 		}
+		
 
 		// On présente la fenêtre sur l'écran
 		window.display();
