@@ -11,7 +11,9 @@ namespace Entities {
 		float health = 20;
 		float speed = 5;
 
-		Foe(sf::Shape& shape, float speed);
+		Foe(sf::Shape& shape, float speed) : DrawableEntity(shape) {
+			this->speed = speed;
+		}
 
 		virtual void Update(float deltaTime) = 0;
 		virtual bool isDead() = 0;
