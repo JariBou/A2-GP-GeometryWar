@@ -15,10 +15,16 @@ int main()
 	window.setVerticalSyncEnabled(true);
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
+	sf::RectangleShape rectangleEnemy;
 	Entities::Player player = Entities::Player(rectangle);
+	Entities::LinearFoe enemy = Entities::LinearFoe(rectangleEnemy, 5);
 	player.SetColor(sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
+	enemy.SetPosition(sf::Vector2f(640 - 32, 0));
+	enemy.SetDirection(sf::Vector2f(0, 1));
+	enemy.SetColor(sf::Color::Red);
 	rectangle.setSize(sf::Vector2f(128, 128));
+	rectangleEnemy.setSize(sf::Vector2f(64, 64));
 
 
 
@@ -61,6 +67,7 @@ int main()
 			moveVector.x = 1;
 
 		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
+		if (!enemy.isDead()) enemy.Update();
 
 		// Affichage
 		
@@ -70,6 +77,10 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		player.Draw(window);
+		if (!enemy.isDead()) {
+			enemy.Draw(window);
+			std::cout << "PUTE" << std::endl;
+		}
 
 		// On présente la fenêtre sur l'écran
 		window.display();

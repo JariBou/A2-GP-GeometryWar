@@ -12,11 +12,9 @@ namespace Entities
 
 	public:
 
-		int lives = 3;
+		int lives;
 
-		Player(sf::Shape& shape) : DrawableEntity(shape) {
-
-		}
+		Player(sf::Shape& shape) : DrawableEntity(shape) {}
 
 
 
