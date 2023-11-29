@@ -8,9 +8,9 @@ namespace Entities
 		window.draw(this->shape);
 	}
 
-	void DrawableEntity::Move(sf::Vector2f vectorMove) {
+	void DrawableEntity::Move(sf::Vector2f vectorMove, float deltaTime) {
 		sf::Vector2f pos = shape.getPosition();
-		pos += vectorMove;
+		pos += vectorMove * deltaTime;
 		shape.setPosition(pos);
 	}
 

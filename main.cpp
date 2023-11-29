@@ -77,9 +77,9 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			moveVector.x = 1;
 
-		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
+		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed, deltaTime);
 		for (Entities::Foe *en : foeList) {
-			en->Update();
+			en->Update(deltaTime);
 		};
 
 		// Affichage

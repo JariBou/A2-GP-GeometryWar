@@ -13,7 +13,7 @@ namespace Entities {
 
 		Foe(sf::Shape& shape, float speed);
 
-		virtual void Update() = 0;
+		virtual void Update(float deltaTime) = 0;
 		virtual bool isDead() = 0;
 
 		virtual void GetHit(float value) = 0;

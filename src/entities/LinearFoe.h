@@ -16,7 +16,7 @@ namespace Entities
 
 		LinearFoe(sf::Shape& shape, float speed);
 
-		void Update();
+		void Update(float deltaTime);
 		bool isDead();
 		void SetDirection(sf::Vector2f direction);
 

@@ -7,8 +7,8 @@ namespace Entities
 	LinearFoe::LinearFoe(sf::Shape& shape, float speed) : Foe(shape, speed) {
 	}
 
-	void LinearFoe::Update() {
-		this->Move(direction * speed);
+	void LinearFoe::Update(float deltaTime) {
+		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
 		if (pos.y > 720) {
 			this->health = 0;
