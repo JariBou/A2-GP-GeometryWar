@@ -18,7 +18,17 @@ namespace Entities
 		shape.setPosition(pos);
 	}
 
+	void DrawableEntity::SetColor(sf::Color color, sf::Color color2) {
+		shape.setFillColor(color);
+		if (color2 != sf::Color::Transparent) {
+			shape.setOutlineThickness(5);
+			shape.setOutlineColor(color2);
+		}
+	}
+	
 	void DrawableEntity::SetColor(sf::Color color) {
 		shape.setFillColor(color);
+		shape.setOutlineThickness(0);
+		shape.setOutlineColor(sf::Color::Transparent);
 	}
 }

@@ -19,7 +19,7 @@ int main()
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
 	Entities::Player player = Entities::Player(rectangle);
-	player.SetColor(sf::Color::Green);
+	player.SetColor(sf::Color::Transparent, sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 	rectangle.setSize(sf::Vector2f(128, 128));
 
@@ -33,7 +33,7 @@ int main()
 		Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1);
 		enemy->SetPosition(sf::Vector2f(64 + 64*i, 0));
 		enemy->SetDirection(sf::Vector2f(0, 1));
-		enemy->SetColor(sf::Color::Red);
+		enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
 		rectangleEnemy->setSize(sf::Vector2f(64, 64));
 		foeList.push_back(enemy);
 	}

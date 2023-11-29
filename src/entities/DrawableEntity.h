@@ -19,6 +19,7 @@ namespace Entities
 
 			virtual void SetPosition(sf::Vector2f pos);
 
+			virtual void SetColor(sf::Color color, sf::Color color2);
 			virtual void SetColor(sf::Color color);
 
 
