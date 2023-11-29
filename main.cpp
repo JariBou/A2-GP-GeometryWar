@@ -3,7 +3,9 @@
 #include <iostream>
 #include "src/entities/Entites.h"
 
+
 constexpr float cubeSpeed = 500.f;
+using namespace Entities;
 
 int main()
 {
@@ -14,11 +16,11 @@ int main()
 
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
-	rectangle.setFillColor(sf::Color::Red);
-	rectangle.setPosition(640, 360);
+	Entities::Player player = Entities::Player(rectangle);
+	player.SetShapeType(ShapeType::OUTLINED);
+	player.SetColor(sf::Color::Green);
 	rectangle.setSize(sf::Vector2f(128, 128));
 
-	Entities::Player player = Entities::Player(rectangle);
 
 
 
@@ -47,21 +49,19 @@ int main()
 		std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
 		// Logique
-		sf::Vector2f pos = rectangle.getPosition();
-		
+		sf::Vector2f moveVector;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			moveVector.y = deltaTime * cubeSpeed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			moveVector.y = -deltaTime * cubeSpeed;
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			pos.x = pos.x - deltaTime * cubeSpeed;
+			moveVector.x =  -deltaTime * cubeSpeed;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			pos.x = pos.x + deltaTime * cubeSpeed;
+			moveVector.x = deltaTime * cubeSpeed;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			pos.y = pos.y - deltaTime * cubeSpeed;
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			pos.y = pos.y + deltaTime * cubeSpeed;
-
-		rectangle.setPosition(pos);
+		player.Move(moveVector);
 
 		// Affichage
 		

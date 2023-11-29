@@ -5,22 +5,30 @@
 
 namespace Entities
 {
+	enum class ShapeType
+	{
+		FILLED = 0,
+		OUTLINED = 1,
+	};
 
 	class DrawableEntity {
 
-	public:
+		public:
+			DrawableEntity(sf::Shape& shape);
 
-		sf::Shape& shape;
+			virtual ~DrawableEntity() = default;
 
-		DrawableEntity(sf::Shape& shape) : shape(shape) {
+			virtual void Draw(sf::RenderWindow& window);
 
-		}
+			virtual void Move(sf::Vector2f vectorMove);
 
-		virtual ~DrawableEntity() = default;
+			virtual void SetPosition(sf::Vector2f pos);
 
-		virtual void Draw(sf::RenderWindow& window) {
-			window.draw(this->shape);
-		}
+			virtual void SetColor(sf::Color color);
+
+			virtual void SetShapeType(ShapeType type);
+
+			sf::Shape& shape;
+			ShapeType shapeType;
 	};
-
 }

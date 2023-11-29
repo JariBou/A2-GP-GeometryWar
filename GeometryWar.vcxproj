@@ -86,11 +86,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\DrawableEntity.h" />
-    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\entities\DrawableEntity.h" />
+    <ClInclude Include="src\entities\Entites.h" />
+    <ClInclude Include="src\entities\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
