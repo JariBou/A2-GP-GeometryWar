@@ -5,11 +5,6 @@
 
 namespace Entities
 {
-	enum class ShapeType
-	{
-		FILLED = 0,
-		OUTLINED = 1,
-	};
 
 	class DrawableEntity {
 
@@ -26,10 +21,8 @@ namespace Entities
 
 			virtual void SetColor(sf::Color color);
 
-			virtual void SetShapeType(ShapeType type);
 
 			sf::Shape& shape;
-			ShapeType shapeType;
 	};
 }
 

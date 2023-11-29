@@ -3,7 +3,7 @@
 
 namespace Entities
 {
-	DrawableEntity::DrawableEntity(sf::Shape& shape) : shape(shape), shapeType(ShapeType::FILLED) {}
+	DrawableEntity::DrawableEntity(sf::Shape& shape) : shape(shape){}
 
 	void DrawableEntity::Draw(sf::RenderWindow& window) {
 		window.draw(this->shape);
@@ -20,22 +20,6 @@ namespace Entities
 	}
 
 	void DrawableEntity::SetColor(sf::Color color) {
-		switch (shapeType)
-		{
-		case ShapeType::FILLED:
-			shape.setFillColor(color);
-			shape.setOutlineColor(sf::Color::Transparent);
-			break;
-		case ShapeType::OUTLINED:
-			shape.setFillColor(sf::Color::Transparent);
-			shape.setOutlineColor(color);
-			break;
-		default:
-			break;
-		}
-	}
-
-	void DrawableEntity::SetShapeType(ShapeType type) {
-		shapeType = type;
+		shape.setFillColor(color);
 	}
 }

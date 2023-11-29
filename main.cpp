@@ -2,10 +2,10 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include "src/entities/Entites.h"
+#include "src/utils.h"
 
 
 constexpr float cubeSpeed = 500.f;
-using namespace Entities;
 
 int main()
 {
@@ -16,8 +16,8 @@ int main()
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
 	Entities::Player player = Entities::Player(rectangle);
-	player.SetShapeType(Entities::ShapeType::OUTLINED);
 	player.SetColor(sf::Color::Green);
+	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 	rectangle.setSize(sf::Vector2f(128, 128));
 
 
@@ -50,17 +50,17 @@ int main()
 		// Logique
 		sf::Vector2f moveVector;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			moveVector.y = deltaTime * cubeSpeed;
+			moveVector.y = -1;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			moveVector.y = -deltaTime * cubeSpeed;
+			moveVector.y = 1;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			moveVector.x =  -deltaTime * cubeSpeed;
+			moveVector.x =  -1;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			moveVector.x = deltaTime * cubeSpeed;
+			moveVector.x = 1;
 
-		player.Move(moveVector);
+		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
 
 		// Affichage
 		
