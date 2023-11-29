@@ -86,12 +86,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="DrawableEntity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\Bullet.h" />
     <ClInclude Include="src\entities\DrawableEntity.h" />
     <ClInclude Include="src\entities\Entites.h" />
     <ClInclude Include="src\entities\Player.h" />
