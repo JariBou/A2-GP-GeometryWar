@@ -16,11 +16,13 @@ namespace Entities
 
 			Player(sf::Shape& shape);
 			virtual ~Player() = default;
-			virtual void MovePlayer();
+			virtual void MovePlayer(float deltaTime);
 			virtual void ShootPlayer();
 
 			float playerWidth;
 			float playerHeight;
+
+			void Draw(sf::RenderWindow& window);
 	
 	};
 }

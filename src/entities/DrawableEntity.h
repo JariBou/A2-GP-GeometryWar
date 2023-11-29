@@ -29,6 +29,8 @@ namespace Entities
 			virtual void SetColor(sf::Color color, sf::Color color2);
 			virtual void SetColor(sf::Color color);
 
+			void SetWindow(sf::RenderWindow& Window);
+
 
 			sf::Shape& shape;
 			int windowWidth;

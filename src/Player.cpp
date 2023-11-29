@@ -1,6 +1,6 @@
-#include "src/entities/Player.h"
-#include "src/entities/DrawableEntity.h"
-#include "src/utils.h"
+#include "entities/Player.h"
+#include "entities/DrawableEntity.h"
+#include "utils.h"
 #include <iostream>
 
 namespace Entities 
@@ -11,7 +11,7 @@ namespace Entities
 	}
 	
 
-	void Player::MovePlayer()
+	void Player::MovePlayer(float deltaTime)
 	{
 		sf::FloatRect boundingBox = shape.getLocalBounds();
 		playerWidth = boundingBox.width;
@@ -52,11 +52,23 @@ namespace Entities
 			//moveVector.x = 1;
 		}
 
-			
-
-		float deltaTime = frameClock.restart().asSeconds();
+		
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
+		Move(Utils::NormalizeVector(moveVector) * cubeSpeed, deltaTime);
+
+	}
+
+	void Player::Draw(sf::RenderWindow& window){
+		window.draw(this->shape);
+
+		//Hitbox
+		sf::RectangleShape rect;
+		rect.setPosition(this->shape.getGlobalBounds().left, this->shape.getGlobalBounds().top);
+		rect.setSize(sf::Vector2f(this->shape.getGlobalBounds().width, this->shape.getGlobalBounds().height));
+		rect.setOutlineThickness(2);
+		rect.setFillColor(sf::Color::Transparent);
+		rect.setOutlineColor(sf::Color::White);
+		window.draw(rect);
 	}
 
 	void Player::ShootPlayer()

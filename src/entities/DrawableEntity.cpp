@@ -6,6 +6,9 @@ namespace Entities
 
 	void DrawableEntity::Draw(sf::RenderWindow& Window) {
 		Window.draw(this->shape);
+	}
+
+	void DrawableEntity::SetWindow(sf::RenderWindow& Window) {
 		windowWidth = Window.getSize().x;
 		windowHeight = Window.getSize().y;
 	}

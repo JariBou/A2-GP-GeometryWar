@@ -23,7 +23,9 @@ int main()
 	player.SetColor(sf::Color::Transparent, sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 	rectangle.setSize(sf::Vector2f(128, 128));
-	player.SetPosition(sf::Vector2f((window.getSize().x / 2), (window.getSize().y / 2)));
+	player.SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
+	player.SetWindow(window);
+	float cubeSpeed = 500.f;
 
 
 	
@@ -36,6 +38,7 @@ int main()
 		enemy->SetPosition(sf::Vector2f(64 + 64*i, 0));
 		enemy->SetDirection(sf::Vector2f(0, 1));
 		enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
+		enemy->SetWindow(window);
 		rectangleEnemy->setSize(sf::Vector2f(64, 64));
 		foeList.push_back(enemy);
 	}
@@ -61,23 +64,13 @@ int main()
 					break;
 			}
 		}
-		
 
-		player.MovePlayer();
-
-		// Logique
-		sf::Vector2f moveVector;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			moveVector.y = -1;
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			moveVector.y = 1;
+		float deltaTime = frameClock.restart().asSeconds();
+		std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			moveVector.x = 1;
+		player.MovePlayer(deltaTime);
 
-		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed, deltaTime);
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);
 		};
