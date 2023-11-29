@@ -3,22 +3,23 @@
 #include <iostream>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
+#include "src/entities/Player.h"
 
 
-constexpr float cubeSpeed = 500.f;
+
 
 int main()
 {
 	// Initialisation
 
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars");
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars", sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
 	Entities::Player player = Entities::Player(rectangle);
 	player.SetColor(sf::Color::Green);
-	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 	rectangle.setSize(sf::Vector2f(128, 128));
+	player.SetPosition(sf::Vector2f((window.getSize().x / 2), (window.getSize().y / 2)));
 
 
 
@@ -43,24 +44,11 @@ int main()
 					break;
 			}
 		}
+		
 
-		float deltaTime = frameClock.restart().asSeconds();
-		std::cout << 1.f / deltaTime << " FPS" << std::endl;
+		player.MovePlayer();
 
-		// Logique
-		sf::Vector2f moveVector;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			moveVector.y = -1;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			moveVector.y = 1;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			moveVector.x =  -1;
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			moveVector.x = 1;
-
-		player.Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
 
 		// Affichage
 		

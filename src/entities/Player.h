@@ -5,20 +5,22 @@
 #include "DrawableEntity.h"
 
 namespace Entities
-
 {
+	constexpr float cubeSpeed = 500.f;
 
 	class Player : public DrawableEntity {
 
-	public:
+		public:
 
-		int lives = 3;
+			int lives = 3;
 
-		Player(sf::Shape& shape) : DrawableEntity(shape) {
+			Player(sf::Shape& shape);
+			virtual ~Player() = default;
+			virtual void MovePlayer();
+			virtual void ShootPlayer();
 
-		}
-
-
-
+			float playerWidth;
+			float playerHeight;
+	
 	};
 }
