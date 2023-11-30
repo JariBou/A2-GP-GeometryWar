@@ -1,7 +1,7 @@
-#include "src/entities/Player.h"
-#include "src/entities/DrawableEntity.h"
-#include "src/entities/Bullet.h"
-#include "src/utils.h"
+#include "Player.h"
+#include "DrawableEntity.h"
+#include "Bullet.h"
+#include "../utils.h"
 #include <iostream>
 
 
@@ -67,11 +67,11 @@ namespace Entities
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !isMouseClickedLastFrame) {
 			cout << "Cliqued" << endl;
 
-			Bullet bullet;
-			bullet.SetColor(sf::Color::Red);
-			bullet.SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - shape.getLocalBounds().height));
+			sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
+			Bullet* bullet = new Bullet(*rectangleBullet);
+			(*bullet).SetColor(sf::Color::Red);
+			bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - shape.getLocalBounds().height));
 			bullets.push_back(bullet);
-			bullet.ID = bullets.size();
 
 			isMouseClickedLastFrame = true;
 		}
@@ -81,7 +81,7 @@ namespace Entities
 	}
 
 
-	std::vector<Bullet> Player::GetBullets() 
+	std::vector<Bullet*> Player::GetBullets() 
 	{
 		return bullets;
 	}

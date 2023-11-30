@@ -1,5 +1,5 @@
-#include "src/entities/DrawableEntity.h"
-#include "src/entities/Entites.h"
+#include "DrawableEntity.h"
+#include "Entites.h"
 
 namespace Entities
 {

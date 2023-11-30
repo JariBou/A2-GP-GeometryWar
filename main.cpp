@@ -59,10 +59,11 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		player.Draw(window);
-		for (Entities::Bullet& bullet : player.GetBullets())
+		float deltaTime = frameClock.restart().asSeconds();
+		for (Entities::Bullet* bullet : player.GetBullets())
 		{
-			bullet.Udapte(frameClock.restart().asSeconds());
-			std :: cout << bullet.ID << std::endl;
+			bullet->Draw(window);
+			bullet->MoveBullet(deltaTime);
 		}
 
 		// On présente la fenêtre sur l'écran

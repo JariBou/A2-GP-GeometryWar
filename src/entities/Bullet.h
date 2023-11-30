@@ -7,10 +7,10 @@ namespace Entities {
 	class Bullet : public DrawableEntity {
 		public:
 			int damage;
-			Bullet();
-			int ID;
+			float speed;
+			Bullet(sf::Shape& shape);
 			virtual ~Bullet() = default;
-			virtual void MoveBullet();
+			virtual void MoveBullet(float deltaTime);
 			virtual void Udapte(float deltaTime);
 
 	};
