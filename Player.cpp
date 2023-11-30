@@ -1,14 +1,19 @@
 #include "src/entities/Player.h"
 #include "src/entities/DrawableEntity.h"
+#include "src/entities/Bullet.h"
 #include "src/utils.h"
 #include <iostream>
+
 
 namespace Entities 
 {
 	using namespace std;
 	sf::Clock frameClock;
+
+
 	Player::Player(sf::Shape& shape) : DrawableEntity(shape){
 	}
+	
 	
 
 	void Player::MovePlayer()
@@ -52,8 +57,6 @@ namespace Entities
 			//moveVector.x = 1;
 		}
 
-			
-
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
 		Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
@@ -61,7 +64,26 @@ namespace Entities
 
 	void Player::ShootPlayer()
 	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !isMouseClickedLastFrame) {
+			cout << "Cliqued" << endl;
 
+			Bullet bullet;
+			bullet.SetColor(sf::Color::Red);
+			bullet.SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - shape.getLocalBounds().height));
+
+			bullets.push_back(bullet);
+
+			isMouseClickedLastFrame = true;
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			isMouseClickedLastFrame = false;
+		}
+	}
+
+
+	std::vector<Bullet> Player::GetBullets() 
+	{
+		return bullets;
 	}
 }
 

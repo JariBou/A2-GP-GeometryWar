@@ -28,6 +28,7 @@ namespace Entities
 
 			virtual void SetColor(sf::Color color);
 
+			virtual void GetWindowwSize(sf::RenderWindow& window);
 
 			sf::Shape& shape;
 			int windowWidth;

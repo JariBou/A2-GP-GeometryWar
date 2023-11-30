@@ -7,8 +7,6 @@ namespace Entities
 
 	void DrawableEntity::Draw(sf::RenderWindow& Window) {
 		Window.draw(this->shape);
-		windowWidth = Window.getSize().x;
-		windowHeight = Window.getSize().y;
 	}
 
 	void DrawableEntity::Move(sf::Vector2f vectorMove) {
@@ -24,4 +22,12 @@ namespace Entities
 	void DrawableEntity::SetColor(sf::Color color) {
 		shape.setFillColor(color);
 	}
+
+	void DrawableEntity::GetWindowwSize(sf::RenderWindow& window)
+	{
+		windowHeight = window.getSize().y;
+		windowWidth = window.getSize().x;
+		
+	}
+
 }
