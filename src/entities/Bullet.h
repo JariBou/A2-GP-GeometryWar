@@ -9,6 +9,7 @@ namespace Entities {
 			int damage;
 			float speed;
 			Bullet(sf::Shape& shape);
+			Bullet(sf::Shape& shape, int damage, float speed);
 			virtual ~Bullet() = default;
 			virtual void MoveBullet(float deltaTime);
 			virtual void Udapte(float deltaTime);

@@ -72,9 +72,16 @@ int main()
 
 		player.MovePlayer(deltaTime);
 
+		player.ShootPlayer(); // This needs to change
+
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);
-		};
+		}
+
+		for (Entities::Bullet* bullet : player.GetBullets())
+		{
+			bullet->MoveBullet(deltaTime);
+		}
 
 		// Affichage
 		
@@ -84,11 +91,10 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		player.Draw(window);
-		float deltaTime = frameClock.restart().asSeconds();
+
 		for (Entities::Bullet* bullet : player.GetBullets())
 		{
 			bullet->Draw(window);
-			bullet->MoveBullet(deltaTime);
 		}
 
 		for (Entities::Foe *en : foeList) {

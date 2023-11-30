@@ -16,7 +16,7 @@ namespace Entities
 	
 	
 
-	void Player::MovePlayer()
+	void Player::MovePlayer(float deltaTime)
 	{
 		sf::FloatRect boundingBox = shape.getLocalBounds();
 		playerWidth = boundingBox.width;
@@ -57,9 +57,8 @@ namespace Entities
 			//moveVector.x = 1;
 		}
 
-		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		Move(Utils::NormalizeVector(moveVector) * cubeSpeed * deltaTime);
+		Move(Utils::NormalizeVector(moveVector) * cubeSpeed, deltaTime);
 	}
     
     void Player::Draw(sf::RenderWindow& window){
@@ -83,7 +82,7 @@ namespace Entities
 			sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
 			Bullet* bullet = new Bullet(*rectangleBullet);
 			(*bullet).SetColor(sf::Color::Red);
-			bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - shape.getLocalBounds().height));
+			bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 			bullets.push_back(bullet);
 
 			isMouseClickedLastFrame = true;

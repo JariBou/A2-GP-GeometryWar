@@ -16,22 +16,31 @@
     <Filter Include="Fichiers d%27en-tête\Entities">
       <UniqueIdentifier>{b1a65c0d-ff6e-430d-b71f-fb4cf6b8dcd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Entities">
+      <UniqueIdentifier>{0690f9cc-6448-46e4-a467-f4261bf73ba2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="DrawableEntity.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="src\entities\Bullet.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="src\entities\DrawableEntity.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Foe.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\LinearFoe.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Player.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +57,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\Bullet.h">
+      <Filter>Fichiers d%27en-tête\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Foe.h">
+      <Filter>Fichiers d%27en-tête\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\LinearFoe.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
   </ItemGroup>

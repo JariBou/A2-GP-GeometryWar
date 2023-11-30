@@ -33,8 +33,8 @@ namespace Entities
 
 
 			sf::Shape& shape;
-			int windowWidth;
-			int windowHeight;
+			int windowWidth = -1;
+			int windowHeight = -1;
 
 	};
 }

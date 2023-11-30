@@ -13,6 +13,7 @@ namespace Entities
 
 		public:
 
+			int upgradeLevel = 0;
 			int lives = 3;
 			Player(sf::Shape& shape);
 			virtual ~Player() = default;
