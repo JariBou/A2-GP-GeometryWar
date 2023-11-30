@@ -5,6 +5,7 @@
 #include "src/entities/Entites.h"
 #include "src/utils.h"
 #include "src/entities/Player.h"
+#include "src/entities/Bullet.h"
 
 
 
@@ -83,6 +84,12 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		player.Draw(window);
+		float deltaTime = frameClock.restart().asSeconds();
+		for (Entities::Bullet* bullet : player.GetBullets())
+		{
+			bullet->Draw(window);
+			bullet->MoveBullet(deltaTime);
+		}
 
 		for (Entities::Foe *en : foeList) {
 			en->Draw(window);

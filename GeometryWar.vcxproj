@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\Bullet.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\entities\DrawableEntity.cpp" />
     <ClCompile Include="src\entities\Foe.cpp" />
@@ -100,6 +101,13 @@
     <ClInclude Include="src\entities\Entites.h" />
     <ClInclude Include="src\entities\Player.h" />
     <ClInclude Include="src\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\entities\Bullet.cpp" />
+    <ClCompile Include="src\entities\DrawableEntity.cpp" />
+    <ClCompile Include="src\entities\Player.cpp" />
+    <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
