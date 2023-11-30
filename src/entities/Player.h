@@ -14,7 +14,6 @@ namespace Entities
 		public:
 
 			int lives = 3;
-
 			Player(sf::Shape& shape);
 			virtual ~Player() = default;
 			virtual void MovePlayer();

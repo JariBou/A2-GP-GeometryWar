@@ -62,7 +62,7 @@ int main()
 		for (Entities::Bullet& bullet : player.GetBullets())
 		{
 			bullet.Udapte(frameClock.restart().asSeconds());
-			bullet.Draw(window);
+			std :: cout << bullet.ID << std::endl;
 		}
 
 		// On présente la fenêtre sur l'écran

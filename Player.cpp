@@ -70,8 +70,8 @@ namespace Entities
 			Bullet bullet;
 			bullet.SetColor(sf::Color::Red);
 			bullet.SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - shape.getLocalBounds().height));
-
 			bullets.push_back(bullet);
+			bullet.ID = bullets.size();
 
 			isMouseClickedLastFrame = true;
 		}

@@ -8,6 +8,7 @@ namespace Entities {
 		public:
 			int damage;
 			Bullet();
+			int ID;
 			virtual ~Bullet() = default;
 			virtual void MoveBullet();
 			virtual void Udapte(float deltaTime);
