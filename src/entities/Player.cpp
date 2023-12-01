@@ -81,11 +81,12 @@ namespace Entities
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
 				cout << "Cliqued" << endl;
-			
-				float w = playerWidth / (pow(2, upgradeLevel % 4) + 1) - 2.5f;
+
+				float bulletSize = 5 + upgradeLevel / 4 * 5;
+				float w = playerWidth / (pow(2, upgradeLevel % 4) + 1) - bulletSize/2;
 				for (size_t i = 1; i < pow(2,upgradeLevel % 4) + 1; i++)
 				{
-					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
+					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize,bulletSize));
                     Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, 300.0, sf::Vector2f(0, -1.0));
 					(*bullet).SetColor(sf::Color::Red);
 					bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
