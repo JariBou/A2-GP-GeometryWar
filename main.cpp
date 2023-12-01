@@ -36,6 +36,7 @@ int main()
 
 	std::vector<sf::Vector2f> spawnPoints;
 	EnemySpawner spawner = EnemySpawner(&foeList, &window);
+	player.enemySpawner = &spawner;
 
 	spawnPoints.push_back(sf::Vector2f(128, 0));
 	spawnPoints.push_back(sf::Vector2f(156, 0));
@@ -89,6 +90,13 @@ int main()
 
 		player.MovePlayer(deltaTime);
 
+		player.Update(deltaTime); // This needs to change
+
+		for (Entities::Bullet* bullet : player.GetBullets())
+		{
+			bullet->Update(deltaTime);
+		}
+
 		auto bulletVectorIterator = player.GetBullets().begin();
 		while (bulletVectorIterator != player.GetBullets().end()) {
 			if ((*bulletVectorIterator)->CheckLife()) {
@@ -101,15 +109,19 @@ int main()
 		}
 
 
-		player.Update(deltaTime); // This needs to change
-
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);
-		}
+		}		
 
-		for (Entities::Bullet* bullet : player.GetBullets())
-		{
-			bullet->MoveBullet(deltaTime);
+		auto foeVectorIterator = foeList.begin();
+		while (foeVectorIterator != foeList.end()) {
+			if ((*foeVectorIterator)->CheckLife()) {
+				foeVectorIterator++;
+			}
+			else {
+				foeVectorIterator = foeList.erase(foeVectorIterator);
+				std::cout << "Enemy deleted" << std::endl;
+			}
 		}
 
 		spawner.Update(deltaTime);

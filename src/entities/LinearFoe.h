@@ -19,6 +19,7 @@ namespace Entities
 		void Update(float deltaTime);
 		bool isDead();
 		void SetDirection(sf::Vector2f direction);
+		bool CheckLife();
 
 		void GetHit(float value);
 

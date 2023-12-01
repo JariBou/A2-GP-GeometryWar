@@ -29,13 +29,14 @@ namespace Entities {
 		return true;
 	}
 
-	void Bullet::Udapte(float deltaTime) {
+	void Bullet::Update(float deltaTime) {
 		MoveBullet(deltaTime);
 		CheckHit();
-		//CheckLife();
 	}	
 
 	bool Bullet::CheckLife() {
+		if (this->shouldDestroy) return false;
+
 		if (shape.getPosition().y < 0 - shape.getLocalBounds().height || shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().x > 1280 + shape.getLocalBounds().width){
 			return false;
 		}
@@ -49,8 +50,12 @@ namespace Entities {
 
 		for (Foe* foe : *(spawner->GetFoes())) {
 
-			if (foe->shape.getGlobalBounds().intersects(selfRect)) {
+			auto enemyRect = foe->shape.getGlobalBounds();
+
+			if (enemyRect.intersects(selfRect)) {
 				foe->GetHit(this->damage);
+				shouldDestroy = true;
+				return true;
 			}
 
 		}

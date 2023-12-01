@@ -28,6 +28,9 @@ namespace Entities
 
 			virtual void SetColor(sf::Color color, sf::Color color2);
 			virtual void SetColor(sf::Color color);
+			virtual bool CheckLife() {
+				return true;
+			}
 
 			void SetWindow(sf::RenderWindow& Window);
 

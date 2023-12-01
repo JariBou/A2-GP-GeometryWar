@@ -22,6 +22,14 @@ namespace Entities
 		this->direction = direction;
 	}
 
+	bool LinearFoe::CheckLife() {
+		if (health <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+
 	void LinearFoe::GetHit(float value) {
 		this->health -= value;
 		if (health <= 0) {
