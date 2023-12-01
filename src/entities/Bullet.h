@@ -16,6 +16,7 @@ namespace Entities {
         virtual ~Bullet() = default;
         virtual bool MoveBullet(float deltaTime);
         virtual void Udapte(float deltaTime);
+        virtual bool CheckLife();
         Player& player; // Utilisation d'une r�f�rence constante
     };
 }

@@ -89,6 +89,16 @@ int main()
 
 		player.MovePlayer(deltaTime);
 
+		auto bulletVectorIterator = player.GetBullets().begin();
+		while (bulletVectorIterator != player.GetBullets().end()) {
+			if ((*bulletVectorIterator)->CheckLife()) {
+				bulletVectorIterator++;
+			}
+			else {
+				bulletVectorIterator = player.GetBullets().erase(bulletVectorIterator);
+			}
+		}
+
 
 		player.Update(deltaTime); // This needs to change
 

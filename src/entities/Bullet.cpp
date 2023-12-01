@@ -43,5 +43,12 @@ namespace Entities {
 
 	}	
 
+	bool Bullet::CheckLife() {
+		if (shape.getPosition().y < 0 - shape.getLocalBounds().height) {
+			return true;
+		}
+		return true;
+	}
+
 
 }
