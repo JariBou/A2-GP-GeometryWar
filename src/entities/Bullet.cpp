@@ -24,18 +24,6 @@ namespace Entities {
 	bool Bullet::MoveBullet(float deltaTime) {
 		Move(sf::Vector2f(0.0, -1.0) * speed, deltaTime);
 
-		if (shape.getPosition().y < 0 - shape.getLocalBounds().height) {
-			std::vector<Bullet*>::iterator it = player.GetBullets().begin();
-			for (Bullet* bullet : player.GetBullets()) {
-				if (bullet == this) {
-					player.GetBullets().erase(it);
-					delete bullet;
-					std::cout << "Bullet deleted" << std::endl;
-					return false;
-				}
-				it++;	
-			}
-		}
 		return true;
 	}
 
