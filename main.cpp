@@ -96,6 +96,7 @@ int main()
 			}
 			else {
 				bulletVectorIterator = player.GetBullets().erase(bulletVectorIterator);
+				std::cout << "Bullet deleted" << std::endl;
 			}
 		}
 

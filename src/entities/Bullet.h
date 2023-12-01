@@ -12,12 +12,14 @@ namespace Entities {
             int damage;
             float speed;
             Bullet(sf::Shape& shape, Player& player); // Utilisation d'une r�f�rence constante
-            Bullet(sf::Shape& shape, Player& player, int damage, float speed); // Utilisation d'une r�f�rence constante
+            Bullet(sf::Shape& shape, Player& player, int damage, float speed, sf::Vector2f Direction); // Utilisation d'une r�f�rence constante
             virtual ~Bullet() = default;
             virtual bool MoveBullet(float deltaTime);
             virtual void Udapte(float deltaTime);
             virtual bool CheckLife();
             Player& player; // Utilisation d'une r�f�rence constante
+    private :
+			sf::Vector2f direction;
        
 };
 }

@@ -84,7 +84,7 @@ namespace Entities
 			
 
 				sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
-				Bullet* bullet = new Bullet(*rectangleBullet, *this);
+				Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, 300.0, sf::Vector2f(0, -1.0));
 				(*bullet).SetColor(sf::Color::Red);
 				bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 				bullets.push_back(bullet);

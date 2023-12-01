@@ -14,16 +14,16 @@ namespace Entities {
 		std::cout << shape.getPosition().y << std::endl;
 	}
 
-	Bullet::Bullet(sf::Shape& shape, Player& Joueur, int damage, float speed) : DrawableEntity(shape), player(Joueur) {
+	Bullet::Bullet(sf::Shape& shape, Player& Joueur, int damage, float speed, sf::Vector2f Direction) : DrawableEntity(shape), player(Joueur) {
 		this->damage = damage;
 		this->speed = speed;
 		std::cout << "Bullet created" << std::endl;
 		std::cout << shape.getPosition().y << std::endl;
+		direction = Direction;
 	}
 
 	bool Bullet::MoveBullet(float deltaTime) {
-		Move(sf::Vector2f(0.0, -1.0) * speed, deltaTime);
-
+		Move(sf::Vector2f(direction) * speed, deltaTime);
 		return true;
 	}
 
@@ -32,8 +32,8 @@ namespace Entities {
 	}	
 
 	bool Bullet::CheckLife() {
-		if (shape.getPosition().y < 0 - shape.getLocalBounds().height) {
-			return true;
+		if (shape.getPosition().y < 0 - shape.getLocalBounds().height || shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().x > 1280 + shape.getLocalBounds().width){
+			return false;
 		}
 		return true;
 	}
