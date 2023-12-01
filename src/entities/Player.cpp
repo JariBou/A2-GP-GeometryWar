@@ -82,13 +82,13 @@ namespace Entities
 				bulletClock = 0;
 				cout << "Cliqued" << endl;
 			
-				float w = playerWidth / (pow(2, upgradeLevel % 3) + 1);
-				for (size_t i = 1; i < pow(2,upgradeLevel % 3) + 1; i++)
+				float w = playerWidth / (pow(2, upgradeLevel % 4) + 1) - 2.5f;
+				for (size_t i = 1; i < pow(2,upgradeLevel % 4) + 1; i++)
 				{
 					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
                     Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, 300.0, sf::Vector2f(0, -1.0));
 					(*bullet).SetColor(sf::Color::Red);
-					bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + i*w, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+					bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
 				
