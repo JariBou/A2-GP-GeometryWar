@@ -17,6 +17,7 @@ public:
 
 	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window);
 
+	std::vector<Entities::Foe*>* GetFoes();
 
 	void SpawnEnemy();
 	void SpawnEnemy(int i);

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "Bullet.h"
+#include "../EnemySpawner.h"
 
 namespace Entities
 {
@@ -27,6 +28,9 @@ namespace Entities
 			virtual std::vector<Bullet*>& GetBullets();
 			float playerWidth;
 			float playerHeight;
+			EnemySpawner* enemySpawner;
+			EnemySpawner* GetSpawner();
+
 
 			void Draw(sf::RenderWindow& window);
 

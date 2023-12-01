@@ -28,7 +28,9 @@ namespace Entities {
 	}
 
 	void Bullet::Udapte(float deltaTime) {
-
+		MoveBullet(deltaTime);
+		CheckHit();
+		CheckLife();
 	}	
 
 	bool Bullet::CheckLife() {
@@ -36,6 +38,10 @@ namespace Entities {
 			return false;
 		}
 		return true;
+	}
+
+	bool Bullet::CheckHit() {
+
 	}
 
 

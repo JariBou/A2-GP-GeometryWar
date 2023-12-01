@@ -17,6 +17,7 @@ namespace Entities {
             virtual bool MoveBullet(float deltaTime);
             virtual void Udapte(float deltaTime);
             virtual bool CheckLife();
+            virtual bool CheckHit();
             Player& player; // Utilisation d'une r�f�rence constante
     private :
 			sf::Vector2f direction;

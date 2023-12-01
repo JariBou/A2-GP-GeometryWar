@@ -6,6 +6,10 @@ EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindo
 	this->window = window;
 }
 
+std::vector<Entities::Foe*>* EnemySpawner::GetFoes() {
+	return this->foeList;
+}
+
 
 void EnemySpawner::SpawnEnemy() {
 	sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();

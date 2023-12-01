@@ -105,6 +105,10 @@ namespace Entities
 		cout << "Upgrade level : " << upgradeLevel << endl;
 	}
 
+	EnemySpawner* Player::GetSpawner() {
+		return this->enemySpawner;
+	}
+
 	std::vector<Bullet*>& Player::GetBullets() 
 	{
 		return bullets;
