@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "Bullet.h"
 #include "Player.h"
+#include "Foe.h"
+#include "../EnemySpawner.h"
 #include <iostream>
 
 namespace Entities {
@@ -52,7 +54,7 @@ namespace Entities {
 			}
 
 		}
-
+		return false;
 	}
 
 

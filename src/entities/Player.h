@@ -4,7 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "Bullet.h"
-#include "../EnemySpawner.h"
+
+class EnemySpawner;
+class DrawableEntity;
 
 namespace Entities
 {
