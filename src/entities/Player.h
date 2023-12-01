@@ -24,7 +24,7 @@ namespace Entities
 			virtual void MovePlayer(float deltaTime);
 			virtual void Update(float deltaTime);
 			virtual void UpgradeLevel();
-			virtual std::vector<Bullet*> GetBullets();
+			virtual std::vector<Bullet*>& GetBullets();
 			float playerWidth;
 			float playerHeight;
 

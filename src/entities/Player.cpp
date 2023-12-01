@@ -100,10 +100,7 @@ namespace Entities
 		upgradeLevel++;
 		upgraded = true;
 
-	}
-
-
-	std::vector<Bullet*> Player::GetBullets() 
+	std::vector<Bullet*>& Player::GetBullets() 
 	{
 		return bullets;
 	}
