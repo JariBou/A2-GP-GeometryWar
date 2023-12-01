@@ -29,7 +29,7 @@ namespace Entities
 			float playerWidth;
 			float playerHeight;
 			EnemySpawner* enemySpawner;
-			EnemySpawner* GetSpawner();
+			virtual EnemySpawner* GetSpawner();
 
 
 			void Draw(sf::RenderWindow& window);

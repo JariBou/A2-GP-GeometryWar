@@ -30,7 +30,7 @@ namespace Entities {
 	void Bullet::Udapte(float deltaTime) {
 		MoveBullet(deltaTime);
 		CheckHit();
-		CheckLife();
+		//CheckLife();
 	}	
 
 	bool Bullet::CheckLife() {
@@ -41,6 +41,17 @@ namespace Entities {
 	}
 
 	bool Bullet::CheckHit() {
+
+		EnemySpawner* spawner = this->player.GetSpawner();
+		auto selfRect = this->shape.getGlobalBounds();
+
+		for (Foe* foe : *(spawner->GetFoes())) {
+
+			if (foe->shape.getGlobalBounds().intersects(selfRect)) {
+				foe->GetHit(this->damage);
+			}
+
+		}
 
 	}
 
