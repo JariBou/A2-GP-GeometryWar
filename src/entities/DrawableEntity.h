@@ -11,7 +11,7 @@ namespace Entities
 		FILLED = 0,
 		OUTLINED = 1,
 	};
-
+	
 
 	class DrawableEntity {
 
@@ -30,7 +30,6 @@ namespace Entities
 			virtual void SetColor(sf::Color color);
 
 			void SetWindow(sf::RenderWindow& Window);
-
 
 			sf::Shape& shape;
 			int windowWidth = -1;
