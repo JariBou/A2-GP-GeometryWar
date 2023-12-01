@@ -14,15 +14,16 @@ namespace Entities {
 		std::cout << shape.getPosition().y << std::endl;
 	}
 
-	Bullet::Bullet(sf::Shape& shape, int damage, float speed) : DrawableEntity(shape) {
+	Bullet::Bullet(sf::Shape& shape, Player& Joueur, int damage, float speed) : DrawableEntity(shape), player(Joueur) {
 		this->damage = damage;
 		this->speed = speed;
 		std::cout << "Bullet created" << std::endl;
 		std::cout << shape.getPosition().y << std::endl;
 	}
 
-	void Bullet::MoveBullet(float deltaTime) {
+	bool Bullet::MoveBullet(float deltaTime) {
 		Move(sf::Vector2f(0.0, -1.0) * speed, deltaTime);
+
 		if (shape.getPosition().y < 0 - shape.getLocalBounds().height) {
 			std::vector<Bullet*>::iterator it = player.GetBullets().begin();
 			for (Bullet* bullet : player.GetBullets()) {
@@ -30,12 +31,12 @@ namespace Entities {
 					player.GetBullets().erase(it);
 					delete bullet;
 					std::cout << "Bullet deleted" << std::endl;
-					break;
+					return false;
 				}
 				it++;	
-				
 			}
 		}
+		return true;
 	}
 
 	void Bullet::Udapte(float deltaTime) {

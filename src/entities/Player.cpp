@@ -85,7 +85,7 @@ namespace Entities
 			
 
 				sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
-				Bullet* bullet = new Bullet(*rectangleBullet);
+				Bullet* bullet = new Bullet(*rectangleBullet, *this);
 				(*bullet).SetColor(sf::Color::Red);
 				bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 				bullets.push_back(bullet);
@@ -99,12 +99,14 @@ namespace Entities
 	{
 		upgradeLevel++;
 		upgraded = true;
+	}
 
 	std::vector<Bullet*>& Player::GetBullets() 
 	{
 		return bullets;
 	}
 }
+	
 
 
 

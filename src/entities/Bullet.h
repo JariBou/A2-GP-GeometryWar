@@ -11,9 +11,10 @@ namespace Entities {
     public:
         int damage;
         float speed;
-        Bullet(sf::Shape& shape, Player& Joueur); // Utilisation d'une r�f�rence constante
+        Bullet(sf::Shape& shape, Player& player); // Utilisation d'une r�f�rence constante
+        Bullet(sf::Shape& shape, Player& player, int damage, float speed); // Utilisation d'une r�f�rence constante
         virtual ~Bullet() = default;
-        virtual void MoveBullet(float deltaTime);
+        virtual bool MoveBullet(float deltaTime);
         virtual void Udapte(float deltaTime);
         Player& player; // Utilisation d'une r�f�rence constante
     };
