@@ -4,6 +4,7 @@
 #include <vector>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
+#include "src/EnemySpawner.h"
 #include "src/entities/Player.h"
 #include "src/entities/Bullet.h"
 
@@ -16,7 +17,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars", sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
-	
+	srand(time(NULL));
 
 	// Début de la boucle de jeu
 	sf::RectangleShape rectangle;
@@ -32,7 +33,17 @@ int main()
 	
 	std::vector<Entities::Foe*> foeList;
 
-	for (int i = 0; i < 5; i++)
+	std::vector<sf::Vector2f> spawnPoints;
+	EnemySpawner spawner = EnemySpawner(&foeList, &window);
+
+	spawnPoints.push_back(sf::Vector2f(128, 0));
+	spawnPoints.push_back(sf::Vector2f(156, 0));
+	spawnPoints.push_back(sf::Vector2f(32, 0));
+
+	spawner.setSpawnPoints(spawnPoints);
+	spawner.StartClock();
+
+	/*for (int i = 0; i < 5; i++)
 	{
 		sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
 		Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1);
@@ -42,7 +53,12 @@ int main()
 		enemy->SetWindow(window);
 		rectangleEnemy->setSize(sf::Vector2f(64, 64));
 		foeList.push_back(enemy);
-	}
+	}*/
+
+	/*for (int i = 0; i < 5; i++)
+	{
+		spawner.SpawnEnemy(i);
+	}*/
 
 
 	sf::Clock frameClock;
@@ -82,6 +98,8 @@ int main()
 		{
 			bullet->MoveBullet(deltaTime);
 		}
+
+		spawner.Update(deltaTime);
 
 		// Affichage
 		

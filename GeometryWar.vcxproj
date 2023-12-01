@@ -86,7 +86,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\entities\Bullet.h" />
+    <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\entities\DrawableEntity.cpp" />
     <ClCompile Include="src\entities\Foe.cpp" />
     <ClCompile Include="src\entities\LinearFoe.cpp" />
