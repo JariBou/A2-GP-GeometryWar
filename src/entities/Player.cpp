@@ -68,11 +68,10 @@ namespace Entities
 			cout << "Cliqued" << endl;
 
 			sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
-			Bullet* bullet = new Bullet(*rectangleBullet);
+			Bullet* bullet = new Bullet(*rectangleBullet, *this);
 			(*bullet).SetColor(sf::Color::Red);
 			bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - 10.0));
 			bullets.push_back(bullet);
-
 			isMouseClickedLastFrame = true;
 		}
 		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -81,7 +80,7 @@ namespace Entities
 	}
 
 
-	std::vector<Bullet*> Player::GetBullets() 
+	std::vector<Bullet*>& Player::GetBullets() 
 	{
 		return bullets;
 	}

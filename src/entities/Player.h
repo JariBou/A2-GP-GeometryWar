@@ -18,7 +18,7 @@ namespace Entities
 			virtual ~Player() = default;
 			virtual void MovePlayer();
 			virtual void ShootPlayer();
-			virtual std::vector<Bullet*> GetBullets();
+			virtual std::vector<Bullet*>& GetBullets();
 			float playerWidth;
 			float playerHeight;
 

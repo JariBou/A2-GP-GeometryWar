@@ -3,15 +3,18 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 
+
 namespace Entities {
-	class Bullet : public DrawableEntity {
-		public:
-			int damage;
-			float speed;
-			Bullet(sf::Shape& shape);
-			Bullet(sf::Shape& shape, Player player);
-			virtual ~Bullet() = default;
-			virtual void MoveBullet(float deltaTime);
-			virtual void Udapte(float deltaTime);
-	};
+    class Player; // Assurez-vous que la classe Player est déclarée avant Bullet
+
+    class Bullet : public DrawableEntity {
+    public:
+        int damage;
+        float speed;
+        Bullet(sf::Shape& shape, Player& Joueur); // Utilisation d'une référence constante
+        virtual ~Bullet() = default;
+        virtual void MoveBullet(float deltaTime);
+        virtual void Udapte(float deltaTime);
+        Player& player; // Utilisation d'une référence constante
+    };
 }
