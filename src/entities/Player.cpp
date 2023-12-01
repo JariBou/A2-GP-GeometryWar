@@ -14,7 +14,6 @@ namespace Entities
 	Player::Player(sf::Shape& shape) : DrawableEntity(shape){
 	}
 	
-	
 
 	void Player::MovePlayer(float deltaTime)
 	{
@@ -74,22 +73,33 @@ namespace Entities
 		window.draw(rect);
 	}
 
-	void Player::ShootPlayer()
+	void Player::Update(float deltaTime)
 	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !isMouseClickedLastFrame) {
-			cout << "Cliqued" << endl;
+		//PlayerShoot
+		std::cout << upgradeLevel;
+		bulletClock += deltaTime;
+		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.1) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+				bulletClock = 0;
+				cout << "Cliqued" << endl;
+			
 
-			sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
-			Bullet* bullet = new Bullet(*rectangleBullet);
-			(*bullet).SetColor(sf::Color::Red);
-			bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
-			bullets.push_back(bullet);
+				sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
+				Bullet* bullet = new Bullet(*rectangleBullet);
+				(*bullet).SetColor(sf::Color::Red);
+				bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + playerWidth / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+				bullets.push_back(bullet);
+			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !upgraded) { UpgradeLevel(); }
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && upgraded) { upgraded = false; }
+	}
 
-			isMouseClickedLastFrame = true;
-		}
-		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			isMouseClickedLastFrame = false;
-		}
+	void Player::UpgradeLevel()
+	{
+		upgradeLevel++;
+		upgraded = true;
+
 	}
 
 

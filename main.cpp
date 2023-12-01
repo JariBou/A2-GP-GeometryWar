@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <vector>
+#include <chrono>
 #include "src/entities/Entites.h"
 #include "src/utils.h"
 #include "src/EnemySpawner.h"
@@ -20,7 +21,7 @@ int main()
 	srand(time(NULL));
 
 	// Début de la boucle de jeu
-	sf::RectangleShape rectangle;
+	sf::RectangleShape rectangle(sf::Vector2f(128,128));
 	Entities::Player player = Entities::Player(rectangle);
 	player.SetColor(sf::Color::Transparent, sf::Color::Green);
 	player.SetPosition(sf::Vector2f(640 - 64, 360 - 64));
@@ -83,12 +84,13 @@ int main()
 		}
 
 		float deltaTime = frameClock.restart().asSeconds();
-		std::cout << 1.f / deltaTime << " FPS" << std::endl;
+		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
 
 		player.MovePlayer(deltaTime);
 
-		player.ShootPlayer(); // This needs to change
+
+		player.Update(deltaTime); // This needs to change
 
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);

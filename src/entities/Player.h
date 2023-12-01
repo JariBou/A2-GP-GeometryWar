@@ -14,11 +14,16 @@ namespace Entities
 		public:
 
 			int upgradeLevel = 0;
+			bool upgraded;
 			int lives = 3;
+			float bulletCooldown = 0.5f;
+			float bulletClock;
+			float nbBulletShot = 1;
 			Player(sf::Shape& shape);
 			virtual ~Player() = default;
 			virtual void MovePlayer(float deltaTime);
-			virtual void ShootPlayer();
+			virtual void Update(float deltaTime);
+			virtual void UpgradeLevel();
 			virtual std::vector<Bullet*> GetBullets();
 			float playerWidth;
 			float playerHeight;
