@@ -16,7 +16,7 @@ int main()
 {
 	// Initialisation
 
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Geometry Wars", sf::Style::Titlebar | sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Geometry Wars", sf::Style::Titlebar | sf::Style::Close);
 	window.setVerticalSyncEnabled(true);
 	srand(time(NULL));
 
@@ -38,9 +38,11 @@ int main()
 	EnemySpawner spawner = EnemySpawner(&foeList, &window);
 	player.enemySpawner = &spawner;
 
-	spawnPoints.push_back(sf::Vector2f(128, 0));
-	spawnPoints.push_back(sf::Vector2f(156, 0));
-	spawnPoints.push_back(sf::Vector2f(32, 0));
+	spawnPoints.push_back(sf::Vector2f(1800, 0));
+	spawnPoints.push_back(sf::Vector2f(1500, 0));
+	spawnPoints.push_back(sf::Vector2f(1000, 0));
+	spawnPoints.push_back(sf::Vector2f(700, 0));
+	spawnPoints.push_back(sf::Vector2f(300, 0));
 
 	spawner.setSpawnPoints(spawnPoints);
 	spawner.StartClock();

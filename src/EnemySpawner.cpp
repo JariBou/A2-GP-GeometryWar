@@ -35,7 +35,7 @@ void EnemySpawner::SpawnEnemy(int i) {
 
 void EnemySpawner::SpawnEnemy(sf::Vector2f position) {
 	sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, 1);
+	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, 50 + rand() % 200);
 	enemy->SetPosition(sf::Vector2f(position.x, position.y));
 	enemy->SetDirection(sf::Vector2f(0, 1));
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
