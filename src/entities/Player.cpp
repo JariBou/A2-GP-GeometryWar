@@ -76,7 +76,6 @@ namespace Entities
 	void Player::Update(float deltaTime)
 	{
 		//PlayerShoot
-		std::cout << upgradeLevel;
 		bulletClock += deltaTime;
 		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.1) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -99,6 +98,7 @@ namespace Entities
 	{
 		upgradeLevel++;
 		upgraded = true;
+		cout << "Upgrade level : " << upgradeLevel << endl;
 	}
 
 	std::vector<Bullet*>& Player::GetBullets() 
