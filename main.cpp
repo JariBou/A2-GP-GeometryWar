@@ -70,7 +70,7 @@ int main()
 
 
 	sf::Clock frameClock;
-	float UpgradeSpawningCooldown = 5;
+	float UpgradeSpawningCooldown = 2;
 	
 
 	while (window.isOpen())
@@ -99,7 +99,7 @@ int main()
 		if (UpgradeSpawningCooldown <= 0) {
 			upgradeBoxSpawner.SpawnUpgradeBox();
 			std::cout << "Upgrade Box spawned" << std::endl;
-			UpgradeSpawningCooldown = 5;
+			UpgradeSpawningCooldown = 2;
 
 		}
 
@@ -150,26 +150,32 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		bool playerIsColliding = false;
-		for (Entities::UpgradeBox* upgradeBox : upgradeBoxSpawner.GetUpgradeBoxList()) {
+		auto upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().begin();
+
+		while (upgradeBoxVectorIterator != upgradeBoxSpawner.GetUpgradeBoxList().end()) {
+			Entities::UpgradeBox* upgradeBox = *upgradeBoxVectorIterator;
+
 			upgradeBox->Update(deltaTime);
 			upgradeBox->Draw(window);
-			auto upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().begin();
+
 			if (upgradeBox->shape.getPosition().y > window.getSize().y) {
-				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
 				delete upgradeBox;
+				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
 				std::cout << "Upgrade Box deleted" << std::endl;
 			}
 			else if (upgradeBox->isColliding() && !playerIsColliding) {
 				playerIsColliding = true;
-				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
 				delete upgradeBox;
+				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
 				std::cout << "Upgrade Box Colliding with Player" << std::endl;
 				player.UpgradeLevel();
 				break;
 			}
-			playerIsColliding = false;
-			upgradeBoxVectorIterator++;
+			else {
+				++upgradeBoxVectorIterator;
+			}
 		}
+
 		player.Draw(window);
 
 		for (Entities::Bullet* bullet : player.GetBullets())
