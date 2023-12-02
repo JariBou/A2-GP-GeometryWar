@@ -37,9 +37,9 @@ int main()
 	std::vector<Entities::Foe*> foeList;
 
 	std::vector<sf::Vector2f> spawnPoints;
-	EnemySpawner spawner = EnemySpawner(&foeList, &window);
+	EnemySpawner spawner = EnemySpawner(&foeList, &window, &player);
 	std::vector<Entities::UpgradeBox*> upgradeBoxList;
-	UpgradeBoxSpawner upgradeBoxSpawner = UpgradeBoxSpawner(upgradeBoxList, window.getSize().x);
+	UpgradeBoxSpawner upgradeBoxSpawner = UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, player);
 	player.enemySpawner = &spawner;
 
 	spawnPoints.push_back(sf::Vector2f(1800, 0));
@@ -71,6 +71,7 @@ int main()
 
 	sf::Clock frameClock;
 	float UpgradeSpawningCooldown = 5;
+	
 
 	while (window.isOpen())
 	{
@@ -102,10 +103,6 @@ int main()
 
 		}
 
-		for (Entities::UpgradeBox* upgradeBox : upgradeBoxSpawner.GetUpgradeBoxList()) {
-			upgradeBox->Update(deltaTime);
-			upgradeBox->Draw(window);
-		}
 		player.MovePlayer(deltaTime);
 
 		player.Update(deltaTime); // This needs to change
@@ -152,6 +149,27 @@ int main()
 
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
+		bool playerIsColliding = false;
+		for (Entities::UpgradeBox* upgradeBox : upgradeBoxSpawner.GetUpgradeBoxList()) {
+			upgradeBox->Update(deltaTime);
+			upgradeBox->Draw(window);
+			auto upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().begin();
+			if (upgradeBox->shape.getPosition().y > window.getSize().y) {
+				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
+				delete upgradeBox;
+				std::cout << "Upgrade Box deleted" << std::endl;
+			}
+			else if (upgradeBox->isColliding() && !playerIsColliding) {
+				playerIsColliding = true;
+				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
+				delete upgradeBox;
+				std::cout << "Upgrade Box Colliding with Player" << std::endl;
+				player.UpgradeLevel();
+				break;
+			}
+			playerIsColliding = false;
+			upgradeBoxVectorIterator++;
+		}
 		player.Draw(window);
 
 		for (Entities::Bullet* bullet : player.GetBullets())

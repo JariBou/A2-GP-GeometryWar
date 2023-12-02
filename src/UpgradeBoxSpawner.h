@@ -11,11 +11,12 @@
 
 class UpgradeBoxSpawner {
 	public :
-		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth);
+		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth, Entities::Player& Player);
 		~UpgradeBoxSpawner() = default;
 		virtual void SpawnUpgradeBox();
 		std::vector<Entities::UpgradeBox*>& GetUpgradeBoxList();
 		int windowWidth; 
+		Entities::Player* player;
 		
 	private:
 		std::vector<Entities::UpgradeBox*> upgradeBoxList;

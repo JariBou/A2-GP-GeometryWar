@@ -101,9 +101,12 @@ namespace Entities
 
 	void Player::UpgradeLevel()
 	{
-		upgradeLevel++;
-		upgraded = true;
-		cout << "Upgrade level : " << upgradeLevel << endl;
+		if (upgradeLevel < 15){
+			upgradeLevel++;
+			upgraded = true;
+			cout << "Upgrade level : " << upgradeLevel << endl;
+		}
+
 	}
 
 	void Player::GetHit(float damage) {

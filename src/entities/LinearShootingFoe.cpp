@@ -24,7 +24,7 @@ namespace Entities
 		if (this->shootingClock >= this->shootingCooldown) {
 			this->shootingClock = 0;
 			sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
-			Bullet* bullet = new Bullet(*rectangleBullet, *this->player, 1, 600.0, sf::Vector2f(0, 1));
+			Bullet* bullet = new Bullet(*rectangleBullet, *this->player, 1, 600.0, sf::Vector2f(0, 1), windowWidth);
 			(*bullet).SetColor(sf::Color::Green);
 			auto selfRect = shape.getGlobalBounds();
 			bullet->SetPosition(sf::Vector2f(selfRect.left + selfRect.width/2 - rectangleBullet->getSize().x/2,
