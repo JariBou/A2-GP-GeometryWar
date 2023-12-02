@@ -19,9 +19,13 @@ namespace Entities {
             virtual void Update(float deltaTime);
             virtual bool CheckLife();
             virtual bool CheckHit();
+            void ShotByEnemy() {
+                shotByPlayer = false;
+            }
             Player& player; // Utilisation d'une r�f�rence constante
     private :
 			sf::Vector2f direction;
+            bool shotByPlayer = true;
        
 };
 }

@@ -92,6 +92,7 @@
     <ClCompile Include="src\entities\DrawableEntity.cpp" />
     <ClCompile Include="src\entities\Foe.cpp" />
     <ClCompile Include="src\entities\LinearFoe.cpp" />
+    <ClCompile Include="src\entities\LinearShootingFoe.cpp" />
     <ClCompile Include="src\entities\Player.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
@@ -100,6 +101,7 @@
     <ClInclude Include="src\entities\Foe.h" />
     <ClInclude Include="src\entities\LinearFoe.h" />
     <ClInclude Include="src\entities\Entites.h" />
+    <ClInclude Include="src\entities\LinearShootingFoe.h" />
     <ClInclude Include="src\entities\Player.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>

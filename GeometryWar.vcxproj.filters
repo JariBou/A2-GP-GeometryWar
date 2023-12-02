@@ -42,6 +42,12 @@
     <ClCompile Include="src\entities\Player.cpp">
       <Filter>Fichiers sources\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\EnemySpawner.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\LinearShootingFoe.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\DrawableEntity.h">
@@ -63,6 +69,12 @@
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\LinearFoe.h">
+      <Filter>Fichiers d%27en-tête\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemySpawner.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\LinearShootingFoe.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
   </ItemGroup>

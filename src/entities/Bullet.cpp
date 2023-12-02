@@ -37,7 +37,11 @@ namespace Entities {
 	bool Bullet::CheckLife() {
 		if (this->shouldDestroy) return false;
 
-		if (shape.getPosition().y < 0 - shape.getLocalBounds().height || shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().x > 1280 + shape.getLocalBounds().width){
+		float windowWidth = player.windowWidth;
+		float windowHeight = player.windowHeight;
+
+		if (shape.getPosition().x < 0 - shape.getLocalBounds().height || shape.getPosition().y < 0 - shape.getLocalBounds().width 
+			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height){
 			return false;
 		}
 		return true;
@@ -45,20 +49,31 @@ namespace Entities {
 
 	bool Bullet::CheckHit() {
 
-		EnemySpawner* spawner = this->player.GetSpawner();
 		auto selfRect = this->shape.getGlobalBounds();
 
-		for (Foe* foe : *(spawner->GetFoes())) {
+		if (shotByPlayer) {
+			EnemySpawner* spawner = this->player.GetSpawner();
 
-			auto enemyRect = foe->shape.getGlobalBounds();
+			for (Foe* foe : *(spawner->GetFoes())) {
 
-			if (enemyRect.intersects(selfRect)) {
-				foe->GetHit(this->damage);
+				auto enemyRect = foe->shape.getGlobalBounds();
+
+				if (enemyRect.intersects(selfRect)) {
+					foe->GetHit(this->damage);
+					shouldDestroy = true;
+					return true;
+				}
+
+			}
+		}
+		else {
+			if (player.shape.getGlobalBounds().intersects(selfRect)) {
+				player.GetHit(this->damage);
 				shouldDestroy = true;
 				return true;
 			}
-
 		}
+		
 		return false;
 	}
 

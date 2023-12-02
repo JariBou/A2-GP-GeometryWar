@@ -35,7 +35,7 @@ int main()
 	std::vector<Entities::Foe*> foeList;
 
 	std::vector<sf::Vector2f> spawnPoints;
-	EnemySpawner spawner = EnemySpawner(&foeList, &window);
+	EnemySpawner spawner = EnemySpawner(&foeList, &window, &player);
 	player.enemySpawner = &spawner;
 
 	spawnPoints.push_back(sf::Vector2f(1800, 0));
@@ -99,7 +99,7 @@ int main()
 			bullet->Update(deltaTime);
 		}
 
-		auto bulletVectorIterator = player.GetBullets().begin();
+		/*auto bulletVectorIterator = player.GetBullets().begin();
 		while (bulletVectorIterator != player.GetBullets().end()) {
 			if ((*bulletVectorIterator)->CheckLife()) {
 				bulletVectorIterator++;
@@ -108,7 +108,8 @@ int main()
 				bulletVectorIterator = player.GetBullets().erase(bulletVectorIterator);
 				std::cout << "Bullet deleted" << std::endl;
 			}
-		}
+		}*/
+		Utils::CheckBulletListLife(player.GetBullets());
 
 
 		for (Entities::Foe *en : foeList) {
