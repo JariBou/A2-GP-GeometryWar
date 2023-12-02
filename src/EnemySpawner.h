@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "entities/Entites.h"
 
+class Player;
 
 class EnemySpawner {
 
@@ -10,12 +11,13 @@ public:
 	std::vector<Entities::Foe*>* foeList; 
 	sf::RenderWindow* window;
 	std::vector<sf::Vector2f> spawnPoints;
+	Entities::Player* player;
 
 	float clock = 0;
 	bool doClock = false;
 	float timeBetweenSpawns = 3;
 
-	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window);
+	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, Entities:: Player* player);
 
 	std::vector<Entities::Foe*>* GetFoes();
 

@@ -115,7 +115,7 @@ int main()
 			bullet->Update(deltaTime);
 		}
 
-		auto bulletVectorIterator = player.GetBullets().begin();
+		/*auto bulletVectorIterator = player.GetBullets().begin();
 		while (bulletVectorIterator != player.GetBullets().end()) {
 			if ((*bulletVectorIterator)->CheckLife()) {
 				bulletVectorIterator++;
@@ -124,7 +124,8 @@ int main()
 				bulletVectorIterator = player.GetBullets().erase(bulletVectorIterator);
 				std::cout << "Bullet deleted" << std::endl;
 			}
-		}
+		}*/
+		Utils::CheckBulletListLife(player.GetBullets());
 
 
 		for (Entities::Foe *en : foeList) {

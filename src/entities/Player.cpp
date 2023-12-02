@@ -106,6 +106,10 @@ namespace Entities
 		cout << "Upgrade level : " << upgradeLevel << endl;
 	}
 
+	void Player::GetHit(float damage) {
+		std::cout << "Player hit" << std::endl;
+	}
+
 	EnemySpawner* Player::GetSpawner() {
 		return this->enemySpawner;
 	}

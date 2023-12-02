@@ -33,6 +33,7 @@ namespace Entities
 			EnemySpawner* enemySpawner;
 			virtual EnemySpawner* GetSpawner();
 
+			virtual void GetHit(float damage);
 
 			void Draw(sf::RenderWindow& window);
 

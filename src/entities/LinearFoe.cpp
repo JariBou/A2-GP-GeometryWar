@@ -4,13 +4,13 @@
 namespace Entities
 {
 
-	LinearFoe::LinearFoe(sf::Shape& shape, float speed) : Foe(shape, speed) {
+	LinearFoe::LinearFoe(sf::Shape& shape, float speed, Player* player) : Foe(shape, speed, player) {
 	}
 
 	void LinearFoe::Update(float deltaTime) {
 		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
-		if (pos.y > 720) {
+		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
 			this->health = 0;
 			//Die();
 		}

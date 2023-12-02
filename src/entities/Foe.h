@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DrawableEntity.h"
+#include "Player.h"
 
 namespace Entities {
 
@@ -10,8 +11,9 @@ namespace Entities {
 
 		float health = 20;
 		float speed = 5;
+		Player* player;
 
-		Foe(sf::Shape& shape, float speed) : DrawableEntity(shape) {
+		Foe(sf::Shape& shape, float speed, Player* player) : DrawableEntity(shape), player(player) {
 			this->speed = speed;
 		}
 

@@ -3,6 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "Foe.h"
+#include "Player.h"
 
 namespace Entities
 
@@ -14,14 +15,14 @@ namespace Entities
 		
 		sf::Vector2f direction;
 
-		LinearFoe(sf::Shape& shape, float speed);
+		LinearFoe(sf::Shape& shape, float speed, Player* player);
 
-		void Update(float deltaTime);
-		bool isDead();
-		void SetDirection(sf::Vector2f direction);
-		bool CheckLife();
+		virtual void Update(float deltaTime);
+		virtual bool isDead();
+		virtual void SetDirection(sf::Vector2f direction);
+		virtual bool CheckLife();
 
-		void GetHit(float value);
+		virtual void GetHit(float value);
 
 	};
 }
