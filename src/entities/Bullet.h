@@ -13,7 +13,7 @@ namespace Entities {
             float speed;
             bool shouldDestroy = false;
             Bullet(sf::Shape& shape, Player& player); // Utilisation d'une r�f�rence constante
-            Bullet(sf::Shape& shape, Player& player, int damage, float speed, sf::Vector2f Direction); // Utilisation d'une r�f�rence constante
+            Bullet(sf::Shape& shape, Player& player, int damage, float speed, sf::Vector2f Direction, int WindowWidth); // Utilisation d'une r�f�rence constante
             virtual ~Bullet() = default;
             virtual bool MoveBullet(float deltaTime);
             virtual void Update(float deltaTime);
@@ -22,6 +22,8 @@ namespace Entities {
             Player& player; // Utilisation d'une r�f�rence constante
     private :
 			sf::Vector2f direction;
+            int windowWidth;
+            /*int windowHeight;*/
        
 };
 }

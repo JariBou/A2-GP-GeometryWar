@@ -8,6 +8,8 @@
 #include "src/EnemySpawner.h"
 #include "src/entities/Player.h"
 #include "src/entities/Bullet.h"
+#include "src/entities/UpgradeBox.h"
+#include "src/UpgradeBoxSpawner.h"
 
 
 
@@ -36,6 +38,8 @@ int main()
 
 	std::vector<sf::Vector2f> spawnPoints;
 	EnemySpawner spawner = EnemySpawner(&foeList, &window);
+	std::vector<Entities::UpgradeBox*> upgradeBoxList;
+	UpgradeBoxSpawner upgradeBoxSpawner = UpgradeBoxSpawner(upgradeBoxList, window.getSize().x);
 	player.enemySpawner = &spawner;
 
 	spawnPoints.push_back(sf::Vector2f(1800, 0));
@@ -66,6 +70,7 @@ int main()
 
 
 	sf::Clock frameClock;
+	float UpgradeSpawningCooldown = 5;
 
 	while (window.isOpen())
 	{
@@ -88,8 +93,19 @@ int main()
 
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
+		UpgradeSpawningCooldown -= deltaTime;
 
+		if (UpgradeSpawningCooldown <= 0) {
+			upgradeBoxSpawner.SpawnUpgradeBox();
+			std::cout << "Upgrade Box spawned" << std::endl;
+			UpgradeSpawningCooldown = 5;
 
+		}
+
+		for (Entities::UpgradeBox* upgradeBox : upgradeBoxSpawner.GetUpgradeBoxList()) {
+			upgradeBox->Update(deltaTime);
+			upgradeBox->Draw(window);
+		}
 		player.MovePlayer(deltaTime);
 
 		player.Update(deltaTime); // This needs to change
