@@ -23,6 +23,24 @@ int main()
 	srand(time(NULL));
 
 	// Début de la boucle de jeu
+
+	//Score:
+
+	sf::Font MyFont;
+	if (!MyFont.loadFromFile("../font/Roboto-Black.ttf"))
+	{
+		// Erreur...
+	}
+
+	sf::Text scoreText;
+	int score = 0;
+	scoreText.setCharacterSize(40);
+	scoreText.setPosition(5, 5);
+	scoreText.setFont(MyFont);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setStyle(sf::Text::Bold);
+
+
 	sf::RectangleShape rectangle(sf::Vector2f(128,128));
 	Entities::Player player = Entities::Player(rectangle);
 	player.SetColor(sf::Color::Transparent, sf::Color::Green);
@@ -95,6 +113,10 @@ int main()
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
+		scoreText.setString("Score : " + Utils::toString(score));
+		//std::cout<< "Score : " + Utils::toString(score);
+
+		
 		upgradeBoxSpawner.TrySpawning(deltaTime);
 
 		player.MovePlayer(deltaTime);
@@ -126,7 +148,7 @@ int main()
 		}		
 
 		Utils::CheckBulletListLife(player.GetBullets());
-		Utils::CheckFoeListLife(*(spawner.GetFoes()));
+		score += Utils::CheckFoeListLife(*(spawner.GetFoes()));
 
 		Utils::CheckUpgradeListLife(upgradeBoxSpawner.GetUpgradeBoxList());
 		
@@ -150,6 +172,7 @@ int main()
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
 		
+		window.draw(scoreText);
 		player.Draw(window);
 
 		for (Entities::Bullet* bullet : player.GetBullets())

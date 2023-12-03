@@ -1,6 +1,8 @@
 #include "utils.h"
 #include <cmath>
 #include <iostream>
+#include <sstream>
+using namespace std;
 
 
 namespace Utils {
@@ -29,7 +31,8 @@ namespace Utils {
 		}
 	}
 
-	void CheckFoeListLife(std::vector<Entities::Foe*>& foes) {
+	int CheckFoeListLife(std::vector<Entities::Foe*>& foes) {
+		int killedFoe = 0;
 		auto foeVectorIterator = foes.begin();
 		while (foeVectorIterator != foes.end()) {
 			if ((*foeVectorIterator)->CheckLife()) {
@@ -37,9 +40,11 @@ namespace Utils {
 			}
 			else {
 				foeVectorIterator = foes.erase(foeVectorIterator);
+				killedFoe++;
 				std::cout << "Foe deleted" << std::endl;
 			}
 		}
+		return killedFoe;
 	}
 
 	void CheckUpgradeListLife(std::vector<Entities::UpgradeBox*>& boxes) {
@@ -67,6 +72,13 @@ namespace Utils {
 				std::cout << "Upgrade deleted" << std::endl;
 			}
 		}
+	}
+
+	sf::String toString(int integer)
+	{
+		std::ostringstream os;
+		os << integer;
+		return os.str();
 	}
 
 }
