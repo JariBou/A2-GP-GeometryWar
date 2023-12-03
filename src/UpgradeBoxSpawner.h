@@ -15,8 +15,14 @@ class UpgradeBoxSpawner {
 		~UpgradeBoxSpawner() = default;
 		virtual void SpawnUpgradeBox();
 		std::vector<Entities::UpgradeBox*>& GetUpgradeBoxList();
+		std::vector<Entities::DrawableEntity*>& GetUpgradeBoxEntities();
 		int windowWidth; 
 		Entities::Player* player;
+		void Update(float deltaTime);
+		float spawnCooldown = 2;
+		float spawnTimer = 0;
+
+		void TrySpawning(float deltaTime);
 		
 	private:
 		std::vector<Entities::UpgradeBox*> upgradeBoxList;

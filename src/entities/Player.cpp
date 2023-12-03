@@ -8,7 +8,6 @@
 namespace Entities 
 {
 	using namespace std;
-	sf::Clock frameClock;
 
 
 	Player::Player(sf::Shape& shape) : DrawableEntity(shape){
@@ -57,7 +56,7 @@ namespace Entities
 		}
 
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		Move(Utils::NormalizeVector(moveVector) * cubeSpeed, deltaTime);
+		Move(Utils::NormalizeVector(moveVector) * speed, deltaTime);
 	}
     
     void Player::Draw(sf::RenderWindow& window){
@@ -77,7 +76,7 @@ namespace Entities
 	{
 		//PlayerShoot
 		bulletClock += deltaTime;
-		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.1) {
+		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.15) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
 				cout << "Cliqued" << endl;
@@ -87,9 +86,10 @@ namespace Entities
 				for (size_t i = 1; i < pow(2,upgradeLevel % 4) + 1; i++)
 				{
 					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize,bulletSize));
-                    Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, 300.0, sf::Vector2f(0, -1.0), windowWidth);
-					(*bullet).SetColor(sf::Color::Red);
-					bullet -> SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+					float bulletSpeed = speed + 250.0 * (upgradeLevel + 1) / 8;
+                    Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, bulletSpeed, sf::Vector2f(0, -1.0), windowWidth);
+					bullet->SetColor(sf::Color::Red);
+					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
 				
@@ -120,6 +120,15 @@ namespace Entities
 	std::vector<Bullet*>& Player::GetBullets() 
 	{
 		return bullets;
+	}
+
+	std::vector<DrawableEntity*>& Player::GetBulletEntities()
+	{
+		std::vector<DrawableEntity*> vec;
+		for (Bullet* bullet : bullets) {
+			vec.push_back(bullet);
+		}
+		return vec;
 	}
 }
 	

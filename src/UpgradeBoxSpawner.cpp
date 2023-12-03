@@ -24,8 +24,36 @@ void UpgradeBoxSpawner::SpawnUpgradeBox() {
 	upgradeBoxList.push_back(UpgradeBox);
 }
 
+void UpgradeBoxSpawner::TrySpawning(float deltaTime) {
+	spawnTimer += deltaTime;
 
+	if (spawnTimer >= spawnCooldown) {
+		SpawnUpgradeBox();
+		std::cout << "Upgrade Box spawned" << std::endl;
+		spawnTimer = 0;
+	}
+}
 
 std::vector<Entities::UpgradeBox*>& UpgradeBoxSpawner::GetUpgradeBoxList() {
 	return upgradeBoxList;
 }
+
+std::vector<Entities::DrawableEntity*>& UpgradeBoxSpawner::GetUpgradeBoxEntities()
+{
+	std::vector<Entities::DrawableEntity*> vec;
+	for (Entities::UpgradeBox* bullet : upgradeBoxList) {
+		vec.push_back(bullet);
+	}
+	return vec;
+}
+
+void UpgradeBoxSpawner::Update(float deltaTime) {
+	for (Entities::UpgradeBox* box : upgradeBoxList) {
+		box->Update(deltaTime);
+		if (box->IsColliding()) {
+			player->UpgradeLevel();
+		}
+	}
+}
+
+

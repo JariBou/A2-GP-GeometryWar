@@ -21,6 +21,8 @@ public:
 
 	std::vector<Entities::Foe*>* GetFoes();
 
+	std::vector<Entities::DrawableEntity*>& GetFoeEntities();
+
 	void SpawnEnemy();
 	void SpawnEnemy(int i);
 	void SpawnEnemy(sf::Vector2f position);

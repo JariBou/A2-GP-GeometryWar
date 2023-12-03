@@ -8,24 +8,35 @@
 
 namespace Entities {
 
-	UpgradeBox::UpgradeBox(sf::Shape& shape, Player& Player) : DrawableEntity(shape) {
+	UpgradeBox::UpgradeBox(sf::Shape& shape, Player& Player) : DrawableEntity(shape), player(Player) {
 		speed = 200;
-		player = &Player;
 	}
 
 	void UpgradeBox::Update(float deltaTime) {
 		Move(sf::Vector2f(0,1), deltaTime*speed);
-
 	}
 
-	bool UpgradeBox::isColliding() {
+	bool UpgradeBox::IsColliding() {
 		auto selfRect = this->shape.getGlobalBounds();
-		auto playerRect = player->shape.getGlobalBounds();
+		auto playerRect = player.shape.getGlobalBounds();
 
-		if (selfRect.intersects(playerRect)) {
-			return true;
+		shouldDestroy = selfRect.intersects(playerRect);
+		return shouldDestroy;
+	}
+
+	bool UpgradeBox::CheckLife() {
+
+		if (this->shouldDestroy) return false;
+
+		float windowWidth = player.windowWidth;
+		float windowHeight = player.windowHeight;
+
+		if (shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().y < 0 - shape.getLocalBounds().height
+			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height) {
+			return false;
 		}
-		return false;
+		return true;
+
 	}
 		
 

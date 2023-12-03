@@ -94,14 +94,8 @@ int main()
 
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		UpgradeSpawningCooldown -= deltaTime;
 
-		if (UpgradeSpawningCooldown <= 0) {
-			upgradeBoxSpawner.SpawnUpgradeBox();
-			std::cout << "Upgrade Box spawned" << std::endl;
-			UpgradeSpawningCooldown = 2;
-
-		}
+		upgradeBoxSpawner.TrySpawning(deltaTime);
 
 		player.MovePlayer(deltaTime);
 
@@ -111,6 +105,9 @@ int main()
 		{
 			bullet->Update(deltaTime);
 		}
+
+		upgradeBoxSpawner.Update(deltaTime);
+
 
 		/*auto bulletVectorIterator = player.GetBullets().begin();
 		while (bulletVectorIterator != player.GetBullets().end()) {
@@ -122,24 +119,27 @@ int main()
 				std::cout << "Bullet deleted" << std::endl;
 			}
 		}*/
-		Utils::CheckBulletListLife(player.GetBullets());
 
 
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);
 		}		
 
-		auto foeVectorIterator = foeList.begin();
-		while (foeVectorIterator != foeList.end()) {
-			if ((*foeVectorIterator)->CheckLife()) {
-				foeVectorIterator++;
-			}
-			else {
-				foeVectorIterator = foeList.erase(foeVectorIterator);
-				std::cout << "Enemy deleted" << std::endl;
-			}
-		}
+		Utils::CheckBulletListLife(player.GetBullets());
+		Utils::CheckFoeListLife(*(spawner.GetFoes()));
 
+		Utils::CheckUpgradeListLife(upgradeBoxSpawner.GetUpgradeBoxList());
+		
+		/*Utils::CheckEntityListLife(player.GetBulletEntities());
+		Utils::CheckEntityListLife(spawner.GetFoeEntities());
+		Utils::CheckEntityListLife(upgradeBoxSpawner.GetUpgradeBoxEntities());
+		*/
+
+
+		// Utils::CheckEntityListLife(player.GetBullets());
+		
+		
+		
 		spawner.Update(deltaTime);
 
 		// Affichage
@@ -149,33 +149,7 @@ int main()
 
 		// Tout le rendu va se dérouler ici
 		//window.draw(rectangle);
-		bool playerIsColliding = false;
-		auto upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().begin();
-
-		while (upgradeBoxVectorIterator != upgradeBoxSpawner.GetUpgradeBoxList().end()) {
-			Entities::UpgradeBox* upgradeBox = *upgradeBoxVectorIterator;
-
-			upgradeBox->Update(deltaTime);
-			upgradeBox->Draw(window);
-
-			if (upgradeBox->shape.getPosition().y > window.getSize().y) {
-				delete upgradeBox;
-				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
-				std::cout << "Upgrade Box deleted" << std::endl;
-			}
-			else if (upgradeBox->isColliding() && !playerIsColliding) {
-				playerIsColliding = true;
-				delete upgradeBox;
-				upgradeBoxVectorIterator = upgradeBoxSpawner.GetUpgradeBoxList().erase(upgradeBoxVectorIterator);
-				std::cout << "Upgrade Box Colliding with Player" << std::endl;
-				player.UpgradeLevel();
-				break;
-			}
-			else {
-				++upgradeBoxVectorIterator;
-			}
-		}
-
+		
 		player.Draw(window);
 
 		for (Entities::Bullet* bullet : player.GetBullets())
@@ -186,8 +160,11 @@ int main()
 		for (Entities::Foe *en : foeList) {
 			en->Draw(window);
 		}
-		
 
+		for (Entities::UpgradeBox* box : upgradeBoxSpawner.GetUpgradeBoxList()) {
+			box->Draw(window);
+		}
+		
 		// On présente la fenêtre sur l'écran
 		window.display();
 	}

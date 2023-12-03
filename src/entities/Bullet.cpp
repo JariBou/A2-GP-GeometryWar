@@ -41,7 +41,7 @@ namespace Entities {
 		float windowWidth = player.windowWidth;
 		float windowHeight = player.windowHeight;
 
-		if (shape.getPosition().x < 0 - shape.getLocalBounds().height || shape.getPosition().y < 0 - shape.getLocalBounds().width 
+		if (shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().y < 0 - shape.getLocalBounds().height 
 			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height){
 			return false;
 		}

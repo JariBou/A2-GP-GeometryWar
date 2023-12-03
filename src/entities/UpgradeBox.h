@@ -11,11 +11,13 @@ namespace Entities
 		UpgradeBox(sf::Shape& shape, Player& Player);
 		~UpgradeBox() = default;
 		virtual void Update(float deltaTime);
-		virtual bool isColliding();
+		virtual bool IsColliding();
+		virtual bool CheckLife();
 
 	private:
+		bool shouldDestroy = false;
 		int speed = 200;
-		Player* player;
+		Player& player;
 	};
 
 }

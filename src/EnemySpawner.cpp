@@ -7,8 +7,18 @@ EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindo
 	this->player = player;
 }
 
+// Yeah so mb We'll have to live with this one being a pointer 'till someone changes it
 std::vector<Entities::Foe*>* EnemySpawner::GetFoes() {
 	return this->foeList;
+}
+
+std::vector<Entities::DrawableEntity*>& EnemySpawner::GetFoeEntities()
+{
+	std::vector<Entities::DrawableEntity*> vec;
+	for (Entities::Foe* foe : *foeList) {
+		vec.push_back(foe);
+	}
+	return vec;
 }
 
 
