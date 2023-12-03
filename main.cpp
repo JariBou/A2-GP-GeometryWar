@@ -89,9 +89,89 @@ int main()
 
 	sf::Clock frameClock;
 	float UpgradeSpawningCooldown = 2;
+	int _scene = 0;
 	
 
-	while (window.isOpen())
+	#pragma region TitleScreen
+
+	std::vector<sf::Color> colorList = {sf::Color::White, sf::Color::Green, sf::Color::Blue, sf::Color::Red, sf::Color::Cyan, sf::Color::Yellow, sf::Color::Magenta};
+
+	std::vector<sf::Text*> textList;
+
+	sf::Text gameTitle;
+	gameTitle.setString("Title of the Game");
+	gameTitle.setCharacterSize(170);
+	gameTitle.setPosition(270, window.getSize().y / 8);
+	textList.push_back(&gameTitle);
+
+	sf::Text anyKeyText;
+	anyKeyText.setString("Press any key to continue !");
+	std::cout << anyKeyText.getString().getSize();
+	anyKeyText.setPosition(600, window.getSize().y / 2);
+	anyKeyText.setCharacterSize(60);
+	textList.push_back(&anyKeyText);
+
+	for (sf::Text* text : textList)
+	{
+		text->setFont(MyFont);
+		text->setFillColor(sf::Color::White);
+		text->setStyle(sf::Text::Bold);
+	}
+
+	float colorClock = 0;
+
+	while (window.isOpen() && _scene==0)
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			// On gère l'événément
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				// L'utilisateur a cliqué sur la croix => on ferme la fenêtre
+				window.close();
+				break;
+
+			case sf::Event::KeyPressed:
+				_scene = 1;
+				break;
+			default:
+				break;
+			}
+		}
+
+		float deltaTime = frameClock.restart().asSeconds();
+		colorClock += deltaTime;
+
+		if (colorClock >= 0.3) {
+			gameTitle.setFillColor(colorList[rand() % colorList.size()]);
+			colorClock = 0;
+		}
+
+
+		// Remise au noir de toute la fenêtre
+		window.clear();
+
+		// Tout le rendu va se dérouler ici
+
+		for (sf::Text* text : textList)
+		{
+			window.draw(*text);
+		}
+
+		// On présente la fenêtre sur l'écran
+		window.display();
+		
+	}
+
+	#pragma endregion TitleScreen
+
+
+	//endregion
+	
+
+	while (window.isOpen() && _scene==1)
 	{
 		// Gérer les événéments survenus depuis le dernier tour de boucle
 		sf::Event event;
