@@ -74,7 +74,6 @@ namespace Entities
 
 	void Player::Update(float deltaTime)
 	{
-		//PlayerShoot
 		bulletClock += deltaTime;
 		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.15) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -92,7 +91,6 @@ namespace Entities
 					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
-				
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !upgraded) { UpgradeLevel(); }
