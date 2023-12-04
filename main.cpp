@@ -106,10 +106,15 @@ int main()
 
 	sf::Text anyKeyText;
 	anyKeyText.setString("Press any key to continue !");
-	std::cout << anyKeyText.getString().getSize();
 	anyKeyText.setPosition(600, window.getSize().y / 2);
 	anyKeyText.setCharacterSize(60);
 	textList.push_back(&anyKeyText);
+
+	sf::RectangleShape titleScreenRectangle(sf::Vector2f(window.getSize().x - 100, window.getSize().y - 100));
+	titleScreenRectangle.setOutlineColor(sf::Color::White);
+	titleScreenRectangle.setFillColor(sf::Color::Transparent);
+	titleScreenRectangle.setOutlineThickness(10);
+	titleScreenRectangle.setPosition(sf::Vector2f(30, 30));
 
 	for (sf::Text* text : textList)
 	{
@@ -146,6 +151,7 @@ int main()
 
 		if (colorClock >= 0.3) {
 			gameTitle.setFillColor(colorList[rand() % colorList.size()]);
+			titleScreenRectangle.setOutlineColor(colorList[rand() % colorList.size()]);
 			colorClock = 0;
 		}
 
@@ -159,6 +165,7 @@ int main()
 		{
 			window.draw(*text);
 		}
+		window.draw(titleScreenRectangle);
 
 		// On présente la fenêtre sur l'écran
 		window.display();
