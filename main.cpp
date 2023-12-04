@@ -48,17 +48,16 @@ int main()
 	rectangle.setSize(sf::Vector2f(128, 128));
 	player.SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
 	player.SetWindow(window);
-	float cubeSpeed = 500.f;
-
 
 	
 	std::vector<Entities::Foe*> foeList;
 
 	std::vector<sf::Vector2f> spawnPoints;
-	EnemySpawner spawner = EnemySpawner(&foeList, &window, &player);
 	std::vector<Entities::UpgradeBox*> upgradeBoxList;
 	UpgradeBoxSpawner upgradeBoxSpawner = UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, player);
-	player.enemySpawner = &spawner;
+	EnemySpawner enemySpawner = EnemySpawner(&foeList, &window, &player);
+	player.SetEnemySpawner(&enemySpawner);
+	player.SetBoxSpawner(&upgradeBoxSpawner);
 
 	spawnPoints.push_back(sf::Vector2f(1800, 0));
 	spawnPoints.push_back(sf::Vector2f(1500, 0));
@@ -66,26 +65,8 @@ int main()
 	spawnPoints.push_back(sf::Vector2f(700, 0));
 	spawnPoints.push_back(sf::Vector2f(300, 0));
 
-	spawner.setSpawnPoints(spawnPoints);
-	spawner.StartClock();
-
-	/*for (int i = 0; i < 5; i++)
-	{
-		sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-		Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1);
-		enemy->SetPosition(sf::Vector2f(64 + 64*i, 0));
-		enemy->SetDirection(sf::Vector2f(0, 1));
-		enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
-		enemy->SetWindow(window);
-		rectangleEnemy->setSize(sf::Vector2f(64, 64));
-		foeList.push_back(enemy);
-	}*/
-
-	/*for (int i = 0; i < 5; i++)
-	{
-		spawner.SpawnEnemy(i);
-	}*/
-
+	enemySpawner.setSpawnPoints(spawnPoints);
+	enemySpawner.StartClock();
 
 	sf::Clock frameClock;
 	float UpgradeSpawningCooldown = 2;
@@ -203,8 +184,7 @@ int main()
 		scoreText.setString("Score : " + Utils::toString(score));
 		//std::cout<< "Score : " + Utils::toString(score);
 
-		
-		upgradeBoxSpawner.TrySpawning(deltaTime);
+		//upgradeBoxSpawner.TrySpawning(deltaTime);
 
 		player.MovePlayer(deltaTime);
 
@@ -217,39 +197,15 @@ int main()
 
 		upgradeBoxSpawner.Update(deltaTime);
 
-
-		/*auto bulletVectorIterator = player.GetBullets().begin();
-		while (bulletVectorIterator != player.GetBullets().end()) {
-			if ((*bulletVectorIterator)->CheckLife()) {
-				bulletVectorIterator++;
-			}
-			else {
-				bulletVectorIterator = player.GetBullets().erase(bulletVectorIterator);
-				std::cout << "Bullet deleted" << std::endl;
-			}
-		}*/
-
-
 		for (Entities::Foe *en : foeList) {
 			en->Update(deltaTime);
 		}		
 
 		Utils::CheckBulletListLife(player.GetBullets());
-		score += Utils::CheckFoeListLife(*(spawner.GetFoes()));
-
+		score += Utils::CheckFoeListLife(*(enemySpawner.GetFoes()));
 		Utils::CheckUpgradeListLife(upgradeBoxSpawner.GetUpgradeBoxList());
 		
-		/*Utils::CheckEntityListLife(player.GetBulletEntities());
-		Utils::CheckEntityListLife(spawner.GetFoeEntities());
-		Utils::CheckEntityListLife(upgradeBoxSpawner.GetUpgradeBoxEntities());
-		*/
-
-
-		// Utils::CheckEntityListLife(player.GetBullets());
-		
-		
-		
-		spawner.Update(deltaTime);
+		enemySpawner.Update(deltaTime);
 
 		// Affichage
 		

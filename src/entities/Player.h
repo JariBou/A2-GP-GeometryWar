@@ -6,6 +6,7 @@
 #include "Bullet.h"
 
 class EnemySpawner;
+class UpgradeBoxSpawner;
 class DrawableEntity;
 
 namespace Entities
@@ -30,14 +31,19 @@ namespace Entities
 			std::vector<DrawableEntity*>& GetBulletEntities();
 			float playerWidth;
 			float playerHeight;
-			EnemySpawner* enemySpawner;
-			virtual EnemySpawner* GetSpawner();
+			virtual EnemySpawner* GetEnemySpawner();
+			virtual UpgradeBoxSpawner* GetBoxSpawner();
 
 			virtual void GetHit(float damage);
 
 			void Draw(sf::RenderWindow& window);
 
+			void SetEnemySpawner(EnemySpawner* spawner);
+			void SetBoxSpawner(UpgradeBoxSpawner* spawner);
+
 		private:
+			EnemySpawner* enemySpawner = nullptr;
+			UpgradeBoxSpawner* boxSpawner = nullptr;
 			std::vector<Bullet*> bullets;
 			bool isMouseClickedLastFrame;
 	

@@ -24,6 +24,21 @@ void UpgradeBoxSpawner::SpawnUpgradeBox() {
 	upgradeBoxList.push_back(UpgradeBox);
 }
 
+void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
+{
+	sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
+	Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player);
+
+	auto shapeRect = shape->getGlobalBounds();
+
+	float x = shapeRect.left + shapeRect.width / 2 - rectangleUpgradeBox->getLocalBounds().width/2;
+	float y = shapeRect.top;
+
+	UpgradeBox->SetPosition(sf::Vector2f(x, y - (rectangleUpgradeBox->getLocalBounds().height / 2)));
+	UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Green);
+	upgradeBoxList.push_back(UpgradeBox);
+}
+
 void UpgradeBoxSpawner::TrySpawning(float deltaTime) {
 	spawnTimer += deltaTime;
 

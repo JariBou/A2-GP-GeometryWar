@@ -1,9 +1,9 @@
 #include "DrawableEntity.h"
 #include "LinearFoe.h"
+#include "../UpgradeBoxSpawner.h"
 
 namespace Entities
 {
-
 	LinearFoe::LinearFoe(sf::Shape& shape, float speed, Player* player) : Foe(shape, speed, player) {
 	}
 
@@ -29,6 +29,9 @@ namespace Entities
 		return true;
 	}
 
+	void LinearFoe::OnKilledByPlayer() {
+		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
+	}
 
 	void LinearFoe::GetHit(float value) {
 		this->health -= value;

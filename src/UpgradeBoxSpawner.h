@@ -14,6 +14,7 @@ class UpgradeBoxSpawner {
 		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth, Entities::Player& Player);
 		~UpgradeBoxSpawner() = default;
 		virtual void SpawnUpgradeBox();
+		virtual void SpawnUpgradeBox(sf::Shape* shape);
 		std::vector<Entities::UpgradeBox*>& GetUpgradeBoxList();
 		std::vector<Entities::DrawableEntity*>& GetUpgradeBoxEntities();
 		int windowWidth; 

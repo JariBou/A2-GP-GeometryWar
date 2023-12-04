@@ -21,7 +21,7 @@ namespace Entities
 		virtual bool isDead();
 		virtual void SetDirection(sf::Vector2f direction);
 		virtual bool CheckLife();
-
+		virtual void OnKilledByPlayer();
 		virtual void GetHit(float value);
 
 	};

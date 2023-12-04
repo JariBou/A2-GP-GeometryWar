@@ -39,6 +39,9 @@ namespace Utils {
 				foeVectorIterator++;
 			}
 			else {
+				if ((*foeVectorIterator)->health <= 0) {
+					(*foeVectorIterator)->OnKilledByPlayer();
+				}
 				foeVectorIterator = foes.erase(foeVectorIterator);
 				killedFoe++;
 				std::cout << "Foe deleted" << std::endl;

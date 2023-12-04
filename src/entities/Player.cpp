@@ -1,6 +1,4 @@
 #include "Player.h"
-#include "DrawableEntity.h"
-#include "Bullet.h"
 #include "../utils.h"
 #include <iostream>
 
@@ -111,8 +109,22 @@ namespace Entities
 		std::cout << "Player hit" << std::endl;
 	}
 
-	EnemySpawner* Player::GetSpawner() {
+	void Player::SetEnemySpawner(EnemySpawner* spawner)
+	{
+		this->enemySpawner = spawner;
+	}
+
+	void Player::SetBoxSpawner(UpgradeBoxSpawner* spawner) {
+		this->boxSpawner = spawner;
+	}
+
+	EnemySpawner* Player::GetEnemySpawner() {
 		return this->enemySpawner;
+	}
+
+	UpgradeBoxSpawner* Player::GetBoxSpawner()
+	{
+		return this->boxSpawner;
 	}
 
 	std::vector<Bullet*>& Player::GetBullets() 

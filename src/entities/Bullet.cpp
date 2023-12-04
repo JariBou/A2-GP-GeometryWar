@@ -53,7 +53,7 @@ namespace Entities {
 		auto selfRect = this->shape.getGlobalBounds();
 
 		if (shotByPlayer) {
-			EnemySpawner* spawner = this->player.GetSpawner();
+			EnemySpawner* spawner = this->player.GetEnemySpawner();
 
 			for (Foe* foe : *(spawner->GetFoes())) {
 
