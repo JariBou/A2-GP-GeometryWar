@@ -11,43 +11,165 @@ UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& Upgrade
 	player = &Player;
 }
 
-void UpgradeBoxSpawner::SpawnUpgradeBox() {
-	
-	sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
-	Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player);
-	std::mt19937 rng(std::random_device{}());
-	std::uniform_int_distribution<int> xDist(0, windowWidth - UpgradeBox->shape.getLocalBounds().width);
-	int random_number = xDist(rng);
-	std::cout << "Nombre aleatoire : " << random_number << std::endl;
-	UpgradeBox->SetPosition(sf::Vector2f(random_number, -UpgradeBox->shape.getLocalBounds().height));
-	UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Green);
-	upgradeBoxList.push_back(UpgradeBox);
-}
+//void UpgradeBoxSpawner::SpawnUpgradeBox() {
+//	std::mt19937 rng(std::random_device{}());
+//	std::uniform_int_distribution<int> type(0, 3);
+//	int random_type = type(rng);
+//	switch (random_type)
+//	{
+//		case 0:
+//			//Speed
+//			{
+//				sf::CircleShape* triangleUpgradeBox = new sf::CircleShape(50, 3);
+//				Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*triangleUpgradeBox, *player, random_type);
+//				std::mt19937 rng(std::random_device{}());
+//				std::uniform_int_distribution<int> xDist(0, windowWidth - UpgradeBox->shape.getLocalBounds().width);
+//				int random_number = xDist(rng);
+//				std::cout << "Nombre aleatoire : " << random_number << std::endl;
+//				UpgradeBox->SetPosition(sf::Vector2f(random_number, -UpgradeBox->shape.getLocalBounds().height));
+//				UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Blue);
+//				upgradeBoxList.push_back(UpgradeBox);
+//				break;
+//			}
+//		case 1:
+//			//Bullet Speed
+//			{
+//				sf::CircleShape* octogonUpgradeBox = new sf::CircleShape(50, 3);
+//				Entities::UpgradeBox* UpgradeBox1 = new Entities::UpgradeBox(*octogonUpgradeBox, *player, random_type);
+//				std::mt19937 rng(std::random_device{}());
+//				std::uniform_int_distribution<int> xDist(0, windowWidth - UpgradeBox1->shape.getLocalBounds().width);
+//				int random_number = xDist(rng);
+//				std::cout << "Nombre aleatoire : " << random_number << std::endl;
+//				UpgradeBox1->SetPosition(sf::Vector2f(random_number, -UpgradeBox1->shape.getLocalBounds().height));
+//				UpgradeBox1->SetColor(sf::Color::Transparent, sf::Color::Blue);
+//				upgradeBoxList.push_back(UpgradeBox1);
+//				break;
+//			}
+//		case 2:
+//			//Bullet Damage
+//			{
+//				sf::RectangleShape * rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
+//				Entities::UpgradeBox* UpgradeBox2 = new Entities::UpgradeBox(*rectangleUpgradeBox, *player, random_type);
+//				std::mt19937 rng(std::random_device{}());
+//				std::uniform_int_distribution<int> xDist(0, windowWidth - UpgradeBox2->shape.getLocalBounds().width);
+//				int random_number = xDist(rng);
+//				std::cout << "Nombre aleatoire : " << random_number << std::endl;
+//				UpgradeBox2->SetPosition(sf::Vector2f(random_number, -UpgradeBox2->shape.getLocalBounds().height));
+//				UpgradeBox2->SetColor(sf::Color::Transparent, sf::Color::Magenta);
+//				upgradeBoxList.push_back(UpgradeBox2);
+//				break;
+//			}
+//		case 3:
+//			//Bullet Number
+//			{
+//				sf::CircleShape* circleUpgradeBox = new sf::CircleShape(50);
+//				Entities::UpgradeBox* UpgradeBox3 = new Entities::UpgradeBox(*circleUpgradeBox, *player, random_type);
+//				std::mt19937 rng(std::random_device{}());
+//				std::uniform_int_distribution<int> xDist(0, windowWidth - UpgradeBox3->shape.getLocalBounds().width);
+//				int random_number = xDist(rng);
+//				std::cout << "Nombre aleatoire : " << random_number << std::endl;
+//				UpgradeBox3->SetPosition(sf::Vector2f(random_number, -UpgradeBox3->shape.getLocalBounds().height));
+//				UpgradeBox3->SetColor(sf::Color::Transparent, sf::Color::Green);
+//				upgradeBoxList.push_back(UpgradeBox3);
+//				break;
+//			}
+//	}
+//
+//}
 
 void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 {
-	sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
-	Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player);
-
-	auto shapeRect = shape->getGlobalBounds();
-
-	float x = shapeRect.left + shapeRect.width / 2 - rectangleUpgradeBox->getLocalBounds().width/2;
-	float y = shapeRect.top;
-
-	UpgradeBox->SetPosition(sf::Vector2f(x, y - (rectangleUpgradeBox->getLocalBounds().height / 2)));
-	UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Green);
-	upgradeBoxList.push_back(UpgradeBox);
-}
-
-void UpgradeBoxSpawner::TrySpawning(float deltaTime) {
-	spawnTimer += deltaTime;
-
-	if (spawnTimer >= spawnCooldown) {
-		SpawnUpgradeBox();
-		std::cout << "Upgrade Box spawned" << std::endl;
-		spawnTimer = 0;
+	std::mt19937 rng(std::random_device{}());
+	std::uniform_int_distribution<int> type(0, 3);
+	int random_type = type(rng);
+	float x;
+	float y;
+	switch (random_type)
+	{
+		case 0:
+			//Speed
+			{
+				sf::CircleShape* triangleUpgradeBox = new sf::CircleShape(50, 3);
+				Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*triangleUpgradeBox, *player, random_type);
+				auto shapeRect = shape->getGlobalBounds();
+				x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
+				y = shapeRect.top;
+				UpgradeBox->SetPosition(sf::Vector2f(x, y - (UpgradeBox->shape.getLocalBounds().height / 2)));
+				UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Blue);
+				upgradeBoxList.push_back(UpgradeBox);
+				break;
+			}
+		case 1:
+			//Bullet Speed
+			{
+				sf::CircleShape* octogonUpgradeBox = new sf::CircleShape(50, 8);
+				Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*octogonUpgradeBox, *player, random_type);
+				auto shapeRect = shape->getGlobalBounds();
+				x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
+				y = shapeRect.top;
+				UpgradeBox->SetPosition(sf::Vector2f(x, y - (UpgradeBox->shape.getLocalBounds().height / 2)));
+				UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Blue);
+				upgradeBoxList.push_back(UpgradeBox);
+				break;
+			}
+		case 2:
+			//Bullet Damage
+			{
+				sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
+				Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player, random_type);
+				auto shapeRect = shape->getGlobalBounds();
+				x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
+				y = shapeRect.top;
+				UpgradeBox->SetPosition(sf::Vector2f(x, y - (UpgradeBox->shape.getLocalBounds().height / 2)));
+				UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Magenta);
+				upgradeBoxList.push_back(UpgradeBox);
+				break;
+			}
+		case 3:
+			//Bullet Number
+			{
+				sf::CircleShape* circleUpgradeBox = new sf::CircleShape(50);
+				Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*circleUpgradeBox, *player, random_type);
+				auto shapeRect = shape->getGlobalBounds();
+				x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
+				y = shapeRect.top;
+				UpgradeBox->SetPosition(sf::Vector2f(x, y - (UpgradeBox->shape.getLocalBounds().height / 2)));
+				UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Green);
+				upgradeBoxList.push_back(UpgradeBox);
+				break;
+			}
 	}
+	//sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
+	//Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player, random_type);
+
+
 }
+
+//void UpgradeBoxSpawner::TrySpawning(float deltaTime) {
+//	spawnTimer += deltaTime;
+//
+//	if (spawnTimer >= spawnCooldown) {
+//		SpawnUpgradeBox();
+//		std::string boxUpgradeType = "";
+//		switch (upgradeBoxList.back()->upgradeType)
+//		{
+//			case 0:
+//				boxUpgradeType = "Speed";
+//				break;
+//			case 1:
+//				boxUpgradeType = "Bullet Damage";
+//				break;
+//			case 2:
+//				boxUpgradeType = "Bullet Speed";
+//				break;
+//			case 3:
+//				boxUpgradeType = "Bullet Number";
+//				break;
+//		}
+//		std::cout << "Upgrade Box spawned with type : "<< boxUpgradeType << std::endl;
+//		spawnTimer = 0;
+//	}
+//}
 
 std::vector<Entities::UpgradeBox*>& UpgradeBoxSpawner::GetUpgradeBoxList() {
 	return upgradeBoxList;
