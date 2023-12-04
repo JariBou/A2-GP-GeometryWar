@@ -19,6 +19,9 @@
     <Filter Include="Fichiers sources\Entities">
       <UniqueIdentifier>{0690f9cc-6448-46e4-a467-f4261bf73ba2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\sfx">
+      <UniqueIdentifier>{f34112c2-d6a5-4716-aa15-7ee81648c056}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,5 +92,16 @@
     <ClInclude Include="src\entities\UpgradeBox.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sfx\bloom.frag">
+      <Filter>Fichiers sources\sfx</Filter>
+    </None>
+    <None Include="src\sfx\vert_shader.vert">
+      <Filter>Fichiers sources\sfx</Filter>
+    </None>
+    <None Include="src\sfx\brightness_extract.frag">
+      <Filter>Fichiers sources\sfx</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -115,7 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\sfx\bloom.frag" />
-    <None Include="src\sfx\bloom.vert" />
+    <None Include="src\sfx\brightness_extract.frag" />
+    <None Include="src\sfx\vert_shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

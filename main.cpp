@@ -24,21 +24,35 @@ int main()
 
 
 	// Shaders
-	sf::Shader shader;
+	sf::Shader brightnessShader;
+	sf::Shader bloomShader;
 	if (sf::Shader::isAvailable())
 	{
 		// load both shaders
-		if (!shader.loadFromFile("../src/sfx/bloom.vert", "../src/sfx/bloom.frag"))
+		if (!brightnessShader.loadFromFile("../src/sfx/vert_shader.vert", "../src/sfx/brightness_extract.frag"))
 		{
 			// error...
 		}
-		//shader.setUniform("texture", sf::Shader::CurrentTexture);
+		brightnessShader.setUniform("texture", sf::Shader::CurrentTexture);
+
+		if (!bloomShader.loadFromFile("../src/sfx/vert_shader.vert", "../src/sfx/bloom.frag"))
+		{
+			// error...
+		}
+		bloomShader.setUniform("texture", sf::Shader::CurrentTexture);
+
+		//shader.setUniform("resolution", sf::Glsl::Bvec2(1920, 1080));
+		//shader.setUniform("intensity", 2.95f);
+		//shader.setUniform("blurSizeAmount", 200);
 		//shader.setUniform("pixelWidth", 2);
 		//shader.setUniform("pixelHeight", 2);
 	}
 
 	sf::RenderTexture mainTexture;
 	mainTexture.create(1920, 1080);
+
+	sf::RenderTexture brightnessText;
+	brightnessText.create(1920, 1080);
 	
 
 
@@ -159,21 +173,25 @@ int main()
 
 		// Remise au noir de toute la fenêtre
 		mainTexture.clear();
+		brightnessText.clear();
 
 		// Tout le rendu va se dérouler ici
 
 		for (sf::Text* text : textList)
 		{
-			mainTexture.draw(*text);
+			brightnessText.draw(*text);
 			//window.draw(*text);
 		}
-		mainTexture.draw(titleScreenRectangle);
-		mainTexture.display();
+		brightnessText.draw(titleScreenRectangle);
+		brightnessText.display();
+
+		sf::Sprite brightnessSprite(brightnessText.getTexture());
+		mainTexture.draw(brightnessSprite, &brightnessShader);
 
 		window.clear();
 		// On présente la fenêtre sur l'écran
 		sf::Sprite sprite(mainTexture.getTexture());
-		window.draw(sprite, &shader);
+		window.draw(sprite, &bloomShader);
 
 		window.display();
 		
