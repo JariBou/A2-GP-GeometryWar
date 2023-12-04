@@ -113,6 +113,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\entities\Bullet.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\sfx\bloom.frag" />
+    <None Include="src\sfx\bloom.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

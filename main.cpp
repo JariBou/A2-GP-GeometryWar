@@ -22,6 +22,26 @@ int main()
 	window.setVerticalSyncEnabled(true);
 	srand(time(NULL));
 
+
+	// Shaders
+	sf::Shader shader;
+	if (sf::Shader::isAvailable())
+	{
+		// load both shaders
+		if (!shader.loadFromFile("../src/sfx/bloom.vert", "../src/sfx/bloom.frag"))
+		{
+			// error...
+		}
+		//shader.setUniform("texture", sf::Shader::CurrentTexture);
+		//shader.setUniform("pixelWidth", 2);
+		//shader.setUniform("pixelHeight", 2);
+	}
+
+	sf::RenderTexture mainTexture;
+	mainTexture.create(1920, 1080);
+	
+
+
 	// Début de la boucle de jeu
 
 	//Score:
@@ -138,17 +158,23 @@ int main()
 
 
 		// Remise au noir de toute la fenêtre
-		window.clear();
+		mainTexture.clear();
 
 		// Tout le rendu va se dérouler ici
 
 		for (sf::Text* text : textList)
 		{
-			window.draw(*text);
+			mainTexture.draw(*text);
+			//window.draw(*text);
 		}
-		window.draw(titleScreenRectangle);
+		mainTexture.draw(titleScreenRectangle);
+		mainTexture.display();
 
+		window.clear();
 		// On présente la fenêtre sur l'écran
+		sf::Sprite sprite(mainTexture.getTexture());
+		window.draw(sprite, &shader);
+
 		window.display();
 		
 	}
