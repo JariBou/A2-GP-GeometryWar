@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "UpgradeBox.h"
+#include "../enum.h"
 #include <random>
 #include <iostream>
 

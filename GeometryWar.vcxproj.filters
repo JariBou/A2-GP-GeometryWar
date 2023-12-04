@@ -89,5 +89,8 @@
     <ClInclude Include="src\entities\UpgradeBox.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

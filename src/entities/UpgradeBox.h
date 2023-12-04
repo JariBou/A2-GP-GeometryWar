@@ -3,15 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "Player.h"
+#include "../enum.h"
+
 
 namespace Entities
 {
-	enum UpgradeType {
-		UpgradeSpeed,
-		UpgradeBulletDamage,
-		UpgradeBulletSpeed,
-		UpgradeBulletNumber
-	};
+	
 	class UpgradeBox : public DrawableEntity {
 	public:
 		UpgradeBox(sf::Shape& shape, Player& Player, int UpgradeTypeNb);

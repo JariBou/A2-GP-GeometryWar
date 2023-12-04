@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../utils.h"
+#include "../enum.h"
 #include <iostream>
 
 
@@ -73,35 +74,54 @@ namespace Entities
 	void Player::Update(float deltaTime)
 	{
 		bulletClock += deltaTime;
-		if (bulletClock >= bulletCooldown - upgradeLevel / 4 * 0.15) {
+		if (bulletClock >= bulletCooldown) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
 				cout << "Cliqued" << endl;
 
-				float bulletSize = 5 + upgradeLevel / 4 * 5;
-				float w = playerWidth / (pow(2, upgradeLevel % 4) + 1) - bulletSize/2;
-				for (size_t i = 1; i < pow(2,upgradeLevel % 4) + 1; i++)
+				float w = playerWidth / (nbBulletShot+1);
+				for (size_t i = 1; i < nbBulletShot+1; i++)
 				{
-					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize,bulletSize));
-					float bulletSpeed = speed + 250.0 * (upgradeLevel + 1) / 8;
-                    Bullet* bullet = new Bullet(*rectangleBullet, *this, 10, bulletSpeed, sf::Vector2f(0, -1.0), windowWidth);
+					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize.x,bulletSize.y));
+					float bulletSpeed = speed + 250.0 * (upgradeLevel + 1) / 8; //TODO : Change that
+                    Bullet* bullet = new Bullet(*rectangleBullet, *this, bulletDamage, bulletSpeed, sf::Vector2f(0, -1.0), windowWidth);
 					bullet->SetColor(sf::Color::Red);
-					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w -bulletSize.x/2 , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !upgraded) { UpgradeLevel(); }
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && upgraded) { upgraded = false; }
+		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !upgraded) { UpgradeLevel(); }
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && upgraded) { upgraded = false; }*/
 	}
 
-	void Player::UpgradeLevel()
+	void Player::UpgradeLevel(UpgradeType upgrade)
 	{
-		if (upgradeLevel < 15){
+		switch (upgrade)
+		{
+		case UpgradeSpeed:
+			speed *= 1.1;
+			break;
+		case UpgradeBulletDamage:
+			bulletSize.x *= 1.5;
+			bulletSize.y *= 1.5;
+			bulletDamage *= 1.5;
+			break;
+		case UpgradeBulletSpeed:
+			bulletCooldown -= 0.0325;
+			break;
+		case UpgradeBulletNumber:
+			nbBulletShot *= 2;
+			break;
+		default:
+			break;
+		}
+		
+		/*if (upgradeLevel < 15) {
 			upgradeLevel++;
 			upgraded = true;
 			cout << "Upgrade level : " << upgradeLevel << endl;
-		}
+		}*/
 
 	}
 

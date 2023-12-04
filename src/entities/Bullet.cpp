@@ -11,7 +11,7 @@ namespace Entities {
 
 	Bullet::Bullet(sf::Shape& shape, Player& Joueur) : DrawableEntity(shape), player(Joueur) {
 		speed = 300.0f;
-		damage = 1;
+		damage = 10;
 		std::cout << "Bullet created" << std::endl;
 		std::cout << shape.getPosition().y << std::endl;
 	}

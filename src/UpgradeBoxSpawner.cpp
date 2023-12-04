@@ -188,7 +188,7 @@ void UpgradeBoxSpawner::Update(float deltaTime) {
 	for (Entities::UpgradeBox* box : upgradeBoxList) {
 		box->Update(deltaTime);
 		if (box->IsColliding()) {
-			player->UpgradeLevel();
+			player->UpgradeLevel(box->GetUpgradeType());
 		}
 	}
 }
