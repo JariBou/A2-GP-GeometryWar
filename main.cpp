@@ -106,7 +106,7 @@ int main()
 
 	float colorClock = 0;
 
-	while (window.isOpen() && _scene==0)
+	while (window.isOpen() && _scene==3)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -155,7 +155,135 @@ int main()
 
 	#pragma endregion TitleScreen
 
+	#pragma region DeadScreen
 
+		std::vector<sf::Color> colorsList = { sf::Color::White, sf::Color::Green, sf::Color::Blue, sf::Color::Red, sf::Color::Cyan, sf::Color::Yellow, sf::Color::Magenta };
+
+		std::vector<sf::Text*> gameOvertextList;
+
+		//GameTitle
+		sf::Text gameOverTitle;
+		gameOverTitle.setString("Game Over");
+		gameOverTitle.setCharacterSize(170);
+
+		sf::FloatRect titleBounds = gameOverTitle.getLocalBounds();
+		gameOverTitle.setPosition((window.getSize().x - titleBounds.width) / 2.0f - 450,
+			(window.getSize().y - titleBounds.height) / 2.0f - 300);
+
+		gameOvertextList.push_back(&gameOverTitle);
+
+		//Restart Button
+		sf::Text restartButton;
+		restartButton.setString("Press to restart !");
+
+		sf::RectangleShape button(sf::Vector2f(550, 100)); // Crée un bouton rectangulaire
+		button.setFillColor(sf::Color::Green);
+		button.setPosition(300, 250);
+		button.setFillColor(sf::Color::Transparent);
+		button.setOutlineThickness(10);
+
+
+		sf::FloatRect buttonBounds = button.getLocalBounds();
+		button.setPosition((window.getSize().x - buttonBounds.width) / 2.0f + 25,
+			(window.getSize().y - buttonBounds.height) / 2.0f + 100);
+
+		sf::FloatRect restartButtonBounds = restartButton.getLocalBounds();
+		restartButton.setPosition((window.getSize().x - restartButtonBounds.width) / 2.0f - 200,
+			(window.getSize().y - restartButtonBounds.height) / 2.0f + 50);
+
+		restartButton.setCharacterSize(60);
+		gameOvertextList.push_back(&restartButton);
+
+		sf::RectangleShape gameOverScreenRectangle(sf::Vector2f(window.getSize().x - 100, window.getSize().y - 100));
+		gameOverScreenRectangle.setOutlineColor(sf::Color::White);
+		gameOverScreenRectangle.setFillColor(sf::Color::Transparent);
+		gameOverScreenRectangle.setOutlineThickness(10);
+		gameOverScreenRectangle.setPosition(sf::Vector2f(30, 30));
+
+		//Score
+		sf::Text endScoreText;
+		endScoreText.setString("Your score : " + Utils::toString(score));
+
+		sf::FloatRect scoreTextBounds = endScoreText.getLocalBounds();
+		endScoreText.setPosition((window.getSize().x - scoreTextBounds.width) / 2.0f - 100,
+			(window.getSize().y - scoreTextBounds.height) / 2.0f - 70);
+
+		endScoreText.setCharacterSize(40);
+		gameOvertextList.push_back(&endScoreText);
+
+		endScoreText.setFont(MyFont);
+		endScoreText.setFillColor(sf::Color::White);
+		endScoreText.setStyle(sf::Text::Bold);
+
+		for (sf::Text* text : gameOvertextList)
+		{
+			text->setFont(MyFont);
+			text->setFillColor(sf::Color::White);
+			text->setStyle(sf::Text::Bold);
+		}
+
+		float colorsClock = 0;
+
+		while (window.isOpen() && _scene == 0)
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				// On gère l'événément
+				switch (event.type)
+				{
+				case sf::Event::Closed:
+					// L'utilisateur a cliqué sur la croix => on ferme la fenêtre
+					window.close();
+					break;
+
+				case sf::Event::KeyPressed:
+					_scene = 1;
+					break;
+				default:
+					break;
+				}
+
+				if (event.type == sf::Event::MouseButtonReleased) {
+					if (event.mouseButton.button == sf::Mouse::Left) {
+						sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+						if (button.getGlobalBounds().contains(mousePosition)) {
+							// Action à effectuer lorsque le bouton est cliqué
+							button.setFillColor(sf::Color::Red);
+							_scene = 1;
+						}
+					}
+				}
+			}
+
+			float deltaTime = frameClock.restart().asSeconds();
+			colorsClock += deltaTime;
+
+			if (colorsClock >= 0.1) {
+				gameOverTitle.setFillColor(colorsList[rand() % colorsList.size()]);
+				gameOverScreenRectangle.setOutlineColor(colorsList[rand() % colorsList.size()]);
+				colorsClock = 0;
+			}
+
+
+			// Remise au noir de toute la fenêtre
+			window.clear();
+
+			// Tout le rendu va se dérouler ici
+
+			for (sf::Text* text : gameOvertextList)
+			{
+				window.draw(*text);
+			}
+			window.draw(gameOverScreenRectangle);
+			window.draw(button);
+
+			// On présente la fenêtre sur l'écran
+			window.display();
+
+		}
+
+	#pragma endregion DeadScreen
 	//endregion
 	
 
