@@ -188,6 +188,8 @@ int main()
 		sf::Sprite brightnessSprite(brightnessText.getTexture());
 		mainTexture.draw(brightnessSprite, &brightnessShader);
 
+		mainTexture.display();
+
 		window.clear();
 		// On présente la fenêtre sur l'écran
 		sf::Sprite sprite(mainTexture.getTexture());

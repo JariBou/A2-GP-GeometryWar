@@ -12,11 +12,11 @@ void main()
 		gl_FragColor = pixel;
 	} else {
 
-		float pixelWidth = 4;
-		float pixelHeight = 4;	
+		float pixelWidth = 2;
+		float pixelHeight = 2;	
 
 		// Larger constant = bigger glow
-		float glow = 4.0 * ((pixelWidth + pixelHeight) / 2.0);
+		float glow = 64.0 * ((pixelWidth + pixelHeight) / 2.0);
 	
 		// The vector to contain the new, "bloomed" colour values
 		vec4 bloom = vec4(0);

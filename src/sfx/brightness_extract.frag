@@ -7,7 +7,7 @@ void main(){
 	
 
 	float brightness = dot(pixel.rgb, vec3(0.2126, 0.2152, 0.0722));
-    if(pixel.r < 0.005 && pixel.g != 0.005 && pixel.b != 0.005) {
+    if(pixel.r < 0.0005 && pixel.g < 0.0005 && pixel.b < 0.0005) {
 		gl_FragColor = vec4(1,1,1,0);
 	} else {
 		gl_FragColor = pixel;
