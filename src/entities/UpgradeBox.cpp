@@ -8,8 +8,12 @@
 
 namespace Entities {
 
-	UpgradeBox::UpgradeBox(sf::Shape& shape, Player& Player) : DrawableEntity(shape), player(Player) {
+	UpgradeBox::UpgradeBox(sf::Shape& shape, Player& Player, int UpgradeTypeNb) : DrawableEntity(shape), player(Player) {
 		speed = 200;
+		std::mt19937 rng(std::random_device{}());
+		std::uniform_int_distribution<int> type(0, 3);
+		int random_number = type(rng);
+		upgradeType = UpgradeType(UpgradeTypeNb);
 	}
 
 	void UpgradeBox::Update(float deltaTime) {
@@ -37,6 +41,10 @@ namespace Entities {
 		}
 		return true;
 
+	}
+
+	UpgradeType UpgradeBox::GetUpgradeType() {
+		return upgradeType;
 	}
 		
 
