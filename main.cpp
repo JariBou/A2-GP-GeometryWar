@@ -176,11 +176,12 @@ int main()
 		sf::Text restartButton;
 		restartButton.setString("Press to restart !");
 
+		//button
 		sf::RectangleShape button(sf::Vector2f(550, 100)); // Crée un bouton rectangulaire
 		button.setFillColor(sf::Color::Green);
 		button.setPosition(300, 250);
 		button.setFillColor(sf::Color::Transparent);
-		button.setOutlineThickness(10);
+		button.setOutlineThickness(5);
 
 
 		sf::FloatRect buttonBounds = button.getLocalBounds();
@@ -214,6 +215,24 @@ int main()
 		endScoreText.setFont(MyFont);
 		endScoreText.setFillColor(sf::Color::White);
 		endScoreText.setStyle(sf::Text::Bold);
+
+		//Credit
+		sf::Text creditText;
+		creditText.setCharacterSize(40);
+
+		for (int i = 0; i < 4; i++)
+		{
+			creditText.setString("Tomé bourdié");
+			if (i == 1) creditText.setString("Volodia Bussereau");
+			if (i == 2) creditText.setString("Shahine Benthanane");
+			if (i == 3) creditText.setString("Pierre Lamare");
+
+			sf::FloatRect creditBounds = creditText.getLocalBounds();
+			creditText.setPosition((window.getSize().x - creditBounds.width) / 2.0f - 150,
+				(window.getSize().y - creditBounds.height) / 2.0f + 200 + i * 60); // Modifiez cette valeur pour changer l'écart entre les titres
+
+			gameOvertextList.push_back(new sf::Text(creditText));
+		}
 
 		for (sf::Text* text : gameOvertextList)
 		{
