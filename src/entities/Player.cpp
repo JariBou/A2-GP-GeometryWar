@@ -55,7 +55,7 @@ namespace Entities
 		}
 
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		Move(Utils::NormalizeVector(moveVector) * speed, deltaTime);
+		Move(Utils::NormalizeVector(moveVector) * speed * (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)? 0.8f : 1), deltaTime);
 	}
     
     void Player::Draw(sf::RenderWindow& window){
@@ -85,7 +85,7 @@ namespace Entities
 					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize.x,bulletSize.y));
 					float bulletSpeed = speed + 250.0 * (upgradeLevel + 1) / 8; //TODO : Change that
                     Bullet* bullet = new Bullet(*rectangleBullet, *this, bulletDamage, bulletSpeed, sf::Vector2f(0, -1.0), windowWidth);
-					bullet->SetColor(sf::Color::Red);
+					bullet->SetColor(sf::Color::Yellow);
 					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w -bulletSize.x/2 , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
