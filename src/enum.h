@@ -6,3 +6,8 @@ enum UpgradeType {
 	UpgradeBulletSpeed,
 	UpgradeBulletNumber
 };
+
+enum EnemyType {
+	LinearShootingFoe,
+	NonLinearFoe,
+};

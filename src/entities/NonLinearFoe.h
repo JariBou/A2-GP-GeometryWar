@@ -14,6 +14,8 @@ namespace Entities
 	public:
 
 		sf::Vector2f direction;
+		float clock = 0;
+		float changeDirectionCooldown = 2;
 
 		NonLinearFoe(sf::Shape& shape, float speed, Player* player);
 

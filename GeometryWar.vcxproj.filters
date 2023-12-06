@@ -57,6 +57,9 @@
     <ClCompile Include="src\entities\NonLinearFoe.cpp">
       <Filter>Fichiers sources\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\Spawnpoint.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\DrawableEntity.h">
@@ -95,7 +98,10 @@
     <ClInclude Include="src\entities\NonLinearFoe.h">
       <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="enum.h">
+    <ClInclude Include="src\enum.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Spawnpoint.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
