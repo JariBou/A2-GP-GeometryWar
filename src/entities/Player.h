@@ -48,11 +48,16 @@ namespace Entities
 
 			void SetEnemySpawner(EnemySpawner* spawner);
 			void SetBoxSpawner(UpgradeBoxSpawner* spawner);
+			int bulletDamageLevel = 1;
+			int bulletNumberLevel = 1;
+			int movementSpeedLevel = 1;
+			int bulletSpeedLevel = 1;
 
 		private:
 			EnemySpawner* enemySpawner = nullptr;
 			UpgradeBoxSpawner* boxSpawner = nullptr;
 			std::vector<Bullet*> bullets;
+			std::vector<float> bulletAngles;
 	
 	};
 }

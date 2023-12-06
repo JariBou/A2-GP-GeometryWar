@@ -22,6 +22,11 @@ int main()
 	window.setVerticalSyncEnabled(true);
 	srand(time(NULL));
 
+	sf::Cursor cursor;
+	if (cursor.loadFromSystem(sf::Cursor::Hand)) {
+		window.setMouseCursor(cursor);
+	}
+
 	// Début de la boucle de jeu
 
 	//Score:
@@ -105,8 +110,8 @@ int main()
 	}
 
 	float colorClock = 0;
-
-	while (window.isOpen() && _scene==0)
+	window.setMouseCursorVisible(true);
+	while (window.isOpen() && _scene==3)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -305,7 +310,7 @@ int main()
 	#pragma endregion DeadScreen
 	//endregion
 	
-
+	window.setMouseCursorVisible(false);
 	while (window.isOpen() && _scene==1)
 	{
 		// Gérer les événéments survenus depuis le dernier tour de boucle
