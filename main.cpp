@@ -115,7 +115,7 @@ int main()
 
 	float colorClock = 0;
 	window.setMouseCursorVisible(true);
-	while (window.isOpen() && _scene==3)
+	while (window.isOpen() && _scene==0)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
