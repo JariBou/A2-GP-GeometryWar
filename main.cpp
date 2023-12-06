@@ -400,6 +400,12 @@ int main()
 			box->Draw(window);
 		}
 
+		//Lifes
+
+		if (player.lives == 0)
+		{
+			_scene = 2;
+		}
 		lifeText.setString("Life: " + std::to_string(player.lives));
 		window.draw(lifeText);
 		
