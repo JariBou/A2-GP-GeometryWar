@@ -86,7 +86,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="enum.h" />
     <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\entities\Bullet.h" />
     <ClCompile Include="src\EnemySpawner.cpp" />
@@ -97,6 +96,7 @@
     <ClCompile Include="src\entities\NonLinearFoe.cpp" />
     <ClCompile Include="src\entities\Player.cpp" />
     <ClCompile Include="src\entities\UpgradeBox.cpp" />
+    <ClCompile Include="src\Spawnpoint.cpp" />
     <ClCompile Include="src\UpgradeBoxSpawner.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
@@ -109,6 +109,8 @@
     <ClInclude Include="src\entities\NonLinearFoe.h" />
     <ClInclude Include="src\entities\Player.h" />
     <ClInclude Include="src\entities\UpgradeBox.h" />
+    <ClInclude Include="src\enum.h" />
+    <ClInclude Include="src\Spawnpoint.h" />
     <ClInclude Include="src\UpgradeBoxSpawner.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>

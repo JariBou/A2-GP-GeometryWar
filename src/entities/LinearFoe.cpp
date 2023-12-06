@@ -29,6 +29,10 @@ namespace Entities
 		return true;
 	}
 
+	void Move() {
+
+	}
+
 	void LinearFoe::OnKilledByPlayer() {
 		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
