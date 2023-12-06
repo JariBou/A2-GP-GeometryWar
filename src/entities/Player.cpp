@@ -77,41 +77,77 @@ namespace Entities
 		if (bulletClock >= bulletCooldown) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
-				/*cout << "Cliqued" << endl;*/
-
-				float w = playerWidth / (nbBulletShot+1);
-				for (size_t i = 1; i < nbBulletShot+1; i++)
-				{
-					sf :: RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize.x,bulletSize.y));
-					float bulletSpeed = speed + 250.0 * (upgradeLevel + 1) / 8; //TODO : Change that
-                    Bullet* bullet = new Bullet(*rectangleBullet, *this, bulletDamage, bulletSpeed, sf::Vector2f(0, -1.0), windowWidth);
+				// Largeur entre les balles
+				float w = playerWidth / (nbBulletShot + 1);
+				for (size_t i = 1; i <= nbBulletShot; i++) {
+					sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize.x, bulletSize.y));
+					float bulletSpeed = speed + 250.0 * bulletSpeedLevel / 8;
+					float angle;
+					// Vérifier le niveau de la mise à niveau des balles
+					if (bulletNumberLevel == 1) {
+						// Si le niveau est 1, tirer droit
+						angle = 0;
+					}
+					else {
+						// Calcul de l'angle de référence
+						float bulletAngleRef = 1.0 / nbBulletShot;
+						// Si la boucle est dans la première moitié des balles
+						if (i <= (nbBulletShot / 2)) {
+							// Si nécessaire, ajouter des angles de référence au vecteur
+							if (bulletAngles.size() < nbBulletShot / 2) {
+								bulletAngles.push_back(bulletAngleRef * i);
+							}
+							angle = -bulletAngles[bulletAngles.size() - i];
+						}
+						else {
+							angle = bulletAngles[i - (nbBulletShot / 2) - 1];
+						}
+					}
+					// Créer une nouvelle balle avec les paramètres calculés
+					Bullet* bullet = new Bullet(*rectangleBullet, *this, bulletDamage, bulletSpeed, sf::Vector2f(angle, -1.0), windowWidth);
 					bullet->SetColor(sf::Color::Yellow);
-					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i*w -bulletSize.x/2 , shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i * w - bulletSize.x / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					bullets.push_back(bullet);
 				}
 			}
 		}
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && !upgraded) { UpgradeLevel(); }
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && upgraded) { upgraded = false; }*/
 	}
+
 
 	void Player::UpgradeLevel(UpgradeType upgrade)
 	{
 		switch (upgrade)
 		{
 		case UpgradeSpeed:
-			speed *= 1.1;
+			if (movementSpeedLevel < 12) {
+				movementSpeedLevel++;
+				speed *= 1.1;
+				cout << "Speed level : " << movementSpeedLevel << endl;
+			}
 			break;
 		case UpgradeBulletDamage:
-			bulletSize.x *= 1.5;
-			bulletSize.y *= 1.5;
-			bulletDamage *= 1.5;
+			if (bulletDamageLevel < 10) {
+				bulletDamageLevel++;
+				bulletDamage *= 1.1;
+				bulletSize.x *= 1.1;
+				bulletSize.y *= 1.1;
+				cout << "Bullet damage level : " << bulletDamageLevel << endl;
+			}
 			break;
 		case UpgradeBulletSpeed:
-			bulletCooldown -= 0.0325;
+			if (bulletSpeedLevel < 8) {
+				bulletSpeedLevel++;
+				bulletCooldown -= 0.0325;
+				cout << "Bullet speed level : " << bulletSpeedLevel << endl;
+			}
 			break;
 		case UpgradeBulletNumber:
-			nbBulletShot *= 2;
+			if (bulletNumberLevel < 4) {
+				bulletNumberLevel++;
+				nbBulletShot*=2;
+				cout << "Bullet number level : " << bulletNumberLevel << endl;
+				bulletAngles.clear();
+			}
 			break;
 		default:
 			break;
