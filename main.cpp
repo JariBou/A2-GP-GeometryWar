@@ -28,6 +28,11 @@ int main()
 		window.setMouseCursor(cursor);
 	}
 
+	sf::Image icon;
+	if (!icon.loadFromFile("../logo.png")) {}
+
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	// Début de la boucle de jeu
 
 	//Score:
