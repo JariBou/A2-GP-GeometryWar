@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "entities/Entites.h"
+#include "enum.h"
+#include "Spawnpoint.h"
 
 class Player;
 
@@ -10,7 +12,7 @@ class EnemySpawner {
 public:
 	std::vector<Entities::Foe*>* foeList; 
 	sf::RenderWindow* window;
-	std::vector<sf::Vector2f> spawnPoints;
+	std::vector<Spawnpoint> spawnPoints;
 	Entities::Player* player;
 
 	float clock = 0;
@@ -26,20 +28,13 @@ public:
 	void SpawnEnemy();
 	void SpawnEnemy(int i);
 	void SpawnEnemy(sf::Vector2f position);
+	void SpawnEnemy(sf::Vector2f position, EnemyType enemyType);
 	
-	void setSpawnPoints(std::vector<sf::Vector2f> points) {
+	void setSpawnPoints(std::vector<Spawnpoint> points) {
 		spawnPoints = points;
 	}
 	
-	void Update(float deltaTime) {
-		if (doClock) {
-			clock += deltaTime;
-			if (clock >= timeBetweenSpawns) {
-				SpawnEnemy(spawnPoints[std::rand() % spawnPoints.size()]);
-				ResetClock();
-			}
-		}
-	}
+	void Update(float deltaTime);
 
 	void StartClock() {
 		doClock = true;

@@ -10,6 +10,7 @@
 #include "src/entities/Bullet.h"
 #include "src/entities/UpgradeBox.h"
 #include "src/UpgradeBoxSpawner.h"
+#include "src/enum.h"
 
 
 
@@ -57,18 +58,21 @@ int main()
 	
 	std::vector<Entities::Foe*> foeList;
 
-	std::vector<sf::Vector2f> spawnPoints;
+	std::vector<Spawnpoint> spawnPoints;
 	std::vector<Entities::UpgradeBox*> upgradeBoxList;
 	UpgradeBoxSpawner upgradeBoxSpawner = UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, player);
 	EnemySpawner enemySpawner = EnemySpawner(&foeList, &window, &player);
 	player.SetEnemySpawner(&enemySpawner);
 	player.SetBoxSpawner(&upgradeBoxSpawner);
 
-	spawnPoints.push_back(sf::Vector2f(1800, 0));
-	spawnPoints.push_back(sf::Vector2f(1500, 0));
-	spawnPoints.push_back(sf::Vector2f(1000, 0));
-	spawnPoints.push_back(sf::Vector2f(700, 0));
-	spawnPoints.push_back(sf::Vector2f(300, 0));
+	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1700, 0),20));
+	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1500, 0),20));
+	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1000, 0),20));
+	spawnPoints.push_back(Spawnpoint(sf::Vector2f(700, 0),20));
+	spawnPoints.push_back(Spawnpoint(sf::Vector2f(300, 0),20));
+	spawnPoints[0].AddEnemyToSpawn(NonLinearFoe, 50);
+	spawnPoints[1].AddEnemyToSpawn(NonLinearFoe, 50);
+	spawnPoints[3].AddEnemyToSpawn(NonLinearFoe, 50);
 
 	enemySpawner.setSpawnPoints(spawnPoints);
 	enemySpawner.StartClock();

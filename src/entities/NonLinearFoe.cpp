@@ -14,6 +14,11 @@ namespace Entities
 			this->health = 0;
 			//Die();
 		}
+		clock += deltaTime;
+		if (clock >= changeDirectionCooldown) {
+			direction.x *= -1;
+			clock = 0;
+		}
 	}
 
 	bool NonLinearFoe::isDead() { return this->health <= 0; }
