@@ -312,6 +312,19 @@ int main()
 		}
 
 	#pragma endregion DeadScreen
+
+	#pragma region HUD
+
+		sf::Text lifeText;
+		lifeText.setFont(MyFont);
+		lifeText.setCharacterSize(50);
+		lifeText.setFillColor(sf::Color::White);
+
+		sf::FloatRect lifeBounds = lifeText.getLocalBounds();
+		lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 700,
+			(window.getSize().y - lifeBounds.height) / 2.0f - 500);
+
+    #pragma endRegion HUD
 	//endregion
 	
 	window.setMouseCursorVisible(false);
@@ -386,6 +399,9 @@ int main()
 		for (Entities::UpgradeBox* box : upgradeBoxSpawner.GetUpgradeBoxList()) {
 			box->Draw(window);
 		}
+
+		lifeText.setString("Life: " + std::to_string(player.lives));
+		window.draw(lifeText);
 		
 		// On présente la fenêtre sur l'écran
 		window.display();
