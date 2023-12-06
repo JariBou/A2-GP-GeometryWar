@@ -222,7 +222,7 @@ int main()
 
 		for (int i = 0; i < 4; i++)
 		{
-			creditText.setString("Tomé bourdié");
+			creditText.setString("Tomé bourdie");
 			if (i == 1) creditText.setString("Volodia Bussereau");
 			if (i == 2) creditText.setString("Shahine Benthanane");
 			if (i == 3) creditText.setString("Pierre Lamare");

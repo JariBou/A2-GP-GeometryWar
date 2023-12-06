@@ -26,7 +26,7 @@ namespace Utils {
 			}
 			else {
 				bulletVectorIterator = bullets.erase(bulletVectorIterator);
-				std::cout << "Bullet deleted" << std::endl;
+				/*std::cout << "Bullet deleted" << std::endl;*/
 			}
 		}
 	}

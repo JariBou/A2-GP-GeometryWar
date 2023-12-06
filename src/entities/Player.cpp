@@ -77,7 +77,7 @@ namespace Entities
 		if (bulletClock >= bulletCooldown) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
-				cout << "Cliqued" << endl;
+				/*cout << "Cliqued" << endl;*/
 
 				float w = playerWidth / (nbBulletShot+1);
 				for (size_t i = 1; i < nbBulletShot+1; i++)
