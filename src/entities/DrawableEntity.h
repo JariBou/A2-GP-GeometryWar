@@ -23,6 +23,7 @@ namespace Entities
 			virtual void Draw(sf::RenderWindow& window);
 
 			virtual void Move(sf::Vector2f vectorMove, float deltaTime);
+			virtual void Update(float deltaTime) = 0;
 
 			virtual void SetPosition(sf::Vector2f pos);
 
