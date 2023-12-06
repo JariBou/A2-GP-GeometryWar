@@ -106,7 +106,7 @@ int main()
 
 	float colorClock = 0;
 
-	while (window.isOpen() && _scene==3)
+	while (window.isOpen() && _scene==0)
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -222,7 +222,7 @@ int main()
 
 		for (int i = 0; i < 4; i++)
 		{
-			creditText.setString("Tomé bourdie");
+			creditText.setString("Tome bourdie");
 			if (i == 1) creditText.setString("Volodia Bussereau");
 			if (i == 2) creditText.setString("Shahine Benthanane");
 			if (i == 3) creditText.setString("Pierre Lamare");
@@ -243,7 +243,7 @@ int main()
 
 		float colorsClock = 0;
 
-		while (window.isOpen() && _scene == 0)
+		while (window.isOpen() && _scene == 2)
 		{
 			sf::Event event;
 			while (window.pollEvent(event))
