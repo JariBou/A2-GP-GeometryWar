@@ -29,7 +29,7 @@ int main()
 	}
 
 	sf::Image icon;
-	if (!icon.loadFromFile("../logo.png")) {}
+	if (!icon.loadFromFile("../logo.jpg")) {}
 
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
