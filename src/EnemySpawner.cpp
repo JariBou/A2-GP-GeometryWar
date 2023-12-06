@@ -34,7 +34,7 @@ void EnemySpawner::Update(float deltaTime) {
 				}
 			}
 			sf::Vector2f pos = spawnPoints[spawnpointIndex].position;
-			pos.x = rand() % spawnPoints[spawnpointIndex].size + spawnPoints[spawnpointIndex].size / 2;
+			pos.x += rand() % spawnPoints[spawnpointIndex].size + spawnPoints[spawnpointIndex].size / 2;
 			SpawnEnemy(pos, enemyType);
 			ResetClock();
 		}
