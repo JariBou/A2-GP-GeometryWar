@@ -137,7 +137,7 @@ namespace States {
 
 		upgradeBoxSpawner->Update(deltaTime);
 
-		for (Entities::Foe* en : foeList) {
+		for (Entities::Foe* en : *(enemySpawner->GetFoes())) {
 			en->Update(deltaTime);
 		}
 

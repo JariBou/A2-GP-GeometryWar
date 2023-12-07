@@ -22,7 +22,6 @@ namespace Entities
 
 		LinearShootingFoe(sf::Shape& shape, float speed, GameManager* pGameManager);
 
-		GameManager* gameManager;
 		virtual void Update(float deltaTime);
 		virtual void Draw(sf::RenderWindow& window);
 

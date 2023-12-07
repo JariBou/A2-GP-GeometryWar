@@ -2,6 +2,8 @@
 
 #include "DrawableEntity.h"
 
+class GameManager;
+
 namespace Entities {
 
 	class Player;

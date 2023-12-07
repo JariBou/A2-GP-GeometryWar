@@ -23,7 +23,7 @@ namespace Entities
 	}
 
 	void LinearFoe::OnKilledByPlayer() {
-		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
+		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
 
 	void LinearFoe::GetHit(float value) {

@@ -18,10 +18,10 @@ private:
 	sf::RenderWindow* window;
 	std::vector<Spawnpoint*> spawnPoints;
 	Entities::Player* player;
-	GameManager* gameManager;
 
 public:
 	
+	GameManager* gameManager;
 
 	float clock = 0;
 	bool doClock = false;
