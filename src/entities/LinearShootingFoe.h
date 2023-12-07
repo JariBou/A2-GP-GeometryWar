@@ -20,7 +20,7 @@ namespace Entities
 
 	public:
 
-		LinearShootingFoe(sf::Shape& shape, float speed, Player* player);
+		LinearShootingFoe(sf::Shape& shape, float speed, GameManager* pGameManager);
 
 		virtual void Update(float deltaTime);
 		virtual void Draw(sf::RenderWindow& window);
