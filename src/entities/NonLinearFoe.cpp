@@ -14,8 +14,9 @@ namespace Entities
 			this->health = 0;
 			//Die();
 		}
+
 		clock += deltaTime;
-		if (clock >= changeDirectionCooldown) {
+		if (clock >= changeDirectionCooldown || pos.x < 0 || pos.x>windowWidth) {
 			direction.x *= -1;
 			clock = 0;
 		}
