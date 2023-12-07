@@ -1,12 +1,13 @@
 #include "EnemySpawner.h"
 #include "entities/Entites.h"
 #include "Spawnpoint.h"
+#include "GameManager.h"
 
 
-EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, GameManager* gameManager) {
+EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, GameManager* pGameManager) : gameManager(pGameManager) {
 	this->foeList = foeList;
 	this->window = window;
-	this->gameManager = gameManager;
+	gameManager->SetEnemySpawner(this);
 	this->player = gameManager->GetPlayer();
 }
 

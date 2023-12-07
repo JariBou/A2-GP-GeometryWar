@@ -3,6 +3,7 @@
 #include "../utils.h"
 #include "../enum.h"
 #include "Bullet.h"
+#include "../GameManager.h"
 
 
 namespace Entities 
@@ -10,7 +11,8 @@ namespace Entities
 	using namespace std;
 
 
-	Player::Player(sf::Shape& shape) : DrawableEntity(shape) {
+	Player::Player(sf::Shape& shape, GameManager* pGameManager) : DrawableEntity(shape), gameManager(pGameManager) {
+		gameManager->SetPlayer(this);
 	}
 	
 
@@ -113,16 +115,6 @@ namespace Entities
 			}
 		}
 	}
-
-	void Player::SetGameManager(GameManager* gameManager)
-	{
-		this->gameManager = gameManager;
-		enemySpawner = this->gameManager->GetEnemySpawner();
-		boxSpawner = this->gameManager->GetUpgradeBoxSpawner();
-
-	}
-
-
 
 	void Player::UpgradeLevel(UpgradeType upgrade)
 	{

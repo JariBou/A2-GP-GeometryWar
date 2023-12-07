@@ -11,6 +11,7 @@ namespace Entities{
 class UpgradeBoxSpawner;
 class EnemySpawner;
 class WaveManager;
+class GameManager;
 
 namespace States {
 
@@ -66,6 +67,8 @@ namespace States {
 	public:
 		std::vector<Entities::Foe*> foeList;
 		std::vector<Entities::UpgradeBox*> upgradeBoxList;
+
+		// Using pointers so that we dont get include problems for now, maybe change later idk
 		UpgradeBoxSpawner* upgradeBoxSpawner;
 		EnemySpawner* enemySpawner;
 		WaveManager* waveManager;

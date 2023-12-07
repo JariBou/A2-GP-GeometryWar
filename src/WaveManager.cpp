@@ -3,11 +3,13 @@
 #include "utils.h"
 #include "Spawnpoint.h"
 #include "EnemySpawner.h"
+#include "GameManager.h"
 
-WaveManager::WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText)
+WaveManager::WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText, GameManager* pGameManager) : gameManager(pGameManager)
 {
 	enemySpawner = spawner;
 	anouncingText = anouncingWaveText;
+	gameManager->SetWaveManager(this);
 }
 
 void WaveManager::SetWave(int wave, float waveCooldown)

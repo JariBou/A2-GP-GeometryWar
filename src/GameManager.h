@@ -1,11 +1,12 @@
 #pragma once
 
+namespace Entities {
+	class Player;
+}
 
-class Player;
 class WaveManager;
 class EnemySpawner;
 class UpgradeBoxSpawner;
-
 class GameManager {
 	
 public:

@@ -8,6 +8,8 @@
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
 	{
+		this->gameManager = new GameManager();
+
 		scoreText.setCharacterSize(40);
 		scoreText.setPosition(5, 5);
 		scoreText.setFont(MyFont);
@@ -15,7 +17,7 @@ namespace States {
 		scoreText.setStyle(sf::Text::Bold);
 
 		rectangle.setSize(sf::Vector2f(128, 128));
-		player = new Entities::Player(rectangle);
+		player = new Entities::Player(rectangle, gameManager);
 		player->SetColor(sf::Color::Transparent, sf::Color::Green);
 		player->SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 		rectangle.setSize(sf::Vector2f(128, 128));
@@ -30,15 +32,8 @@ namespace States {
 		lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 670,
 			(window.getSize().y - lifeBounds.height) / 2.0f - 520);
 
-		this->gameManager = new GameManager();
 		this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, gameManager);
-		this->enemySpawner = new EnemySpawner(&foeList, &window, gameManager);
-		gameManager->SetEnemySpawner(enemySpawner);
-		gameManager->SetUpgradeBoxSpawner(upgradeBoxSpawner);
-		gameManager->SetPlayer(player);
-		player->SetGameManager(gameManager);
-
-		
+		this->enemySpawner = new EnemySpawner(&foeList, &window, gameManager);	
 
 		anouncingWaveText.setCharacterSize(100);
 		sf::FloatRect waveTextBounds = anouncingWaveText.getLocalBounds();
@@ -47,8 +42,7 @@ namespace States {
 		anouncingWaveText.setFillColor(sf::Color::White);
 		anouncingWaveText.setStyle(sf::Text::Bold);
 
-		this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText);
-		gameManager->SetWaveManager(waveManager);
+		this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText, gameManager);
 		waveManager->SetWave(0, 30);
 
 		//GRID ACTIVATION

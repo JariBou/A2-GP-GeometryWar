@@ -4,6 +4,7 @@
 
 
 class EnemySpawner;
+class GameManager;
 
 class WaveManager
 {
@@ -15,10 +16,13 @@ public:
 	int wave = 0;
 	bool anouncing = false;
 	sf::Text* anouncingText;
-	WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText);
+	WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText, GameManager* pGameManager);
 
 	void SetWave(int wave, float waveCooldown);
 
 	void Update(float deltaTime);
+
+private:
+	GameManager* gameManager;
 
 };

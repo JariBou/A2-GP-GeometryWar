@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "../enum.h"
-#include "../GameManager.h"
 
 
 class EnemySpawner;
 class UpgradeBoxSpawner;
+class GameManager;
 
 namespace Entities
 {
@@ -30,11 +30,10 @@ namespace Entities
 			float speed = 450.0;
 			float bulletDamage = 10;
 
-			Player(sf::Shape& shape);
+			Player(sf::Shape& shape, GameManager* pGameManager);
 			virtual ~Player() = default;
 			virtual void MovePlayer(float deltaTime);
 			virtual void Update(float deltaTime);
-			virtual void SetGameManager(GameManager* gameManager);
 			virtual void UpgradeLevel(UpgradeType type);
 			virtual std::vector<Bullet*>& GetBullets();
 			std::vector<DrawableEntity*>& GetBulletEntities();

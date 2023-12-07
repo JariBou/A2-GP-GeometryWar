@@ -4,12 +4,12 @@
 #include "UpgradeBoxSpawner.h"
 #include "entities/UpgradeBox.h"
 #include "entities/Player.h"
+#include "GameManager.h"
 
-
-UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& UpgradeBoxList, int WindowWidth, GameManager* pGameManager) {
+UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& UpgradeBoxList, int WindowWidth, GameManager* pGameManager) : gameManager(pGameManager) {
 	upgradeBoxList = UpgradeBoxList;
 	windowWidth = WindowWidth;
-	gameManager = pGameManager;
+	gameManager->SetUpgradeBoxSpawner(this);
 	player = gameManager->GetPlayer();
 }
 
