@@ -1,6 +1,8 @@
 #include "WaveManager.h"
-#include "utils.h"
 #include <iostream>
+#include "utils.h"
+#include "Spawnpoint.h"
+#include "EnemySpawner.h"
 
 WaveManager::WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText)
 {
@@ -12,7 +14,7 @@ void WaveManager::SetWave(int wave, float waveCooldown)
 {
 	this->wave = wave;
 	this->waveCooldown = waveCooldown;
-	std::vector<Spawnpoint> spawnPoints;
+	std::vector<Spawnpoint*> spawnPoints;
 	enemySpawner->StopClock();
 	anouncingText->setString("Wave " + Utils::toString(wave));
 	anouncingText->setScale(sf::Vector2f(0,0));
@@ -20,29 +22,29 @@ void WaveManager::SetWave(int wave, float waveCooldown)
 	switch (wave)
 	{
 	case 0:
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1500, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1000, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(300, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1500, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1000, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(300, 0), 20));
 		break;
 	case 1:
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1500, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1000, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(300, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1500, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1000, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(300, 0), 20));
 		for (size_t i = 0; i < spawnPoints.size(); i++)
 		{
-			spawnPoints[i].AddEnemyToSpawn(NonLinearFoe, 20);
+			spawnPoints[i]->AddEnemyToSpawn(NonLinearFoe, 20);
 		}
 		break;
 	default:
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1500, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(1000, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(700, 0), 20));
-		spawnPoints.push_back(Spawnpoint(sf::Vector2f(300, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1500, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1000, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(700, 0), 20));
+		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(300, 0), 20));
 		break;
 	}
 	enemySpawner->setSpawnPoints(spawnPoints);

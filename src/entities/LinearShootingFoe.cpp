@@ -1,7 +1,8 @@
-#include "DrawableEntity.h"
-#include "../utils.h"
 #include "LinearShootingFoe.h"
 #include <iostream>
+#include "../utils.h"
+#include "Bullet.h"
+#include "Player.h"
 
 namespace Entities
 {

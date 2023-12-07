@@ -2,10 +2,11 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
+#include <iostream>
+#include <random>
 #include "UpgradeBox.h"
 #include "../enum.h"
-#include <random>
-#include <iostream>
+#include "Player.h"
 
 namespace Entities {
 

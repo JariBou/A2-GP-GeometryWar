@@ -2,12 +2,12 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
-#include "Player.h"
 #include "../enum.h"
 
 
 namespace Entities
 {
+	class Player;
 	
 	class UpgradeBox : public DrawableEntity {
 	public:

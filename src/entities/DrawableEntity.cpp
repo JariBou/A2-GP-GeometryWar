@@ -36,4 +36,6 @@ namespace Entities
 		shape.setOutlineThickness(0);
 		shape.setOutlineColor(sf::Color::Transparent);
 	}
+
+	
 }

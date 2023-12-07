@@ -1,13 +1,14 @@
 #include <SFML/Window.hpp>
 #include <iostream>
-#include "src/States.h"
-
+#include "src/states/States.h"
+#include <windows.h>
 
 int main()
 {
 	// Initialisation
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Geometry Wars", sf::Style::Titlebar | sf::Style::Close);
+	ShowWindow(window.getSystemHandle(), SW_MAXIMIZE);
 	window.setVerticalSyncEnabled(true);
 	srand(time(NULL));
 

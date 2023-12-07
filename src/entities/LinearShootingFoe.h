@@ -2,15 +2,14 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
-#include "LinearFoe.h"
-#include "Bullet.h"
-#include "Player.h"
-
 #include <vector>
+#include "LinearFoe.h"
+
 
 namespace Entities
-
 {
+	class Bullet;
+	class Player;
 
 	class LinearShootingFoe : public LinearFoe {
 

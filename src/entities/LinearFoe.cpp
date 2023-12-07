@@ -1,6 +1,6 @@
-#include "DrawableEntity.h"
 #include "LinearFoe.h"
 #include "../UpgradeBoxSpawner.h"
+#include "Player.h"
 
 namespace Entities
 {
@@ -12,27 +12,14 @@ namespace Entities
 		sf::Vector2f pos = shape.getPosition();
 		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
 			player->GetHit(1);
-			this->health = 0;
 		}
 		if (IsCollidingWithPlayer()) {
 			player->GetHit(1);
-			this->health = 0;
 		}
-	}
-
-	bool LinearFoe::isDead() {
-		return this->health <= 0; 
 	}
 
 	void LinearFoe::SetDirection(sf::Vector2f direction) {
 		this->direction = direction;
-	}
-
-	bool LinearFoe::CheckLife() {
-		if (health <= 0) {
-			return false;
-		}
-		return true;
 	}
 
 	void LinearFoe::OnKilledByPlayer() {

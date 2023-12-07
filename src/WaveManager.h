@@ -1,6 +1,9 @@
 #pragma once
-#include "EnemySpawner.h"
 
+#include <SFML/Graphics.hpp>
+
+
+class EnemySpawner;
 
 class WaveManager
 {

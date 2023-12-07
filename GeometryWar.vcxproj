@@ -86,10 +86,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\states\DeathState.cpp" />
+    <ClCompile Include="src\states\GameState.cpp" />
+    <ClCompile Include="src\states\MenuState.cpp" />
     <ClCompile Include="src\WaveManager.cpp" />
     <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\entities\Bullet.h" />
-    <ClCompile Include="src\DeathState.cpp" />
     <ClCompile Include="src\EnemySpawner.cpp" />
     <ClCompile Include="src\entities\DrawableEntity.cpp" />
     <ClCompile Include="src\entities\Foe.cpp" />
@@ -98,11 +101,11 @@
     <ClCompile Include="src\entities\NonLinearFoe.cpp" />
     <ClCompile Include="src\entities\Player.cpp" />
     <ClCompile Include="src\entities\UpgradeBox.cpp" />
-    <ClCompile Include="src\GameState.cpp" />
-    <ClCompile Include="src\MenuState.cpp" />
     <ClCompile Include="src\Spawnpoint.cpp" />
     <ClCompile Include="src\UpgradeBoxSpawner.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClInclude Include="src\GameManager.h" />
+    <ClInclude Include="src\states\States.h" />
     <ClInclude Include="src\WaveManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -116,7 +119,6 @@
     <ClInclude Include="src\entities\UpgradeBox.h" />
     <ClInclude Include="src\enum.h" />
     <ClInclude Include="src\Spawnpoint.h" />
-    <ClInclude Include="src\States.h" />
     <ClInclude Include="src\UpgradeBoxSpawner.h" />
     <ClInclude Include="src\utils.h" />
   </ItemGroup>

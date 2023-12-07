@@ -1,12 +1,15 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <random>
-#include <iostream>
-#include "entities/UpgradeBox.h"
-#include "entities/DrawableEntity.h"
 #include "utils.h"
-#include <iostream>
+
+namespace Entities {
+	class DrawableEntity;
+	class UpgradeBoc;
+	class Player;
+}
 
 
 class UpgradeBoxSpawner {

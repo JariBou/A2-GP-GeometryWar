@@ -1,7 +1,8 @@
 #include "Player.h"
+#include <iostream>
 #include "../utils.h"
 #include "../enum.h"
-#include <iostream>
+#include "Bullet.h"
 
 
 namespace Entities 

@@ -3,11 +3,11 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "Foe.h"
-#include "Player.h"
+
 
 namespace Entities
-
 {
+	class Player;
 
 	class LinearFoe : public Foe {
 
@@ -18,9 +18,11 @@ namespace Entities
 		LinearFoe(sf::Shape& shape, float speed, Player* player);
 
 		virtual void Update(float deltaTime);
-		virtual bool isDead();
 		virtual void SetDirection(sf::Vector2f direction);
-		virtual bool CheckLife();
+
+		/// <summary>
+		/// Function called when destroyed by PLAYER by "normal" means (i.e bullets)
+		/// </summary>
 		virtual void OnKilledByPlayer();
 		virtual void GetHit(float value);
 

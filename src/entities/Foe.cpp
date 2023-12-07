@@ -1,4 +1,5 @@
 #include "Foe.h"
+#include "Player.h"
 
 namespace Entities {
 
@@ -7,15 +8,25 @@ namespace Entities {
 		this->player = player;
 	}
 	
-	void Foe::OnKilledByPlayer() {
+	
+	bool Foe::isDead() {
+		return this->health <= 0;
+	}
 
+	void Foe::OnDestroyed()
+	{
+		// TODO
 	}
 
 	void Foe::GetHit(float value) {
 		this->health -= value;
+	}
+
+	bool Foe::CheckLife() {
 		if (health <= 0) {
-			//Die();
+			return false;
 		}
+		return !(IsCollidingWithPlayer() || IsOutOfBounds());
 	}
 
 	bool Foe::IsCollidingWithPlayer() {
@@ -24,6 +35,13 @@ namespace Entities {
 
 		bool shouldDestroy = selfRect.intersects(playerRect);
 		return shouldDestroy;
+	}
+
+	bool Foe::IsOutOfBounds() {
+		if (shape.getPosition().y > this->windowHeight + shape.getGlobalBounds().height) {
+			return true;
+		}
+		return false;
 	}
 
 }

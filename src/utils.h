@@ -3,9 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "entities/Bullet.h"
-#include "entities/Foe.h"
-#include "entities/UpgradeBox.h"
+namespace Entities {
+	class Bullet;
+	class Foe;
+	class UpgradeBox;
+}
 
 namespace Utils {
 

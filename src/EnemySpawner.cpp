@@ -1,4 +1,6 @@
 #include "EnemySpawner.h"
+#include "entities/Entites.h"
+#include "Spawnpoint.h"
 
 
 EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, Entities::Player* player) {
@@ -27,14 +29,14 @@ void EnemySpawner::Update(float deltaTime) {
 		clock += deltaTime;
 		if (clock >= timeBetweenSpawns) {
 			EnemyType enemyType = LinearShootingFoe;
-			for (EnemyType type : spawnPoints[spawnpointIndex].possibleEnemiesTypes) {
-				if (rand() % 101 < spawnPoints[spawnpointIndex].enemyTypes[type]) {
+			for (EnemyType type : spawnPoints[spawnpointIndex]->possibleEnemiesTypes) {
+				if (rand() % 101 < spawnPoints[spawnpointIndex]->enemyTypes[type]) {
 					enemyType = type;
 					break;
 				}
 			}
-			sf::Vector2f pos = spawnPoints[spawnpointIndex].position;
-			pos.x += rand() % spawnPoints[spawnpointIndex].size + spawnPoints[spawnpointIndex].size / 2;
+			sf::Vector2f pos = spawnPoints[spawnpointIndex]->position;
+			pos.x += rand() % spawnPoints[spawnpointIndex]->size + spawnPoints[spawnpointIndex]->size / 2;
 			SpawnEnemy(pos, enemyType);
 			ResetClock();
 		}

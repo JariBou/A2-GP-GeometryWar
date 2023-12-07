@@ -7,4 +7,5 @@
 #include "LinearShootingFoe.h"
 #include "Foe.h"
 #include "Bullet.h"
+#include "Upgradebox.h"
 

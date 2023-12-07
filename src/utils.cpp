@@ -2,6 +2,10 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+
+#include "entities/Bullet.h"
+#include "entities/Foe.h"
+#include "entities/UpgradeBox.h"
 using namespace std;
 
 
@@ -39,7 +43,7 @@ namespace Utils {
 				foeVectorIterator++;
 			}
 			else {
-				if ((*foeVectorIterator)->health <= 0) {
+				if ((*foeVectorIterator)->isDead()) {
 					(*foeVectorIterator)->OnKilledByPlayer();
 				}
 				foeVectorIterator = foes.erase(foeVectorIterator);

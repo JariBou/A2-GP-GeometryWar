@@ -29,9 +29,12 @@ namespace Entities
 
 			virtual void SetColor(sf::Color color, sf::Color color2);
 			virtual void SetColor(sf::Color color);
-			virtual bool CheckLife() {
-				return true;
-			}
+
+			/// <summary>
+			/// Returns False if the entity should be removed
+			/// </summary>
+			/// <returns></returns>
+			virtual bool CheckLife() = 0;
 
 			void SetWindow(sf::RenderWindow& Window);
 

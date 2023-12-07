@@ -6,8 +6,8 @@
 #include "Player.h"
 
 namespace Entities
-
 {
+	class Player;
 
 	class NonLinearFoe : public Foe {
 
@@ -22,9 +22,19 @@ namespace Entities
 		virtual void Update(float deltaTime);
 		virtual bool isDead();
 		virtual void SetDirection(sf::Vector2f direction);
-		virtual bool CheckLife();
+
+		/// <summary>
+		/// Function called when destroyed by PLAYER by "normal" means (i.e bullets)
+		/// </summary>
 		virtual void OnKilledByPlayer();
+
+		/// <summary>
+		/// Returns False if the entity should be removes
+		/// </summary>
+		/// <returns></returns>
 		virtual void GetHit(float value);
+
+		bool IsOutOfBounds();
 
 	};
 }

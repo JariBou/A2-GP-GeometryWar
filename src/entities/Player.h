@@ -3,16 +3,15 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
-#include "Bullet.h"
 #include "../enum.h"
 
 
 class EnemySpawner;
 class UpgradeBoxSpawner;
-class DrawableEntity;
 
 namespace Entities
 {
+	class Bullet;
 
 	class Player : public DrawableEntity {
 
@@ -43,6 +42,11 @@ namespace Entities
 			virtual UpgradeBoxSpawner* GetBoxSpawner();
 
 			virtual void GetHit(float damage);
+
+			/// <summary>
+			/// Returns False if the entity should be removed
+			/// </summary>
+			/// <returns></returns>
 			virtual bool CheckLife();
 
 			void Draw(sf::RenderWindow& window);
