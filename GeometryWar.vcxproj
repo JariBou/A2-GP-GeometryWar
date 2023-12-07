@@ -124,6 +124,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\entities\Bullet.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\logo.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

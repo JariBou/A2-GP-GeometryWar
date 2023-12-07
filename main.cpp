@@ -11,6 +11,10 @@ int main()
 	window.setVerticalSyncEnabled(true);
 	srand(time(NULL));
 
+	sf::Image icon;
+	if (!icon.loadFromFile("../logo.jpg")) {}
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	sf::Cursor cursor;
 	if (cursor.loadFromSystem(sf::Cursor::Hand)) {
 		window.setMouseCursor(cursor);

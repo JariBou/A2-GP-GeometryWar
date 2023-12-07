@@ -74,11 +74,15 @@ namespace States {
 
 		GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score);
 
+		void CreateNeonGrid(int windowWidth, int windowHeight);
+
 		void Loop(sf::RenderWindow& window, int& sceneIndex);
 
 	private:
 		sf::Text scoreText;
 		sf::RectangleShape rectangle;
+		sf::Text lifeText;
+		sf::VertexArray grid;
 		int& score;
 
 

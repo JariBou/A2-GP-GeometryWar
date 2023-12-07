@@ -19,7 +19,13 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 	player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
 	player->SetWindow(window);
 
+	lifeText.setFont(MyFont);
+	lifeText.setCharacterSize(50);
+	lifeText.setFillColor(sf::Color::White);
 
+	sf::FloatRect lifeBounds = lifeText.getLocalBounds();
+	lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 670,
+		(window.getSize().y - lifeBounds.height) / 2.0f - 520);
 
 	this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, *player);
 	this->enemySpawner = new EnemySpawner(&foeList, &window, player);
@@ -37,6 +43,27 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 	this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText);
 	waveManager->SetWave(0, 30);
 
+	//GRID ACTIVATION
+	grid = sf::VertexArray(sf::Lines);
+	CreateNeonGrid(window.getSize().x, window.getSize().y);
+}
+
+void States::GameState::CreateNeonGrid(int windowWidth, int windowHeight)
+{
+	const int gridSize = 150;
+	const int numberOfLines = 15; // Nombre de lignes verticales et horizontales
+
+	for (int i = 0; i < numberOfLines; ++i) {
+		float thicknessFactor = static_cast<float>(i) / numberOfLines; // Facteur d'épaisseur basé sur la distance du point de fuite
+
+		// Lignes horizontales
+		grid.append(sf::Vertex(sf::Vector2f(0, i * windowHeight / numberOfLines), sf::Color::Green));
+		grid.append(sf::Vertex(sf::Vector2f(windowWidth, i * windowHeight / numberOfLines), sf::Color::Green));
+
+		// Lignes verticales
+		grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, 0), sf::Color::Green));
+		grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, windowHeight), sf::Color::Green));
+	}
 }
 
 void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
@@ -54,6 +81,7 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 		default:
 			break;
 		}
+		lifeText.setString("Life: " + std::to_string(player->lives));
 	}
 
 	float deltaTime = frameClock.restart().asSeconds();
@@ -94,7 +122,10 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 	// Tout le rendu va se dérouler ici
 	//window.draw(rectangle);
 
+	window.draw(lifeText);
 	window.draw(scoreText);
+	window.draw(grid);
+
 	if (waveManager->anouncing) window.draw(anouncingWaveText);
 	player->Draw(window);
 
