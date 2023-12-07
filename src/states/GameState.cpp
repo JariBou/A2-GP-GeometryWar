@@ -130,7 +130,7 @@ namespace States {
 
 		player->Update(deltaTime); // This needs to change
 
-		for (Entities::Bullet* bullet : player->GetBullets())
+		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
 			bullet->Update(deltaTime);
 		}
@@ -141,7 +141,7 @@ namespace States {
 			en->Update(deltaTime);
 		}
 
-		Utils::CheckBulletListLife(player->GetBullets());
+		Utils::CheckBulletListLife(*gameManager->GetBullets());
 		score += Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
 		Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
 
@@ -160,7 +160,7 @@ namespace States {
 		if (waveManager->anouncing) window.draw(anouncingWaveText);
 		player->Draw(window);
 
-		for (Entities::Bullet* bullet : player->GetBullets())
+		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
 			bullet->Draw(window);
 		}

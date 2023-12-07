@@ -15,7 +15,7 @@ namespace Entities
 		
 		sf::Vector2f direction;
 
-		LinearFoe(sf::Shape& shape, float speed, Player* player);
+		LinearFoe(sf::Shape& shape, float speed, GameManager* gameManager);
 
 		virtual void Update(float deltaTime);
 		virtual void SetDirection(sf::Vector2f direction);

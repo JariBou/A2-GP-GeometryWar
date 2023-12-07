@@ -4,7 +4,7 @@
 
 namespace Entities
 {
-	LinearFoe::LinearFoe(sf::Shape& shape, float speed, Player* player) : Foe(shape, speed, player) {
+	LinearFoe::LinearFoe(sf::Shape& shape, float speed, GameManager* pGameManager) : Foe(shape, speed, pGameManager) {
 	}
 
 	void LinearFoe::Update(float deltaTime) {

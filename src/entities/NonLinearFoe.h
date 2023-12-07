@@ -17,7 +17,7 @@ namespace Entities
 		float clock = 0;
 		float changeDirectionCooldown = 2;
 
-		NonLinearFoe(sf::Shape& shape, float speed, Player* player);
+		NonLinearFoe(sf::Shape& shape, float speed, GameManager* gameManager);
 
 		virtual void Update(float deltaTime);
 		virtual bool isDead();

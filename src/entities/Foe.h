@@ -13,8 +13,9 @@ namespace Entities {
 		float health = 20;
 		float speed = 5;
 		Player* player;
+		GameManager* gameManager;
 
-		Foe(sf::Shape& shape, float speed, Player* player);
+		Foe(sf::Shape& shape, float speed, GameManager* pGameManager);
 
 		//virtual void Update(float deltaTime);
 

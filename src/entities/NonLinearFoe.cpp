@@ -4,7 +4,7 @@
 
 namespace Entities
 {
-	NonLinearFoe::NonLinearFoe(sf::Shape& shape, float speed, Player* player) : Foe(shape, speed, player) {
+	NonLinearFoe::NonLinearFoe(sf::Shape& shape, float speed, GameManager* pGameManager) : Foe(shape, speed, pGameManager) {
 	}
 
 	void NonLinearFoe::Update(float deltaTime) {
