@@ -43,6 +43,7 @@ namespace Entities
 			virtual UpgradeBoxSpawner* GetBoxSpawner();
 
 			virtual void GetHit(float damage);
+			virtual bool CheckLife();
 
 			void Draw(sf::RenderWindow& window);
 
@@ -58,6 +59,7 @@ namespace Entities
 			UpgradeBoxSpawner* boxSpawner = nullptr;
 			std::vector<Bullet*> bullets;
 			std::vector<float> bulletAngles;
+			int chanceCount = 3; // Toutes les trois erreurs (pris un dégât ou enemie passe en bas de l'écran) le joueur perd une vie
 	
 	};
 }

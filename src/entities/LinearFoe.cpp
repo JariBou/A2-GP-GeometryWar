@@ -11,11 +11,18 @@ namespace Entities
 		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
 		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
+			player->GetHit(1);
+			this->health = 0;
+		}
+		if (IsCollidingWithPlayer()) {
+			player->GetHit(1);
 			this->health = 0;
 		}
 	}
 
-	bool LinearFoe::isDead() { return this->health <= 0; }
+	bool LinearFoe::isDead() {
+		return this->health <= 0; 
+	}
 
 	void LinearFoe::SetDirection(sf::Vector2f direction) {
 		this->direction = direction;
@@ -26,10 +33,6 @@ namespace Entities
 			return false;
 		}
 		return true;
-	}
-
-	void Move() {
-
 	}
 
 	void LinearFoe::OnKilledByPlayer() {

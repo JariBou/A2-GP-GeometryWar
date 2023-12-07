@@ -23,8 +23,8 @@ namespace Entities
 
 		LinearShootingFoe(sf::Shape& shape, float speed, Player* player);
 
-		void Update(float deltaTime);
-		void Draw(sf::RenderWindow& window);
+		virtual void Update(float deltaTime);
+		virtual void Draw(sf::RenderWindow& window);
 
 	};
 }

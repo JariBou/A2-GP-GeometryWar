@@ -4,7 +4,8 @@
 #include "EnemySpawner.h"
 #include "WaveManager.h"
 
-States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score) {
+States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score) 
+{
 	scoreText.setCharacterSize(40);
 	scoreText.setPosition(5, 5);
 	scoreText.setFont(MyFont);
@@ -40,77 +41,113 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 }
 
 void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
-	sf::Event event;
-	while (window.pollEvent(event))
+	if (sceneIndex == 1) //Le jeu ne tourne pas si on est pas dans la scène
 	{
-		// On gère l'événément
-		switch (event.type)
-		{
-		case sf::Event::Closed:
-			// L'utilisateur a cliqué sur la croix => on ferme la fenêtre
-			window.close();
-			break;
 
-		default:
-			break;
+		if (!player->CheckLife()) {
+			sceneIndex = 0;
+			player->lives = 3;
+			player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
+			//On réinitialise les niveaux des upgrades
+			player->bulletDamageLevel = 1;
+			player->bulletSpeedLevel = 1;
+			player->movementSpeedLevel = 1;
+			player->bulletNumberLevel = 1;
+
+			//On réinitialise les stats du joueur
+			player->bulletCooldown = 0.5f;
+			player->bulletDamage = 10;
+			player->bulletSize = sf::Vector2f(5, 5);
+			player->bulletClock = 0;
+			player->nbBulletShot = 1;
+			player->speed = 450.0;
+
+
+			//On réinitialise les vagues d'enemies
+			waveManager->clock = 0;
+			waveManager->waveCooldown = 3;
+			waveManager->wave = 0;
+			waveManager->anouncing = false;
+			waveManager->SetWave(0, 30);
+
+			//On réinitialise le score
+			score = 0;
+			window.clear();
 		}
+
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			// On gère l'événément
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				// L'utilisateur a cliqué sur la croix => on ferme la fenêtre
+				window.close();
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		float deltaTime = frameClock.restart().asSeconds();
+		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
+
+		scoreText.setString("Score : " + Utils::toString(score));
+		//std::cout<< "Score : " + Utils::toString(score);
+
+		//upgradeBoxSpawner.TrySpawning(deltaTime);
+
+		player->MovePlayer(deltaTime);
+
+		player->Update(deltaTime); // This needs to change
+
+		for (Entities::Bullet* bullet : player->GetBullets())
+		{
+			bullet->Update(deltaTime);
+		}
+
+		upgradeBoxSpawner->Update(deltaTime);
+
+		for (Entities::Foe* en : foeList) {
+			en->Update(deltaTime);
+		}
+
+		Utils::CheckBulletListLife(player->GetBullets());
+		score += Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
+		Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
+
+		enemySpawner->Update(deltaTime);
+		waveManager->Update(deltaTime);
+
+		// Affichage
+
+		// Remise au noir de toute la fenêtre
+		window.clear();
+
+		// Tout le rendu va se dérouler ici
+		//window.draw(rectangle);
+
+		window.draw(scoreText);
+		if (waveManager->anouncing) window.draw(anouncingWaveText);
+		player->Draw(window);
+
+		for (Entities::Bullet* bullet : player->GetBullets())
+		{
+			bullet->Draw(window);
+		}
+
+		for (Entities::Foe* en : foeList) {
+			en->Draw(window);
+		}
+
+		for (Entities::UpgradeBox* box : upgradeBoxSpawner->GetUpgradeBoxList()) {
+			box->Draw(window);
+		}
+
+		// On présente la fenêtre sur l'écran
+		window.display();
 	}
-
-	float deltaTime = frameClock.restart().asSeconds();
-	//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-
-	scoreText.setString("Score : " + Utils::toString(score));
-	//std::cout<< "Score : " + Utils::toString(score);
-
-	//upgradeBoxSpawner.TrySpawning(deltaTime);
-
-	player->MovePlayer(deltaTime);
-
-	player->Update(deltaTime); // This needs to change
-
-	for (Entities::Bullet* bullet : player->GetBullets())
-	{
-		bullet->Update(deltaTime);
-	}
-
-	upgradeBoxSpawner->Update(deltaTime);
-
-	for (Entities::Foe* en : foeList) {
-		en->Update(deltaTime);
-	}
-
-	Utils::CheckBulletListLife(player->GetBullets());
-	score += Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
-	Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
-
-	enemySpawner->Update(deltaTime);
-	waveManager->Update(deltaTime);
-
-	// Affichage
-
-	// Remise au noir de toute la fenêtre
-	window.clear();
-
-	// Tout le rendu va se dérouler ici
-	//window.draw(rectangle);
-
-	window.draw(scoreText);
-	if (waveManager->anouncing) window.draw(anouncingWaveText);
-	player->Draw(window);
-
-	for (Entities::Bullet* bullet : player->GetBullets())
-	{
-		bullet->Draw(window);
-	}
-
-	for (Entities::Foe* en : foeList) {
-		en->Draw(window);
-	}
-
-	for (Entities::UpgradeBox* box : upgradeBoxSpawner->GetUpgradeBoxList()) {
-		box->Draw(window);
-	}
-
-	// On présente la fenêtre sur l'écran
-	window.display();
+	
 }

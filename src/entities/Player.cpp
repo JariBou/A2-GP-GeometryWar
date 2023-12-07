@@ -84,13 +84,13 @@ namespace Entities
 					float bulletSpeed = speed + 250.0 * bulletSpeedLevel / 8;
 					float angle;
 					// Vérifier le niveau de la mise à niveau des balles
-					if (bulletNumberLevel == 1) {
+					if (bulletNumberLevel <=2) {
 						// Si le niveau est 1, tirer droit
 						angle = 0;
 					}
 					else {
 						// Calcul de l'angle de référence
-						float bulletAngleRef = 1.0 / nbBulletShot;
+						float bulletAngleRef = 0.5 / nbBulletShot;
 						// Si la boucle est dans la première moitié des balles
 						if (i <= (nbBulletShot / 2)) {
 							// Si nécessaire, ajouter des angles de référence au vecteur
@@ -163,6 +163,16 @@ namespace Entities
 
 	void Player::GetHit(float damage) {
 		std::cout << "Player hit" << std::endl;
+		chanceCount--;
+		if (chanceCount <= 0) {
+			lives--;
+			chanceCount = 3;
+			std::cout << "Player lives : " << lives << std::endl;
+		}
+	}
+
+	bool Player::CheckLife() {
+		return (this->lives > 0);
 	}
 
 	void Player::SetEnemySpawner(EnemySpawner* spawner)

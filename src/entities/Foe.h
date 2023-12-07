@@ -13,14 +13,13 @@ namespace Entities {
 		float speed = 5;
 		Player* player;
 
-		Foe(sf::Shape& shape, float speed, Player* player) : DrawableEntity(shape), player(player) {
-			this->speed = speed;
-		}
+		Foe(sf::Shape& shape, float speed, Player* player);
 
-		virtual void Update(float deltaTime) = 0;
-		virtual bool isDead() = 0;
-		virtual void OnKilledByPlayer() = 0;
-		virtual void GetHit(float value) = 0;
+		//virtual void Update(float deltaTime);
+		//virtual bool isDead();
+		virtual void OnKilledByPlayer();
+		virtual void GetHit(float value);
+		virtual bool IsCollidingWithPlayer();
 	};
 
 }
