@@ -3,10 +3,11 @@
 #include "Spawnpoint.h"
 
 
-EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, Entities::Player* player) {
+EnemySpawner::EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, GameManager* gameManager) {
 	this->foeList = foeList;
 	this->window = window;
-	this->player = player;
+	this->gameManager = gameManager;
+	this->player = gameManager->GetPlayer();
 }
 
 // Yeah so mb We'll have to live with this one being a pointer 'till someone changes it

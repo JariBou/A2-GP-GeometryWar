@@ -23,6 +23,11 @@ namespace Entities
 		shape.setPosition(pos);
 	}
 
+	void DrawableEntity::SetGameManager(GameManager* gameManager)
+	{
+		this->gameManager = gameManager;
+	}
+
 	void DrawableEntity::SetColor(sf::Color color, sf::Color color2) {
 		shape.setFillColor(color);
 		if (color2 != sf::Color::Transparent) {

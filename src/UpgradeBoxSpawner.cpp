@@ -6,10 +6,11 @@
 #include "entities/Player.h"
 
 
-UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& UpgradeBoxList, int WindowWidth, Entities::Player& Player) {
+UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& UpgradeBoxList, int WindowWidth, GameManager* pGameManager) {
 	upgradeBoxList = UpgradeBoxList;
 	windowWidth = WindowWidth;
-	player = &Player;
+	gameManager = pGameManager;
+	player = gameManager->GetPlayer();
 }
 
 void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)

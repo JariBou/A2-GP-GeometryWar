@@ -69,6 +69,7 @@ namespace States {
 		UpgradeBoxSpawner* upgradeBoxSpawner;
 		EnemySpawner* enemySpawner;
 		WaveManager* waveManager;
+		GameManager* gameManager;
 		Entities::Player* player;
 		sf::Text anouncingWaveText;
 

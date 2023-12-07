@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include "utils.h"
+#include "GameManager.h"
 
 namespace Entities {
 	class DrawableEntity;
@@ -14,7 +15,7 @@ namespace Entities {
 
 class UpgradeBoxSpawner {
 	public :
-		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth, Entities::Player& Player);
+		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth, GameManager* pGameManager);
 		~UpgradeBoxSpawner() = default;
 		//virtual void SpawnUpgradeBox();
 		virtual void SpawnUpgradeBox(sf::Shape* shape);
@@ -25,6 +26,7 @@ class UpgradeBoxSpawner {
 		void Update(float deltaTime);
 		float spawnCooldown = 2;
 		float spawnTimer = 0;
+		GameManager* gameManager;
 
 		//void TrySpawning(float deltaTime);
 		

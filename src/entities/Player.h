@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 #include "../enum.h"
+#include "../GameManager.h"
 
 
 class EnemySpawner;
@@ -33,12 +34,14 @@ namespace Entities
 			virtual ~Player() = default;
 			virtual void MovePlayer(float deltaTime);
 			virtual void Update(float deltaTime);
+			virtual void SetGameManager(GameManager* gameManager);
 			virtual void UpgradeLevel(UpgradeType type);
 			virtual std::vector<Bullet*>& GetBullets();
 			std::vector<DrawableEntity*>& GetBulletEntities();
 			float playerWidth;
 			float playerHeight;
 			virtual EnemySpawner* GetEnemySpawner();
+			virtual GameManager* GetGameManager();
 			virtual UpgradeBoxSpawner* GetBoxSpawner();
 
 			virtual void GetHit(float damage);
@@ -50,9 +53,6 @@ namespace Entities
 			virtual bool CheckLife();
 
 			void Draw(sf::RenderWindow& window);
-
-			void SetEnemySpawner(EnemySpawner* spawner);
-			void SetBoxSpawner(UpgradeBoxSpawner* spawner);
 			int bulletDamageLevel = 1;
 			int bulletNumberLevel = 1;
 			int movementSpeedLevel = 1;
@@ -60,6 +60,7 @@ namespace Entities
 
 		private:
 			EnemySpawner* enemySpawner = nullptr;
+			GameManager* gameManager = nullptr;
 			UpgradeBoxSpawner* boxSpawner = nullptr;
 			std::vector<Bullet*> bullets;
 			std::vector<float> bulletAngles;

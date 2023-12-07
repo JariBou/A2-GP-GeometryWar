@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "enum.h"
+#include "GameManager.h"
 
 namespace Entities {
 	class Player;
@@ -18,12 +19,13 @@ public:
 	sf::RenderWindow* window;
 	std::vector<Spawnpoint*> spawnPoints;
 	Entities::Player* player;
+	GameManager* gameManager;
 
 	float clock = 0;
 	bool doClock = false;
 	float timeBetweenSpawns = 3;
 
-	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, Entities::Player* player);
+	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, GameManager* gameManager);
 
 	std::vector<Entities::Foe*>* GetFoes();
 

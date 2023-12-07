@@ -10,7 +10,7 @@ namespace Entities
 	using namespace std;
 
 
-	Player::Player(sf::Shape& shape) : DrawableEntity(shape){
+	Player::Player(sf::Shape& shape) : DrawableEntity(shape) {
 	}
 	
 
@@ -114,6 +114,15 @@ namespace Entities
 		}
 	}
 
+	void Player::SetGameManager(GameManager* gameManager)
+	{
+		this->gameManager = gameManager;
+		enemySpawner = this->gameManager->GetEnemySpawner();
+		boxSpawner = this->gameManager->GetUpgradeBoxSpawner();
+
+	}
+
+
 
 	void Player::UpgradeLevel(UpgradeType upgrade)
 	{
@@ -176,17 +185,13 @@ namespace Entities
 		return (this->lives > 0);
 	}
 
-	void Player::SetEnemySpawner(EnemySpawner* spawner)
-	{
-		this->enemySpawner = spawner;
-	}
-
-	void Player::SetBoxSpawner(UpgradeBoxSpawner* spawner) {
-		this->boxSpawner = spawner;
-	}
-
 	EnemySpawner* Player::GetEnemySpawner() {
 		return this->enemySpawner;
+	}
+
+	GameManager* Player::GetGameManager()
+	{
+		return gameManager;
 	}
 
 	UpgradeBoxSpawner* Player::GetBoxSpawner()

@@ -3,6 +3,7 @@
 #include "../UpgradeBoxSpawner.h"
 #include "../EnemySpawner.h"
 #include "../WaveManager.h"
+#include "../GameManager.h"
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
@@ -29,11 +30,15 @@ namespace States {
 		lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 670,
 			(window.getSize().y - lifeBounds.height) / 2.0f - 520);
 
-		this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, *player);
-		this->enemySpawner = new EnemySpawner(&foeList, &window, player);
+		this->gameManager = new GameManager();
+		this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, gameManager);
+		this->enemySpawner = new EnemySpawner(&foeList, &window, gameManager);
+		gameManager->SetEnemySpawner(enemySpawner);
+		gameManager->SetUpgradeBoxSpawner(upgradeBoxSpawner);
+		gameManager->SetPlayer(player);
+		player->SetGameManager(gameManager);
 
-		player->SetEnemySpawner(enemySpawner);
-		player->SetBoxSpawner(upgradeBoxSpawner);
+		
 
 		anouncingWaveText.setCharacterSize(100);
 		sf::FloatRect waveTextBounds = anouncingWaveText.getLocalBounds();
@@ -43,6 +48,7 @@ namespace States {
 		anouncingWaveText.setStyle(sf::Text::Bold);
 
 		this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText);
+		gameManager->SetWaveManager(waveManager);
 		waveManager->SetWave(0, 30);
 
 		//GRID ACTIVATION
