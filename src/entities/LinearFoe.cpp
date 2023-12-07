@@ -12,7 +12,6 @@ namespace Entities
 		sf::Vector2f pos = shape.getPosition();
 		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
 			this->health = 0;
-			//Die();
 		}
 	}
 

@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\WaveManager.cpp" />
     <ClInclude Include="src\EnemySpawner.h" />
     <ClInclude Include="src\entities\Bullet.h" />
     <ClCompile Include="src\DeathState.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="src\Spawnpoint.cpp" />
     <ClCompile Include="src\UpgradeBoxSpawner.cpp" />
     <ClCompile Include="src\utils.cpp" />
+    <ClInclude Include="src\WaveManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\DrawableEntity.h" />

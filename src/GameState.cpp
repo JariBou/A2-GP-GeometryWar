@@ -2,6 +2,7 @@
 #include "entities/Entites.h"
 #include "UpgradeBoxSpawner.h"
 #include "EnemySpawner.h"
+#include "WaveManager.h"
 
 States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score) {
 	scoreText.setCharacterSize(40);
@@ -20,23 +21,22 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 
 
 
-	std::vector<Spawnpoint> spawnPoints;
 	this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, *player);
 	this->enemySpawner = new EnemySpawner(&foeList, &window, player);
+	
 	player->SetEnemySpawner(enemySpawner);
 	player->SetBoxSpawner(upgradeBoxSpawner);
 
-	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1700, 0), 20));
-	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1500, 0), 20));
-	spawnPoints.push_back(Spawnpoint(sf::Vector2f(1000, 0), 20));
-	spawnPoints.push_back(Spawnpoint(sf::Vector2f(700, 0), 20));
-	spawnPoints.push_back(Spawnpoint(sf::Vector2f(300, 0), 20));
-	spawnPoints[0].AddEnemyToSpawn(NonLinearFoe, 50);
-	spawnPoints[1].AddEnemyToSpawn(NonLinearFoe, 50);
-	spawnPoints[3].AddEnemyToSpawn(NonLinearFoe, 50);
+	anouncingWaveText.setCharacterSize(100);
+	sf::FloatRect waveTextBounds = anouncingWaveText.getLocalBounds();
+	anouncingWaveText.setPosition((window.getSize().x - waveTextBounds.width) / 2.0f - 100, (window.getSize().y - waveTextBounds.height) / 4.0f - 70);
+	anouncingWaveText.setFont(MyFont);
+	anouncingWaveText.setFillColor(sf::Color::White);
+	anouncingWaveText.setStyle(sf::Text::Bold);
 
-	enemySpawner->setSpawnPoints(spawnPoints);
-	enemySpawner->StartClock();
+	this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText);
+	waveManager->SetWave(0, 30);
+
 }
 
 void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
@@ -84,6 +84,7 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 	Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
 
 	enemySpawner->Update(deltaTime);
+	waveManager->Update(deltaTime);
 
 	// Affichage
 
@@ -94,6 +95,7 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 	//window.draw(rectangle);
 
 	window.draw(scoreText);
+	if (waveManager->anouncing) window.draw(anouncingWaveText);
 	player->Draw(window);
 
 	for (Entities::Bullet* bullet : player->GetBullets())

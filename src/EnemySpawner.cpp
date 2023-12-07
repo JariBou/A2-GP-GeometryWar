@@ -22,8 +22,8 @@ std::vector<Entities::DrawableEntity*>& EnemySpawner::GetFoeEntities()
 }
 
 void EnemySpawner::Update(float deltaTime) {
-	int spawnpointIndex = std::rand() % spawnPoints.size();
 	if (doClock) {
+		int spawnpointIndex = std::rand() % spawnPoints.size();	
 		clock += deltaTime;
 		if (clock >= timeBetweenSpawns) {
 			EnemyType enemyType = LinearShootingFoe;

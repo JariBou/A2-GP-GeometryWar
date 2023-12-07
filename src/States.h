@@ -10,6 +10,7 @@ namespace Entities{
 
 class UpgradeBoxSpawner;
 class EnemySpawner;
+class WaveManager;
 
 namespace States {
 
@@ -67,7 +68,9 @@ namespace States {
 		std::vector<Entities::UpgradeBox*> upgradeBoxList;
 		UpgradeBoxSpawner* upgradeBoxSpawner;
 		EnemySpawner* enemySpawner;
+		WaveManager* waveManager;
 		Entities::Player* player;
+		sf::Text anouncingWaveText;
 
 		GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score);
 
