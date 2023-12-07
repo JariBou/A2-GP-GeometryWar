@@ -20,7 +20,13 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 	player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
 	player->SetWindow(window);
 
+	lifeText.setFont(MyFont);
+	lifeText.setCharacterSize(50);
+	lifeText.setFillColor(sf::Color::White);
 
+	sf::FloatRect lifeBounds = lifeText.getLocalBounds();
+	lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 670,
+		(window.getSize().y - lifeBounds.height) / 2.0f - 520);
 
 	this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, *player);
 	this->enemySpawner = new EnemySpawner(&foeList, &window, player);
@@ -38,23 +44,44 @@ States::GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clo
 	this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText);
 	waveManager->SetWave(0, 30);
 
+	//GRID ACTIVATION
+	grid = sf::VertexArray(sf::Lines);
+	CreateNeonGrid(window.getSize().x, window.getSize().y);
+}
+
+void States::GameState::CreateNeonGrid(int windowWidth, int windowHeight)
+{
+	const int gridSize = 150;
+	const int numberOfLines = 15; // Nombre de lignes verticales et horizontales
+
+	for (int i = 0; i < numberOfLines; ++i) {
+		float thicknessFactor = static_cast<float>(i) / numberOfLines; // Facteur d'ï¿½paisseur basï¿½ sur la distance du point de fuite
+
+		// Lignes horizontales
+		grid.append(sf::Vertex(sf::Vector2f(0, i * windowHeight / numberOfLines), sf::Color::Green));
+		grid.append(sf::Vertex(sf::Vector2f(windowWidth, i * windowHeight / numberOfLines), sf::Color::Green));
+
+		// Lignes verticales
+		grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, 0), sf::Color::Green));
+		grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, windowHeight), sf::Color::Green));
+	}
 }
 
 void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
-	if (sceneIndex == 1) //Le jeu ne tourne pas si on est pas dans la scène
+	if (sceneIndex == 1) //Le jeu ne tourne pas si on est pas dans la scï¿½ne
 	{
 
 		if (!player->CheckLife()) {
 			sceneIndex = 0;
 			player->lives = 3;
 			player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
-			//On réinitialise les niveaux des upgrades
+			//On rï¿½initialise les niveaux des upgrades
 			player->bulletDamageLevel = 1;
 			player->bulletSpeedLevel = 1;
 			player->movementSpeedLevel = 1;
 			player->bulletNumberLevel = 1;
 
-			//On réinitialise les stats du joueur
+			//On rï¿½initialise les stats du joueur
 			player->bulletCooldown = 0.5f;
 			player->bulletDamage = 10;
 			player->bulletSize = sf::Vector2f(5, 5);
@@ -63,14 +90,14 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 			player->speed = 450.0;
 
 
-			//On réinitialise les vagues d'enemies
+			//On rï¿½initialise les vagues d'enemies
 			waveManager->clock = 0;
 			waveManager->waveCooldown = 3;
 			waveManager->wave = 0;
 			waveManager->anouncing = false;
 			waveManager->SetWave(0, 30);
 
-			//On réinitialise le score
+			//On rï¿½initialise le score
 			score = 0;
 			window.clear();
 		}
@@ -78,11 +105,11 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// On gère l'événément
+			// On gï¿½re l'ï¿½vï¿½nï¿½ment
 			switch (event.type)
 			{
 			case sf::Event::Closed:
-				// L'utilisateur a cliqué sur la croix => on ferme la fenêtre
+				// L'utilisateur a cliquï¿½ sur la croix => on ferme la fenï¿½tre
 				window.close();
 				break;
 
@@ -90,6 +117,8 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 				break;
 			}
 		}
+		lifeText.setString("Life: " + std::to_string(player->lives));
+	}
 
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
@@ -123,15 +152,15 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 
 		// Affichage
 
-		// Remise au noir de toute la fenêtre
+		// Remise au noir de toute la fenï¿½tre
 		window.clear();
 
-		// Tout le rendu va se dérouler ici
+		// Tout le rendu va se dï¿½rouler ici
 		//window.draw(rectangle);
 
-		window.draw(scoreText);
-		if (waveManager->anouncing) window.draw(anouncingWaveText);
-		player->Draw(window);
+	window.draw(scoreText);
+	if (waveManager->anouncing) window.draw(anouncingWaveText);
+	player->Draw(window);
 
 		for (Entities::Bullet* bullet : player->GetBullets())
 		{
@@ -146,7 +175,7 @@ void States::GameState::Loop(sf::RenderWindow& window, int& sceneIndex) {
 			box->Draw(window);
 		}
 
-		// On présente la fenêtre sur l'écran
+		// On prï¿½sente la fenï¿½tre sur l'ï¿½cran
 		window.display();
 	}
 	
