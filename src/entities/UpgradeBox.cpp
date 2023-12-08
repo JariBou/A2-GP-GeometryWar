@@ -11,9 +11,8 @@
 
 namespace Entities {
 
-	UpgradeBox::UpgradeBox(sf::Shape& shape, GameManager* pGameManager, int UpgradeTypeNb) : DrawableEntity(shape), player(*pGameManager->GetPlayer()) {
+	UpgradeBox::UpgradeBox(sf::Shape& shape, GameManager* pGameManager, int UpgradeTypeNb) : DrawableEntity(shape), gameManager(pGameManager), player(*pGameManager->GetPlayer()) {
 		speed = 200;
-		SetGameManager(gameManager);
 		std::mt19937 rng(std::random_device{}());
 		std::uniform_int_distribution<int> type(0, 3);
 		int random_number = type(rng);

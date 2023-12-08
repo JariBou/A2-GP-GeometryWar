@@ -3,6 +3,7 @@
 #include "../utils.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "../GameManager.h"
 
 namespace Entities
 {

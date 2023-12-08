@@ -4,6 +4,7 @@
 #include "DrawableEntity.h"
 #include "../enum.h"
 
+class GameManager;
 
 namespace Entities
 {
@@ -20,6 +21,7 @@ namespace Entities
 		UpgradeType upgradeType;
 
 	private:
+		GameManager* gameManager;
 		bool shouldDestroy = false;
 		int speed = 200;
 		Player& player;

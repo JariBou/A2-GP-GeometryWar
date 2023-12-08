@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "DrawableEntity.h"
 
+class GameManager;
 
 namespace Entities {
     class Player; // Assurez-vous que la classe Player est d�clar�e avant Bullet

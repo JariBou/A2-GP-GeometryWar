@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
-#include "../GameManager.h"
 
 namespace Entities
 {
@@ -27,7 +26,6 @@ namespace Entities
 			virtual void Update(float deltaTime) = 0;
 
 			virtual void SetPosition(sf::Vector2f pos);
-			virtual void SetGameManager(GameManager* gameManager);
 
 			virtual void SetColor(sf::Color color, sf::Color color2);
 			virtual void SetColor(sf::Color color);
@@ -41,7 +39,6 @@ namespace Entities
 			void SetWindowDimension(sf::Vector2f windowDimension);
 
 			sf::Shape& shape;
-			GameManager* gameManager;
 			sf::Vector2f windowDimension;
 
 	};

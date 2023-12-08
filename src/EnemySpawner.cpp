@@ -93,7 +93,6 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 	}
 	if (enemy != nullptr) {
 		enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
-		enemy->SetGameManager(gameManager);
 		foeList->push_back(enemy);
 	}
 

@@ -1,6 +1,7 @@
 #include "LinearFoe.h"
 #include "../UpgradeBoxSpawner.h"
 #include "Player.h"
+#include "../GameManager.h"
 
 namespace Entities
 {
