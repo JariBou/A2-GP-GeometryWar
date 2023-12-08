@@ -9,7 +9,7 @@
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
 	{
-		this->gameManager = new GameManager(window);
+		this->gameManager = new GameManager(window, score);
 		this->gameManager->SetParticleSystem(new SFX::ParticleSystem());
 
 		scoreText.setCharacterSize(40);
@@ -150,7 +150,7 @@ namespace States {
 		}
 
 		Utils::CheckBulletListLife(*gameManager->GetBullets());
-		score += Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
+		Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
 		Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
 
 		enemySpawner->Update(deltaTime);

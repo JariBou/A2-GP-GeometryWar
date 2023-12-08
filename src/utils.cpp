@@ -35,8 +35,7 @@ namespace Utils {
 		}
 	}
 
-	int CheckFoeListLife(std::vector<Entities::Foe*>& foes) {
-		int killedFoe = 0;
+	void CheckFoeListLife(std::vector<Entities::Foe*>& foes) {
 		auto foeVectorIterator = foes.begin();
 		while (foeVectorIterator != foes.end()) {
 			if ((*foeVectorIterator)->CheckLife()) {
@@ -47,11 +46,9 @@ namespace Utils {
 					(*foeVectorIterator)->OnKilledByPlayer();
 				}
 				foeVectorIterator = foes.erase(foeVectorIterator);
-				killedFoe++;
 				std::cout << "Foe deleted" << std::endl;
 			}
 		}
-		return killedFoe;
 	}
 
 	void CheckUpgradeListLife(std::vector<Entities::UpgradeBox*>& boxes) {

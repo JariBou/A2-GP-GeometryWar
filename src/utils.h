@@ -15,7 +15,7 @@ namespace Utils {
 
 
 	void CheckBulletListLife(std::vector<Entities::Bullet*>& bullets);
-	int CheckFoeListLife(std::vector<Entities::Foe*>& foes);
+	void CheckFoeListLife(std::vector<Entities::Foe*>& foes);
 	void CheckUpgradeListLife(std::vector<Entities::UpgradeBox*>& boxes);
 
 	sf::String toString(int integers);

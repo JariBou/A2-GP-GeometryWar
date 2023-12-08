@@ -25,5 +25,6 @@ namespace Entities
 
 	void LinearFoe::OnKilledByPlayer() {
 		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
+		this->gameManager->score++;
 	}
 }

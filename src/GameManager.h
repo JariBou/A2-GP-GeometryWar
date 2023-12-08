@@ -18,7 +18,7 @@ class UpgradeBoxSpawner;
 class GameManager {
 	
 public:
-	GameManager(sf::RenderWindow& window);
+	GameManager(sf::RenderWindow& window, int& score);
 
 	void SetPlayer(Entities::Player* pPlayer) { player = pPlayer;  std::cout << "Player Set !";}
 	void SetWaveManager(WaveManager* pWaveManager) { waveManager = pWaveManager; }
@@ -38,6 +38,7 @@ public:
 	UpgradeBoxSpawner* GetUpgradeBoxSpawner() { return UpgradeBoxSpawner; }
 	SFX::ParticleSystem* GetParticleSystem() { return particleSystem; }
 
+	int& score;
 	sf::Vector2f windowDimension;
 	Entities::Player* player = nullptr;
 	WaveManager* waveManager = nullptr;

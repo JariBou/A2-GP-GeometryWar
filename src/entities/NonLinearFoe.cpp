@@ -35,6 +35,7 @@ namespace Entities
 
 	void NonLinearFoe::OnKilledByPlayer() {
 		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
+		this->gameManager->score++;
 	}
 
 	//TODO
