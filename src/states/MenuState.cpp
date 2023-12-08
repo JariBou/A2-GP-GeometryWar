@@ -5,10 +5,14 @@ namespace States {
 	MenuState::MenuState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock)
 		: State(frameClock) {
 
-		this->gameTitle.setString("Title of the Game");
-		this->gameTitle.setCharacterSize(170);
+		this->gameTitle.setString("2042");
+		this->gameTitle.setCharacterSize(400);
 		this->gameTitle.setPosition(270, window.getSize().y / 8);
 		this->textList.push_back(&this->gameTitle);
+
+		sf::FloatRect gameTitleBounds = gameTitle.getLocalBounds();
+		gameTitle.setPosition((window.getSize().x - gameTitleBounds.width) / 2.0f - 450,
+			(window.getSize().y - gameTitleBounds.height) / 2.0f - 500);
 
 		this->anyKeyText.setString("Press any key to continue !");
 		this->anyKeyText.setPosition(600, window.getSize().y / 2);
