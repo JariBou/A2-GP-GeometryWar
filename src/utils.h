@@ -19,4 +19,5 @@ namespace Utils {
 	void CheckUpgradeListLife(std::vector<Entities::UpgradeBox*>& boxes);
 
 	sf::String toString(int integers);
+	sf::Vector2f GetShapeCenter(sf::Shape& shape);
 }
