@@ -53,7 +53,7 @@ namespace SFX {
 		}
 	}
 
-	void ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size, int numberOfParticles)
+	void ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size, int numberOfParticles, float distanceFromOrigin, float minSpeed)
 	{
 		ParticleCompound* explosionCompound = new ParticleCompound();
 
@@ -65,14 +65,14 @@ namespace SFX {
 		{
 			float angle = testingAngle + (rand() % directionAngle) - directionAngle / 2.;
 
-			float x = cos(angle);
-			float y = sin(angle);
+			float x = cos(angle) * distanceFromOrigin;
+			float y = sin(angle) * distanceFromOrigin;
 
 			sf::RectangleShape* particleShape = new sf::RectangleShape(sf::Vector2f(size, size));
 			particleShape->setPosition(position);
 			particleShape->setFillColor(color);
 
-			float speed = ((rand() % 1000) / 100.) + 50;
+			float speed = ((rand() % 1000) / 100.) + minSpeed;
 			Particle* pNewParticle = new Particle(*particleShape, 0.6, sf::Vector2f(x, y), speed);
 
 			explosionCompound->AddParticle(pNewParticle);

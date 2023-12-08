@@ -45,6 +45,7 @@ namespace Utils {
 				if ((*foeVectorIterator)->isDead()) {
 					(*foeVectorIterator)->OnKilledByPlayer();
 				}
+				(*foeVectorIterator)->OnDestroyed();
 				foeVectorIterator = foes.erase(foeVectorIterator);
 				std::cout << "Foe deleted" << std::endl;
 			}
@@ -83,6 +84,12 @@ namespace Utils {
 		std::ostringstream os;
 		os << integer;
 		return os.str();
+	}
+
+	sf::Vector2f GetShapeCenter(sf::Shape& shape)
+	{
+		return sf::Vector2f(shape.getPosition().x + shape.getLocalBounds().width / 2,
+			shape.getPosition().y + shape.getLocalBounds().height / 2);
 	}
 
 }

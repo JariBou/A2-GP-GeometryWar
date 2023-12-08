@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "../particles/ParticleSystem.h"
 #include "../GameManager.h"
+#include "../Utils.h"
 
 namespace Entities {
 
@@ -18,6 +19,7 @@ namespace Entities {
 
 	void Foe::OnDestroyed()
 	{
+		this->gameManager->GetParticleSystem()->CreateExplosionAt(Utils::GetShapeCenter(this->shape), this->shape.getOutlineColor(), 3.0, 20, this->shape.getLocalBounds().width/2, 20);
 		// TODO
 	}
 
