@@ -6,6 +6,7 @@
 #include "NonLinearFoe.h"
 #include "LinearShootingFoe.h"
 #include "Foe.h"
+#include "Boss1.h"
 #include "Bullet.h"
 #include "Upgradebox.h"
 

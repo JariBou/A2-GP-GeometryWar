@@ -99,6 +99,9 @@
     <ClCompile Include="src\WaveManager.cpp">
       <Filter>Fichiers sources\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="src\entities\Boss1.cpp">
+      <Filter>Fichiers sources\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\DrawableEntity.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="src\WaveManager.h">
       <Filter>Fichiers d%27en-tête\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Boss1.h">
+      <Filter>Fichiers d%27en-tête\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "Foe.h"
-#include "Player.h"
 
 namespace Entities
 {
@@ -29,6 +28,9 @@ namespace Entities
 		virtual void OnKilledByPlayer();
 
 		bool IsOutOfBounds();
+
+	private:
+		float thrustTimer = 0;
 
 	};
 }

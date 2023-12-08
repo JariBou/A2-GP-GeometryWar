@@ -88,8 +88,24 @@ namespace Utils {
 
 	sf::Vector2f GetShapeCenter(sf::Shape& shape)
 	{
-		return sf::Vector2f(shape.getPosition().x + shape.getLocalBounds().width / 2,
-			shape.getPosition().y + shape.getLocalBounds().height / 2);
+		return sf::Vector2f(GetShapeXCenter(shape),
+			GetShapeYCenter(shape));
+	}
+
+	float GetShapeXCenter(sf::Shape& shape)
+	{
+		return shape.getPosition().x + shape.getLocalBounds().width / 2;
+	}
+
+	float GetShapeYCenter(sf::Shape& shape)
+	{
+		return shape.getPosition().y + shape.getLocalBounds().height / 2;
+	}
+
+	double DegToRad(float deg) {
+		double pi = 3.14159265359;
+		return (deg * (pi / 180));
+		
 	}
 
 }
