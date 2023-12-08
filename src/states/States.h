@@ -95,6 +95,17 @@ namespace States {
 		sf::VertexArray grid;
 		int& score;
 
+		sf::CircleShape triangleUpgrade = sf::CircleShape(40, 3);
+		sf::Text lvlTriangle;
+
+		sf::CircleShape octogonUpgrade = sf::CircleShape(30, 8);
+		sf::Text lvlOctogon;
+
+		sf::RectangleShape rectangleUpgrade = sf::RectangleShape(sf::Vector2f(50, 50));
+		sf::Text lvlRectangle;
+
+		sf::CircleShape circleUpgrade = sf::CircleShape(30.f);
+		sf::Text lvlCircle;
 
 	};
 }

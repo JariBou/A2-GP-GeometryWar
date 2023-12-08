@@ -30,7 +30,7 @@ namespace States {
 		lifeText.setFillColor(sf::Color::White);
 
 		sf::FloatRect lifeBounds = lifeText.getLocalBounds();
-		lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 670,
+		lifeText.setPosition((window.getSize().x - lifeBounds.width) / 2.0f + 700,
 			(window.getSize().y - lifeBounds.height) / 2.0f - 520);
 
 		this->upgradeBoxSpawner = new UpgradeBoxSpawner(upgradeBoxList, window.getSize().x, gameManager);
@@ -42,6 +42,79 @@ namespace States {
 		anouncingWaveText.setFont(MyFont);
 		anouncingWaveText.setFillColor(sf::Color::White);
 		anouncingWaveText.setStyle(sf::Text::Bold);
+
+		//Power up
+		//Triangle
+		triangleUpgrade.setFillColor(sf::Color::Transparent);
+		triangleUpgrade.setOutlineThickness(5);
+		triangleUpgrade.setOutlineColor(sf::Color::Blue);
+
+		lvlTriangle.setCharacterSize(30);
+		lvlTriangle.setFont(MyFont);
+		lvlTriangle.setFillColor(sf::Color::White);
+		lvlTriangle.setStyle(sf::Text::Bold);
+
+		sf::FloatRect triangleBounds = triangleUpgrade.getLocalBounds();
+		triangleUpgrade.setPosition((window.getSize().x - triangleBounds.width) / 2.0f - 880,
+			(window.getSize().y - triangleBounds.height) / 2.0f - 400);
+
+		sf::FloatRect lvlTriangleBounds = lvlTriangle.getLocalBounds();
+		lvlTriangle.setPosition((window.getSize().x - lvlTriangleBounds.width) / 2.0f - 895,
+			(window.getSize().y - lvlTriangleBounds.height) / 2.0f - 370);
+
+		//Octogone
+		octogonUpgrade.setFillColor(sf::Color::Transparent);
+		octogonUpgrade.setOutlineThickness(5);
+		octogonUpgrade.setOutlineColor(sf::Color::Blue);
+
+		lvlOctogon.setCharacterSize(30);
+		lvlOctogon.setFont(MyFont);
+		lvlOctogon.setFillColor(sf::Color::White);
+		lvlOctogon.setStyle(sf::Text::Bold);
+
+		sf::FloatRect octogonBounds = octogonUpgrade.getLocalBounds();
+		octogonUpgrade.setPosition((window.getSize().x - octogonBounds.width) / 2.0f - 880,
+			(window.getSize().y - octogonBounds.height) / 2.0f - 270);
+
+		sf::FloatRect lvlOctogonBounds = lvlOctogon.getLocalBounds();
+		lvlOctogon.setPosition((window.getSize().x - lvlOctogonBounds.width) / 2.0f - 895,
+			(window.getSize().y - lvlOctogonBounds.height) / 2.0f - 240);
+
+		//Rectangle
+		rectangleUpgrade.setFillColor(sf::Color::Transparent);
+		rectangleUpgrade.setOutlineThickness(5);
+		rectangleUpgrade.setOutlineColor(sf::Color::Magenta);
+
+		lvlRectangle.setCharacterSize(30);
+		lvlRectangle.setFont(MyFont);
+		lvlRectangle.setFillColor(sf::Color::White);
+		lvlRectangle.setStyle(sf::Text::Bold);
+
+		sf::FloatRect rectangleBounds = rectangleUpgrade.getLocalBounds();
+		rectangleUpgrade.setPosition((window.getSize().x - rectangleBounds.width) / 2.0f - 880,
+			(window.getSize().y - rectangleBounds.height) / 2.0f - 150);
+
+		sf::FloatRect lvlRectangleBounds = lvlRectangle.getLocalBounds();
+		lvlRectangle.setPosition((window.getSize().x - lvlRectangleBounds.width) / 2.0f - 895,
+			(window.getSize().y - lvlRectangleBounds.height) / 2.0f - 120);
+
+		//Circle
+		circleUpgrade.setFillColor(sf::Color::Transparent);
+		circleUpgrade.setOutlineThickness(5);
+		circleUpgrade.setOutlineColor(sf::Color::Green);
+
+		lvlCircle.setCharacterSize(30);
+		lvlCircle.setFont(MyFont);
+		lvlCircle.setFillColor(sf::Color::White);
+		lvlCircle.setStyle(sf::Text::Bold);
+
+		sf::FloatRect circleBounds = circleUpgrade.getLocalBounds();
+		circleUpgrade.setPosition((window.getSize().x - circleBounds.width) / 2.0f - 880,
+			(window.getSize().y - circleBounds.height) / 2.0f - 20);
+
+		sf::FloatRect lvlCircleBounds = lvlCircle.getLocalBounds();
+		lvlCircle.setPosition((window.getSize().x - lvlCircleBounds.width) / 2.0f - 895,
+			(window.getSize().y - lvlCircleBounds.height) / 2.0f + 10);
 
 		this->waveManager = new WaveManager(enemySpawner, &anouncingWaveText, gameManager);
 		waveManager->SetWave(0, 30);
@@ -173,6 +246,51 @@ namespace States {
 
 		window.draw(lifeText);
 		window.draw(grid);
+
+		if (player->movementSpeedLevel > 1)
+		{
+			lvlTriangle.setString(Utils::toString(player->movementSpeedLevel));
+			window.draw(triangleUpgrade);
+			window.draw(lvlTriangle);
+		}else if (player->movementSpeedLevel == 12)
+		{
+			lvlTriangle.setString("MAX");
+			window.draw(triangleUpgrade);
+			window.draw(lvlTriangle);
+		}
+		if (player->bulletDamageLevel > 1) {
+
+			lvlOctogon.setString(Utils::toString(player->bulletSpeedLevel));
+			window.draw(octogonUpgrade);
+			window.draw(lvlOctogon);
+		}else if (player->bulletDamageLevel == 8)
+		{
+			lvlOctogon.setString("MAX");
+			window.draw(octogonUpgrade);
+			window.draw(lvlOctogon);
+		}
+		if (player->bulletSpeedLevel > 1) {
+
+			lvlRectangle.setString(Utils::toString(player->bulletDamageLevel));
+			window.draw(rectangleUpgrade);
+			window.draw(lvlRectangle);
+		}else if (player->bulletSpeedLevel == 10)
+		{
+			lvlOctogon.setString("MAX");
+			window.draw(rectangleUpgrade);
+			window.draw(lvlRectangle);
+		}
+		if (player->bulletNumberLevel > 1) {
+
+			lvlCircle.setString(Utils::toString(player->bulletNumberLevel));
+			window.draw(circleUpgrade);
+			window.draw(lvlCircle);
+		}else if (player->bulletNumberLevel == 4)
+		{
+			lvlCircle.setString("MAX");
+			window.draw(circleUpgrade);
+			window.draw(lvlCircle);
+		}
 
 		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
