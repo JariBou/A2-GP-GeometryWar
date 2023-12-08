@@ -25,7 +25,7 @@ void WaveManager::SetWave(int wave, float waveCooldown)
 	anouncing = true;
 	switch (wave)
 	{
-	case 5:
+	case 0:
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1700, 0), 20));
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1500, 0), 20));
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1000, 0), 20));
@@ -79,10 +79,11 @@ void WaveManager::SetWave(int wave, float waveCooldown)
 			spawnPoints[i]->AddEnemyToSpawn(NonLinearFoe, 40);
 		}
 		break;
-	case 0: 
-		enemySpawner->bossWave = true;
-		break;
 	default:
+		if (wave % 5 == 0) {
+			enemySpawner->bossWave = true;
+			break;
+		}
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1700, 0), 20));
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1500, 0), 20));
 		spawnPoints.push_back(new Spawnpoint(sf::Vector2f(1000, 0), 20));
@@ -91,8 +92,8 @@ void WaveManager::SetWave(int wave, float waveCooldown)
 
 		for (size_t i = 0; i < spawnPoints.size(); i++)
 		{
-			spawnPoints[i]->AddEnemyToSpawn(LinearShootingFoe, 100);
-			spawnPoints[i]->AddEnemyToSpawn(NonLinearFoe, 50);
+			spawnPoints[i]->AddEnemyToSpawn(LinearShootingFoe, 70 + rand() % 30);
+			spawnPoints[i]->AddEnemyToSpawn(NonLinearFoe, 30 + rand() % 40);
 		}
 		break;
 	}
@@ -116,7 +117,7 @@ void WaveManager::Update(float deltaTime)
 			clock = 0;
 		}
 	}
-	else if (clock >= waveCooldown) {
+	else if (clock >= waveCooldown || enemySpawner->bossWave) {
 		if (!enemySpawner->bossWave) this->SetWave(wave + 1, waveCooldown);
 		else if (bossKilled) {
 			bossKilled = false;
