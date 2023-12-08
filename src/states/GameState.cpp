@@ -73,7 +73,7 @@ namespace States {
 	void GameState::Loop(sf::RenderWindow& window, int& sceneIndex)
 	{
 		if (!player->CheckLife()) {
-			sceneIndex = 0;
+			sceneIndex = 2;
 			player->lives = 3;
 			player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
 			//On r�initialise les niveaux des upgrades

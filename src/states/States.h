@@ -46,16 +46,18 @@ namespace States {
 		DeathState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score);
 
 		void Loop(sf::RenderWindow& window, int& sceneIndex);
+		std::vector<sf::Text*> gameOvertextList;
 
 	private:
 		std::vector<sf::Color> colorList = { sf::Color::White, sf::Color::Green, sf::Color::Blue, sf::Color::Red, sf::Color::Cyan, sf::Color::Yellow, sf::Color::Magenta };
 
-		std::vector<sf::Text*> gameOvertextList;
 
 		sf::Text gameOverTitle;
-		sf::Text restartButton;
-		sf::RectangleShape button;
-		sf::Text creditText;
+		sf::Text restartButtonText;
+		sf::Text menuButtonText;
+		sf::Text endScoreText;
+		sf::RectangleShape restartButton;
+		sf::RectangleShape menuButton;
 		sf::RectangleShape gameOverScreenRectangle;
 
 		float colorClock = 0;
