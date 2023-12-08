@@ -1,14 +1,14 @@
 #pragma once
-
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics.hpp>
 #include "Foe.h"
+#include "Player.h"
 
 namespace Entities
 {
 	class Player;
 
-	class NonLinearFoe : public Foe {
+	class Boss1 : public Foe {
 
 	public:
 
@@ -16,11 +16,10 @@ namespace Entities
 		float clock = 0;
 		float changeDirectionCooldown = 2;
 
-		NonLinearFoe(sf::Shape& shape, float speed, GameManager* gameManager);
+		Boss1(sf::Shape& shape, float speed, float health, GameManager* gameManager);
 
 		virtual void Update(float deltaTime);
 		virtual bool isDead();
-		virtual void SetDirection(sf::Vector2f direction);
 
 		/// <summary>
 		/// Function called when destroyed by PLAYER by "normal" means (i.e bullets)
@@ -30,7 +29,10 @@ namespace Entities
 		bool IsOutOfBounds();
 
 	private:
-		float thrustTimer = 0;
+		float shootingClock = 0;
+		float BigShotClock = 0;
+		float shootingCooldown = .5;
+		float BigShotCooldown = 5;
 
 	};
 }
