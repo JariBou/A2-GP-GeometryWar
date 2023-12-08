@@ -56,6 +56,8 @@ namespace States {
 		sf::Text restartButtonText;
 		sf::Text menuButtonText;
 		sf::Text endScoreText;
+		sf::Text mainMenuText;
+		sf::RectangleShape mainMenuButton;
 		sf::RectangleShape restartButton;
 		sf::RectangleShape menuButton;
 		sf::RectangleShape gameOverScreenRectangle;

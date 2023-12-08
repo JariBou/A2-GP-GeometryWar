@@ -12,7 +12,7 @@ namespace States {
 
 		sf::FloatRect titleBounds = gameOverTitle.getLocalBounds();
 		gameOverTitle.setPosition((window.getSize().x - titleBounds.width) / 2.0f - 450,
-			(window.getSize().y - titleBounds.height) / 2.0f - 300);
+			(window.getSize().y - titleBounds.height) / 2.0f - 400);
 
 		gameOvertextList.push_back(&gameOverTitle);
 
@@ -29,11 +29,11 @@ namespace States {
 
 		sf::FloatRect buttonBounds = restartButton.getLocalBounds();
 		restartButton.setPosition((window.getSize().x - buttonBounds.width) / 2.0f + 25,
-			(window.getSize().y - buttonBounds.height) / 2.0f + 100);
+			(window.getSize().y - buttonBounds.height) / 2.0f);
 
 		sf::FloatRect restartButtonBounds = restartButtonText.getLocalBounds();
 		restartButtonText.setPosition((window.getSize().x - restartButtonBounds.width) / 2.0f - 200,
-			(window.getSize().y - restartButtonBounds.height) / 2.0f + 50);
+			(window.getSize().y - restartButtonBounds.height) / 2.0f - 50);
 
 		restartButtonText.setCharacterSize(60);
 		gameOvertextList.push_back(&restartButtonText);
@@ -44,11 +44,33 @@ namespace States {
 		gameOverScreenRectangle.setOutlineThickness(10);
 		gameOverScreenRectangle.setPosition(sf::Vector2f(30, 30));
 
+		//Menu Button
+		mainMenuText.setString("Main Menu !");
+
+		//button
+		mainMenuButton.setSize(sf::Vector2f(550, 100));
+		mainMenuButton.setFillColor(sf::Color::Green);
+		mainMenuButton.setPosition(300, 250);
+		mainMenuButton.setFillColor(sf::Color::Transparent);
+		mainMenuButton.setOutlineThickness(5);
+
+
+		sf::FloatRect mainMenubuttonBounds = mainMenuButton.getLocalBounds();
+		mainMenuButton.setPosition((window.getSize().x - mainMenubuttonBounds.width) / 2.0f + 25,
+			(window.getSize().y - mainMenubuttonBounds.height) / 2.0f + 130);
+
+		sf::FloatRect mainMenuButtons = mainMenuText.getLocalBounds();
+		mainMenuText.setPosition((window.getSize().x - mainMenuButtons.width) / 2.0f - 150,
+			(window.getSize().y - mainMenuButtons.height) / 2.0f + 90);
+
+		mainMenuText.setCharacterSize(60);
+		gameOvertextList.push_back(&mainMenuText);
+
 		//Score
 
 		sf::FloatRect scoreTextBounds = endScoreText.getLocalBounds();
 		endScoreText.setPosition((window.getSize().x - scoreTextBounds.width) / 2.0f - 100,
-			(window.getSize().y - scoreTextBounds.height) / 2.0f - 70);
+			(window.getSize().y - scoreTextBounds.height) / 2.0f - 170);
 
 		endScoreText.setCharacterSize(40);
 		gameOvertextList.push_back(&endScoreText);
@@ -103,10 +125,10 @@ namespace States {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 					if (restartButton.getGlobalBounds().contains(mousePosition)) {
-						// Action à effectuer lorsque le bouton est cliqué
-						restartButton.setFillColor(sf::Color::Red);
 						sceneIndex = 1;
-
+					}
+					if (mainMenuButton.getGlobalBounds().contains(mousePosition)) {
+						sceneIndex = 0;
 					}
 				}
 			}
@@ -135,6 +157,7 @@ namespace States {
 		}
 		window.draw(gameOverScreenRectangle);
 		window.draw(restartButton);
+		window.draw(mainMenuButton);
 
 		// On présente la fenêtre sur l'écran
 		window.display();

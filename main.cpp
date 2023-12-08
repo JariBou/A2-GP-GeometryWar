@@ -39,7 +39,7 @@ int main()
 	while (window.isOpen())
 	{
 		if (_previousScene != _scene) {
-			if (_previousScene == 2) gameState.Restart(window);
+			if (_previousScene == 2 || _previousScene == 0) gameState.Restart(window);
 			_previousScene = _scene;
 		}
 		if (_scene == 0) {
