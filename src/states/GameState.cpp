@@ -56,16 +56,18 @@ namespace States {
 		const int gridSize = 150;
 		const int numberOfLines = 15; // Nombre de lignes verticales et horizontales
 
+		sf::Color color = sf::Color::Green;
+
 		for (int i = 0; i < numberOfLines; ++i) {
 			float thicknessFactor = static_cast<float>(i) / numberOfLines; // Facteur d'�paisseur bas� sur la distance du point de fuite
 
 			// Lignes horizontales
-			grid.append(sf::Vertex(sf::Vector2f(0, i * windowHeight / numberOfLines), sf::Color::Green));
-			grid.append(sf::Vertex(sf::Vector2f(windowWidth, i * windowHeight / numberOfLines), sf::Color::Green));
+			grid.append(sf::Vertex(sf::Vector2f(0, i * windowHeight / numberOfLines), color));
+			grid.append(sf::Vertex(sf::Vector2f(windowWidth, i * windowHeight / numberOfLines), color));
 
 			// Lignes verticales
-			grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, 0), sf::Color::Green));
-			grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, windowHeight), sf::Color::Green));
+			grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, 0), color));
+			grid.append(sf::Vertex(sf::Vector2f(i * windowWidth / numberOfLines, windowHeight), color));
 		}
 	}
 
@@ -124,11 +126,11 @@ namespace States {
 				break;
 			}
 		}
-		lifeText.setString("Life: " + std::to_string(player->lives));
 
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
+		lifeText.setString("Life: " + std::to_string(player->lives));
 		scoreText.setString("Score : " + Utils::toString(score));
 		//std::cout<< "Score : " + Utils::toString(score);
 
@@ -168,6 +170,9 @@ namespace States {
 		window.draw(scoreText);
 		if (waveManager->anouncing) window.draw(anouncingWaveText);
 		player->Draw(window);
+
+		window.draw(lifeText);
+		window.draw(grid);
 
 		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
