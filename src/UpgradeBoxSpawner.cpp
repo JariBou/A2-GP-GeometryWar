@@ -33,7 +33,7 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 					x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
 					y = shapeRect.top;
 					UpgradeBox->SetPosition(sf::Vector2f(x, y - (UpgradeBox->shape.getLocalBounds().height / 2)));
-					UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Blue);
+					UpgradeBox->SetColor(sf::Color::Transparent, sf::Color::Yellow);
 					upgradeBoxList.push_back(UpgradeBox);
 				}
 				break;

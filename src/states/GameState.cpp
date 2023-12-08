@@ -5,6 +5,7 @@
 #include "../WaveManager.h"
 #include "../GameManager.h"
 #include "../particles/ParticleSystem.h"
+#include <SFML/Audio.hpp>
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
@@ -47,7 +48,7 @@ namespace States {
 		//Triangle
 		triangleUpgrade.setFillColor(sf::Color::Transparent);
 		triangleUpgrade.setOutlineThickness(5);
-		triangleUpgrade.setOutlineColor(sf::Color::Blue);
+		triangleUpgrade.setOutlineColor(sf::Color::Yellow);
 
 		lvlTriangle.setCharacterSize(30);
 		lvlTriangle.setFont(MyFont);
@@ -200,6 +201,12 @@ namespace States {
 			}
 		}
 
+		//MUSIC
+		sf::Music music;
+		if (!music.openFromFile("music.ogg")) {
+			std::cout << "Erreur lors du chargement de la musique\n";
+		}
+
 		float deltaTime = frameClock.restart().asSeconds();
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
 
@@ -247,7 +254,7 @@ namespace States {
 		window.draw(lifeText);
 		window.draw(grid);
 
-		if (player->movementSpeedLevel > 1)
+		if (player->movementSpeedLevel <= 11)
 		{
 			lvlTriangle.setString(Utils::toString(player->movementSpeedLevel));
 			window.draw(triangleUpgrade);
@@ -258,9 +265,9 @@ namespace States {
 			window.draw(triangleUpgrade);
 			window.draw(lvlTriangle);
 		}
-		if (player->bulletDamageLevel > 1) {
+		if (player->bulletDamageLevel <= 7) {
 
-			lvlOctogon.setString(Utils::toString(player->bulletSpeedLevel));
+			lvlOctogon.setString(Utils::toString(player->bulletDamageLevel));
 			window.draw(octogonUpgrade);
 			window.draw(lvlOctogon);
 		}else if (player->bulletDamageLevel == 8)
@@ -269,9 +276,9 @@ namespace States {
 			window.draw(octogonUpgrade);
 			window.draw(lvlOctogon);
 		}
-		if (player->bulletSpeedLevel > 1) {
+		if (player->bulletSpeedLevel <= 9) {
 
-			lvlRectangle.setString(Utils::toString(player->bulletDamageLevel));
+			lvlRectangle.setString(Utils::toString(player->bulletSpeedLevel));
 			window.draw(rectangleUpgrade);
 			window.draw(lvlRectangle);
 		}else if (player->bulletSpeedLevel == 10)
@@ -280,7 +287,7 @@ namespace States {
 			window.draw(rectangleUpgrade);
 			window.draw(lvlRectangle);
 		}
-		if (player->bulletNumberLevel > 1) {
+		if (player->bulletNumberLevel <= 3) {
 
 			lvlCircle.setString(Utils::toString(player->bulletNumberLevel));
 			window.draw(circleUpgrade);
