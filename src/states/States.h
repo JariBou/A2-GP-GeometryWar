@@ -94,6 +94,7 @@ namespace States {
 		sf::Text lifeText;
 		sf::VertexArray grid;
 		int& score;
+		sf::Music music;
 
 		sf::CircleShape triangleUpgrade = sf::CircleShape(40, 3);
 		sf::Text lvlTriangle;
