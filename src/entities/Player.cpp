@@ -6,7 +6,7 @@
 #include "../GameManager.h"
 
 
-namespace Entities 
+namespace Entities
 {
 	using namespace std;
 
@@ -15,35 +15,35 @@ namespace Entities
 		gameManager->SetPlayer(this);
 		windowDimension = gameManager->GetWindowDimension();
 	}
-	
+
 
 	void Player::MovePlayer(float deltaTime)
 	{
 		sf::FloatRect boundingBox = shape.getLocalBounds();
-		playerWidth = boundingBox.width + shape.getOutlineThickness()/2;
-		playerHeight = boundingBox.height + shape.getOutlineThickness()/2;
+		playerWidth = boundingBox.width + shape.getOutlineThickness() / 2;
+		playerHeight = boundingBox.height + shape.getOutlineThickness() / 2;
 
 		//cout << "player Witdh : " << playerHeight << ", player Height : " << playerHeight << endl;
 		//cout << "x : " << shape.getPosition().x << ", y :" << shape.getPosition().y << endl;
 		//cout << "Window Height : " << windowHeight << ", Window Width : " << windowWidth << endl << endl;
 		sf::Vector2f moveVector;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-			if (shape.getPosition().y - 1 > 0) {
+			if ((shape.getPosition().y - shape.getOutlineThickness()) - 1 > shape.getOutlineThickness()) {
 				moveVector.y = -1;
 			}
 			/*moveVector.y = -1;*/
 		}
 
-			
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			if ((shape.getPosition().y + playerHeight) + 1 < windowDimension.y) {
+			if ((shape.getPosition().y + playerHeight) + 1 < windowDimension.y + shape.getOutlineThickness()) {
 				moveVector.y = 1;
 			}
 			/*moveVector.y = 1;*/
-		}	
+		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-			if (shape.getPosition().x - 1 > 0)
+			if ((shape.getPosition().x - shape.getOutlineThickness()) - 1 > shape.getOutlineThickness())
 			{
 				moveVector.x = -1;
 			}
@@ -51,7 +51,7 @@ namespace Entities
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			if ((shape.getPosition().x + playerWidth) + 1 < windowDimension.x)
+			if ((shape.getPosition().x + playerWidth) + 1 < windowDimension.x + shape.getOutlineThickness())
 			{
 				moveVector.x = 1;
 			}
@@ -59,10 +59,10 @@ namespace Entities
 		}
 
 		//std::cout << 1.f / deltaTime << " FPS" << std::endl;
-		Move(Utils::NormalizeVector(moveVector) * speed * (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)? 0.8f : 1), deltaTime);
+		Move(Utils::NormalizeVector(moveVector) * speed * (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ? 0.8f : 1), deltaTime);
 	}
-    
-    void Player::Draw(sf::RenderWindow& window){
+
+	void Player::Draw(sf::RenderWindow& window) {
 		window.draw(this->shape);
 
 		//Hitbox
@@ -88,23 +88,38 @@ namespace Entities
 					float bulletSpeed = speed + 250.0 * bulletSpeedLevel / 8;
 					float angle;
 					// Vérifier le niveau de la mise à niveau des balles
-					if (bulletNumberLevel <=2) {
+					if (bulletNumberLevel <= 2) {
 						// Si le niveau est 1, tirer droit
 						angle = 0;
 					}
 					else {
-						// Calcul de l'angle de référence
-						float bulletAngleRef = 0.5 / nbBulletShot;
+						float bulletAngleRef = 0.15;
 						// Si la boucle est dans la première moitié des balles
 						if (i <= (nbBulletShot / 2)) {
-							// Si nécessaire, ajouter des angles de référence au vecteur
+						// Si nécessaire, ajouter des angles de référence au vecteur
 							if (bulletAngles.size() < nbBulletShot / 2) {
-								bulletAngles.push_back(bulletAngleRef * i);
+								if (i == nbBulletShot / 2) {
+									bulletAngles.insert(bulletAngles.begin(),0);
+								}
+								else {
+									bulletAngles.push_back(bulletAngleRef * i);
+
+								}
 							}
 							angle = -bulletAngles[bulletAngles.size() - i];
+							
 						}
 						else {
+							
 							angle = bulletAngles[i - (nbBulletShot / 2) - 1];
+							
+						}
+						
+						if (i == nbBulletShot) {
+							cout<< angle << endl;
+						}
+						else {
+							cout << angle;
 						}
 					}
 					// Créer une nouvelle balle avec les paramètres calculés

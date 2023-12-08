@@ -12,7 +12,7 @@ namespace Entities
 		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
 		if (pos.y > this->windowDimension.x + shape.getGlobalBounds().height) {
-			player->GetHit(1);
+			/*player->GetHit(1);*/
 		}
 		if (IsCollidingWithPlayer()) {
 			player->GetHit(1);
