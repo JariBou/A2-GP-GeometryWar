@@ -119,16 +119,17 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 		break;
 	}
 	case LinearFoe: {
-		sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-		Entities::LinearFoe* linearFoe = new Entities::LinearFoe(*rectangleEnemy, 50 + rand() % 100, this->gameManager);
+		sf::CircleShape* triangleShape = new sf::CircleShape(48,3);
+		Entities::LinearFoe* linearFoe = new Entities::LinearFoe(*triangleShape, 50 + rand() % 100, this->gameManager);
 		linearFoe->SetPosition(sf::Vector2f(position.x, position.y));
 		linearFoe->SetDirection(sf::Vector2f(0, 1));
-		rectangleEnemy->setSize(sf::Vector2f(64, 64));
+		triangleShape->setRadius(48);
+		triangleShape->setRotation(triangleShape->getRotation() + 180);
 		enemy = linearFoe;
 		break;
 	}
 	case NonLinearFoe: {
-		sf::CircleShape* octogonalShape = new sf::CircleShape(8);
+		sf::CircleShape* octogonalShape = new sf::CircleShape(48,8);
 		Entities::NonLinearFoe* nonlinearFoe = new Entities::NonLinearFoe(*octogonalShape, 50 + rand() % 100, this->gameManager);
 		nonlinearFoe->SetPosition(sf::Vector2f(position.x, position.y));
 		nonlinearFoe->SetDirection(sf::Vector2f(rand() % 2 == 0 ? -1 : 1, 1));
