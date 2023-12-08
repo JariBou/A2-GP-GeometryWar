@@ -45,7 +45,6 @@ namespace States {
 		gameOverScreenRectangle.setPosition(sf::Vector2f(30, 30));
 
 		//Score
-		endScoreText.setString("Your score : " + Utils::toString(score));
 
 		sf::FloatRect scoreTextBounds = endScoreText.getLocalBounds();
 		endScoreText.setPosition((window.getSize().x - scoreTextBounds.width) / 2.0f - 100,
@@ -107,10 +106,12 @@ namespace States {
 						// Action à effectuer lorsque le bouton est cliqué
 						restartButton.setFillColor(sf::Color::Red);
 						sceneIndex = 1;
+
 					}
 				}
 			}
 		}
+
 
 		float deltaTime = frameClock.restart().asSeconds();
 		colorClock += deltaTime;
@@ -121,6 +122,7 @@ namespace States {
 			colorClock = 0;
 		}
 
+		endScoreText.setString("Your score : " + Utils::toString(score));
 
 		// Remise au noir de toute la fenêtre
 		window.clear();

@@ -25,6 +25,7 @@ public:
 	void SetEnemySpawner(EnemySpawner* pEnemySpawner) { enemySpawner = pEnemySpawner; }
 	void SetUpgradeBoxSpawner(UpgradeBoxSpawner* pUpgradeBoxSpawner) { UpgradeBoxSpawner = pUpgradeBoxSpawner; }
 	void SetParticleSystem(SFX::ParticleSystem* pParticleSystem) { particleSystem = pParticleSystem; }
+	void Reset();
 	
 	void AddBullet(Entities::Bullet* bullet);
 	std::vector<Entities::Bullet*>* GetBullets();

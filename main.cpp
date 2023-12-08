@@ -28,6 +28,7 @@ int main()
 	}
 
 	sf::Clock frameClock;
+	int _previousScene = 0;
 	int _scene = 0;
 	int score = 0;
 
@@ -37,6 +38,10 @@ int main()
 
 	while (window.isOpen())
 	{
+		if (_previousScene != _scene) {
+			if (_previousScene == 2) gameState.Restart(window);
+			_previousScene = _scene;
+		}
 		if (_scene == 0) {
 			window.setMouseCursorVisible(true);
 			menuState.Loop(window, _scene);

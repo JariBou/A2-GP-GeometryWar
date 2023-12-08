@@ -69,37 +69,44 @@ namespace States {
 		}
 	}
 
+	void GameState::Restart(sf::RenderWindow& window) {
+		foeList.clear();
+		gameManager->Reset();
+
+		player->lives = 3;
+		player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
+
+		//On reset les niveaux des upgrades
+		player->bulletDamageLevel = 1;
+		player->bulletSpeedLevel = 1;
+		player->movementSpeedLevel = 1;
+		player->bulletNumberLevel = 1;
+
+		//On reset les stats du joueur
+		player->bulletCooldown = 0.5f;
+		player->bulletDamage = 10;
+		player->bulletSize = sf::Vector2f(5, 5);
+		player->bulletClock = 0;
+		player->nbBulletShot = 1;
+		player->speed = 450.0;
+
+
+		//On reset les vagues d'enemies
+		waveManager->clock = 0;
+		waveManager->waveCooldown = 3;
+		waveManager->wave = 0;
+		waveManager->anouncing = false;
+		waveManager->SetWave(0, 30);
+
+		//On reset le score
+		score = 0;
+		window.clear();
+	}
+
 	void GameState::Loop(sf::RenderWindow& window, int& sceneIndex)
 	{
 		if (!player->CheckLife()) {
 			sceneIndex = 2;
-			player->lives = 3;
-			player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
-			//On r�initialise les niveaux des upgrades
-			player->bulletDamageLevel = 1;
-			player->bulletSpeedLevel = 1;
-			player->movementSpeedLevel = 1;
-			player->bulletNumberLevel = 1;
-
-			//On r�initialise les stats du joueur
-			player->bulletCooldown = 0.5f;
-			player->bulletDamage = 10;
-			player->bulletSize = sf::Vector2f(5, 5);
-			player->bulletClock = 0;
-			player->nbBulletShot = 1;
-			player->speed = 450.0;
-
-
-			//On r�initialise les vagues d'enemies
-			waveManager->clock = 0;
-			waveManager->waveCooldown = 3;
-			waveManager->wave = 0;
-			waveManager->anouncing = false;
-			waveManager->SetWave(0, 30);
-
-			//On r�initialise le score
-			score = 0;
-			window.clear();
 		}
 
 		sf::Event event;

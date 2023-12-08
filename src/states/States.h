@@ -84,6 +84,8 @@ namespace States {
 
 		void Loop(sf::RenderWindow& window, int& sceneIndex);
 
+		void Restart(sf::RenderWindow& window);
+
 	private:
 		sf::Text scoreText;
 		sf::RectangleShape rectangle;
