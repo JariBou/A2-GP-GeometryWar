@@ -84,7 +84,7 @@ namespace Entities
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
 				// Largeur entre les balles
-				float w = playerWidth / (nbBulletShot + 1);
+				float w = (playerWidth-(shape.getOutlineThickness()*2)) / (nbBulletShot + 1);
 				for (size_t i = 1; i <= nbBulletShot; i++) {
 					sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(bulletSize.x, bulletSize.y));
 					float bulletSpeed = speed + 250.0 * bulletSpeedLevel / 8;

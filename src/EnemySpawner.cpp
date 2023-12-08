@@ -124,7 +124,7 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 		linearFoe->SetPosition(sf::Vector2f(position.x, position.y));
 		linearFoe->SetDirection(sf::Vector2f(0, 1));
 		triangleShape->setRadius(48);
-		triangleShape->setRotation(triangleShape->getRotation() + 180);
+		//triangleShape->setRotation(triangleShape->getRotation() + 180);
 		enemy = linearFoe;
 		break;
 	}

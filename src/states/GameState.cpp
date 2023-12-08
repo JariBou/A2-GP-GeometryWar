@@ -18,11 +18,9 @@ namespace States {
 		scoreText.setFillColor(sf::Color::White);
 		scoreText.setStyle(sf::Text::Bold);
 
-		rectangle.setSize(sf::Vector2f(128, 128));
+		rectangle.setSize(sf::Vector2f(64, 64));
 		player = new Entities::Player(rectangle, gameManager);
 		player->SetColor(sf::Color::Transparent, sf::Color::Green);
-		player->SetPosition(sf::Vector2f(640 - 64, 360 - 64));
-		rectangle.setSize(sf::Vector2f(128, 128));
 		player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
 
 		lifeText.setFont(MyFont);
