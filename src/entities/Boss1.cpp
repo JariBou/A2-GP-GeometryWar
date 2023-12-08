@@ -21,7 +21,7 @@ void Entities::Boss1::Update(float deltaTime)
 		sf::Vector2f direction(Utils::GetShapeCenter(this->gameManager->GetPlayer()->shape) - Utils::GetShapeCenter(this->shape)); 
 
 		Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 5, 500.0, Utils::NormalizeVector(direction), windowDimension.x);
-		(*bullet).SetColor(sf::Color::Green); 
+		(*bullet).SetColor(sf::Color::Red); 
 		auto selfRect = shape.getGlobalBounds();
 		bullet->SetPosition(sf::Vector2f(selfRect.left + selfRect.width / 2 - rectangleBullet->getSize().x / 2,
 			selfRect.top + selfRect.height));
@@ -38,7 +38,7 @@ void Entities::Boss1::Update(float deltaTime)
 		auto selfRect = shape.getGlobalBounds();
 		bullet->SetPosition(sf::Vector2f(selfRect.left + selfRect.width / 2 - rectangleBullet->getSize().x / 2,
 			selfRect.top + selfRect.height));
-		(*bullet).SetColor(sf::Color::Green); 
+		(*bullet).SetColor(sf::Color::Red); 
 		bullet->ShotByEnemy();
 		this->gameManager->AddBullet(bullet);
 	}
