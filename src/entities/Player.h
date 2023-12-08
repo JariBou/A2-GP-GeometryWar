@@ -35,13 +35,10 @@ namespace Entities
 			virtual void MovePlayer(float deltaTime);
 			virtual void Update(float deltaTime);
 			virtual void UpgradeLevel(UpgradeType type);
-			virtual std::vector<Bullet*>& GetBullets();
-			std::vector<DrawableEntity*>& GetBulletEntities();
 			float playerWidth;
 			float playerHeight;
-			virtual EnemySpawner* GetEnemySpawner();
+
 			virtual GameManager* GetGameManager();
-			virtual UpgradeBoxSpawner* GetBoxSpawner();
 
 			virtual void GetHit(float damage);
 
@@ -58,9 +55,7 @@ namespace Entities
 			int bulletSpeedLevel = 1;
 
 		private:
-			EnemySpawner* enemySpawner = nullptr;
 			GameManager* gameManager = nullptr;
-			UpgradeBoxSpawner* boxSpawner = nullptr;
 			std::vector<Bullet*> bullets;
 			std::vector<float> bulletAngles;
 			int chanceCount = 3; // Toutes les trois erreurs (pris un dégât ou enemie passe en bas de l'écran) le joueur perd une vie

@@ -13,6 +13,7 @@ namespace Entities
 
 	Player::Player(sf::Shape& shape, GameManager* pGameManager) : DrawableEntity(shape), gameManager(pGameManager) {
 		gameManager->SetPlayer(this);
+		windowDimension = gameManager->GetWindowDimension();
 	}
 	
 
@@ -35,7 +36,7 @@ namespace Entities
 
 			
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			if ((shape.getPosition().y + playerHeight) + 1 < windowHeight) {
+			if ((shape.getPosition().y + playerHeight) + 1 < windowDimension.y) {
 				moveVector.y = 1;
 			}
 			/*moveVector.y = 1;*/
@@ -50,7 +51,7 @@ namespace Entities
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			if ((shape.getPosition().x + playerWidth) + 1 < windowWidth)
+			if ((shape.getPosition().x + playerWidth) + 1 < windowDimension.x)
 			{
 				moveVector.x = 1;
 			}
@@ -107,7 +108,7 @@ namespace Entities
 						}
 					}
 					// Créer une nouvelle balle avec les paramètres calculés
-					Bullet* bullet = new Bullet(*rectangleBullet, gameManager, bulletDamage, bulletSpeed, sf::Vector2f(angle, -1.0), windowWidth);
+					Bullet* bullet = new Bullet(*rectangleBullet, gameManager, bulletDamage, bulletSpeed, sf::Vector2f(angle, -1.0), windowDimension.x);
 					bullet->SetColor(sf::Color::Yellow);
 					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i * w - bulletSize.x / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					this->gameManager->AddBullet(bullet);
@@ -178,33 +179,11 @@ namespace Entities
 		return (this->lives > 0);
 	}
 
-	EnemySpawner* Player::GetEnemySpawner() {
-		return this->enemySpawner;
-	}
-
 	GameManager* Player::GetGameManager()
 	{
 		return gameManager;
 	}
-
-	UpgradeBoxSpawner* Player::GetBoxSpawner()
-	{
-		return this->boxSpawner;
-	}
-
-	std::vector<Bullet*>& Player::GetBullets() 
-	{
-		return bullets;
-	}
-
-	std::vector<DrawableEntity*>& Player::GetBulletEntities()
-	{
-		std::vector<DrawableEntity*> vec;
-		for (Bullet* bullet : bullets) {
-			vec.push_back(bullet);
-		}
-		return vec;
-	}
+	
 }
 	
 

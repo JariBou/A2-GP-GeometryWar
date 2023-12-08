@@ -9,7 +9,7 @@
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
 	{
-		this->gameManager = new GameManager();
+		this->gameManager = new GameManager(window);
 		this->gameManager->SetParticleSystem(new SFX::ParticleSystem());
 
 		scoreText.setCharacterSize(40);
@@ -24,7 +24,6 @@ namespace States {
 		player->SetPosition(sf::Vector2f(640 - 64, 360 - 64));
 		rectangle.setSize(sf::Vector2f(128, 128));
 		player->SetPosition(sf::Vector2f((window.getSize().x / 2.), (window.getSize().y / 2.)));
-		player->SetWindow(window);
 
 		lifeText.setFont(MyFont);
 		lifeText.setCharacterSize(50);

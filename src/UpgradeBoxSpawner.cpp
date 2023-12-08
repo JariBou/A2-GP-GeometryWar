@@ -28,7 +28,7 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 				//Speed
 				if (player->movementSpeedLevel < 12) {
 					sf::CircleShape* triangleUpgradeBox = new sf::CircleShape(50, 3);
-					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*triangleUpgradeBox, *player, random_type);
+					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*triangleUpgradeBox, gameManager, random_type);
 					auto shapeRect = shape->getGlobalBounds();
 					x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
 					y = shapeRect.top;
@@ -41,7 +41,7 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 				//Bullet Speed
 				if (player->bulletSpeedLevel < 8) {
 					sf::CircleShape* octogonUpgradeBox = new sf::CircleShape(50, 8);
-					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*octogonUpgradeBox, *player, random_type);
+					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*octogonUpgradeBox, gameManager, random_type);
 					auto shapeRect = shape->getGlobalBounds();
 					x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
 					y = shapeRect.top;
@@ -54,7 +54,7 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 				//Bullet Damage
 				if (player->bulletDamageLevel < 10) {
 					sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
-					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player, random_type);
+					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, gameManager, random_type);
 					auto shapeRect = shape->getGlobalBounds();
 					x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
 					y = shapeRect.top;
@@ -67,7 +67,7 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 				//Bullet Number
 				if (player->bulletNumberLevel < 4) {
 					sf::CircleShape* circleUpgradeBox = new sf::CircleShape(50);
-					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*circleUpgradeBox, *player, random_type);
+					Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*circleUpgradeBox, gameManager, random_type);
 					auto shapeRect = shape->getGlobalBounds();
 					x = shapeRect.left + shapeRect.width / 2 - UpgradeBox->shape.getLocalBounds().width / 2;
 					y = shapeRect.top;

@@ -39,7 +39,7 @@ namespace Entities {
 	}
 
 	bool Foe::IsOutOfBounds() {
-		if (shape.getPosition().y > this->windowHeight + shape.getGlobalBounds().height) {
+		if (shape.getPosition().y > this->windowDimension.y + shape.getGlobalBounds().height) {
 			return true;
 		}
 		return false;

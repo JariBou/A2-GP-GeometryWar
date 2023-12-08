@@ -38,12 +38,11 @@ namespace Entities
 			/// <returns></returns>
 			virtual bool CheckLife() = 0;
 
-			void SetWindow(sf::RenderWindow& Window);
+			void SetWindowDimension(sf::Vector2f windowDimension);
 
 			sf::Shape& shape;
 			GameManager* gameManager;
-			int windowWidth = -1;
-			int windowHeight = -1;
+			sf::Vector2f windowDimension;
 
 	};
 }

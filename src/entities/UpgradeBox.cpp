@@ -7,11 +7,13 @@
 #include "UpgradeBox.h"
 #include "../enum.h"
 #include "Player.h"
+#include "../GameManager.h"
 
 namespace Entities {
 
-	UpgradeBox::UpgradeBox(sf::Shape& shape, Player& Player, int UpgradeTypeNb) : DrawableEntity(shape), player(Player) {
+	UpgradeBox::UpgradeBox(sf::Shape& shape, GameManager* pGameManager, int UpgradeTypeNb) : DrawableEntity(shape), player(*pGameManager->GetPlayer()) {
 		speed = 200;
+		SetGameManager(gameManager);
 		std::mt19937 rng(std::random_device{}());
 		std::uniform_int_distribution<int> type(0, 3);
 		int random_number = type(rng);
@@ -34,11 +36,10 @@ namespace Entities {
 
 		if (this->shouldDestroy) return false;
 
-		float windowWidth = player.windowWidth;
-		float windowHeight = player.windowHeight;
+		sf::Vector2f windowDimension = gameManager->GetWindowDimension();
 
 		if (shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().y < 0 - shape.getLocalBounds().height
-			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height) {
+			|| shape.getPosition().x > windowDimension.x + shape.getLocalBounds().width || shape.getPosition().y > windowDimension.y + shape.getLocalBounds().height) {
 			return false;
 		}
 		return true;

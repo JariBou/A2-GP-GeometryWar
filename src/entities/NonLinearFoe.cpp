@@ -10,14 +10,14 @@ namespace Entities
 	void NonLinearFoe::Update(float deltaTime) {
 		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
-		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
+		if (pos.y > this->windowDimension.x + shape.getGlobalBounds().height) {
 			player->GetHit(1);
 		}
 		if (IsCollidingWithPlayer()) {
 			player->GetHit(1);
 		}
 		clock += deltaTime;
-		if (clock >= changeDirectionCooldown || pos.x < 0 || pos.x>windowWidth) {
+		if (clock >= changeDirectionCooldown || pos.x < 0 || pos.x>windowDimension.x) {
 			direction.x *= -1;
 			clock = 0;
 		}
@@ -38,7 +38,7 @@ namespace Entities
 
 	//TODO
 	bool NonLinearFoe::IsOutOfBounds() {
-		if (shape.getPosition().y > this->windowHeight + shape.getGlobalBounds().height) {
+		if (shape.getPosition().y > this->windowDimension.y + shape.getGlobalBounds().height) {
 			return true;
 		}
 		return false;

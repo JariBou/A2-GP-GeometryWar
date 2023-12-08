@@ -11,7 +11,7 @@ namespace Entities
 	
 	class UpgradeBox : public DrawableEntity {
 	public:
-		UpgradeBox(sf::Shape& shape, Player& Player, int UpgradeTypeNb);
+		UpgradeBox(sf::Shape& shape, GameManager* pGameManager, int UpgradeTypeNb);
 		~UpgradeBox() = default;
 		virtual void Update(float deltaTime);
 		virtual bool IsColliding();

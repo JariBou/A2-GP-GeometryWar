@@ -1,7 +1,8 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager(sf::RenderWindow& window)
 {
+	windowDimension = sf::Vector2f(window.getSize().x,window.getSize().y);
 }
 
 void GameManager::AddBullet(Entities::Bullet* bullet)

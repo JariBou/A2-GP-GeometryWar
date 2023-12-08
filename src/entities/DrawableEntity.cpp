@@ -8,9 +8,8 @@ namespace Entities
 		Window.draw(this->shape);
 	}
 
-	void DrawableEntity::SetWindow(sf::RenderWindow& Window) {
-		windowWidth = Window.getSize().x;
-		windowHeight = Window.getSize().y;
+	void DrawableEntity::SetWindowDimension(sf::Vector2f windowDimension) {
+		this->windowDimension = windowDimension;
 	}
 
 	void DrawableEntity::Move(sf::Vector2f vectorMove, float deltaTime) {
@@ -26,6 +25,7 @@ namespace Entities
 	void DrawableEntity::SetGameManager(GameManager* gameManager)
 	{
 		this->gameManager = gameManager;
+		this->windowDimension = gameManager->GetWindowDimension();
 	}
 
 	void DrawableEntity::SetColor(sf::Color color, sf::Color color2) {

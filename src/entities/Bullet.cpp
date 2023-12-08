@@ -41,11 +41,10 @@ namespace Entities {
 	bool Bullet::CheckLife() {
 		if (this->shouldDestroy) return false;
 
-		float windowWidth = player->windowWidth;
-		float windowHeight = player->windowHeight;
+		sf::Vector2f windowDimension = gameManager->GetWindowDimension();
 
 		if (shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().y < 0 - shape.getLocalBounds().height 
-			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height){
+			|| shape.getPosition().x > windowDimension.x + shape.getLocalBounds().width || shape.getPosition().y > windowDimension.y + shape.getLocalBounds().height){
 			return false;
 		}
 		return true;

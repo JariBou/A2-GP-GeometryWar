@@ -52,7 +52,6 @@ void EnemySpawner::SpawnEnemy() {
 	enemy->SetPosition(sf::Vector2f(128, 0));
 	enemy->SetDirection(sf::Vector2f(0, 1));
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
-	enemy->SetWindow(*window);
 	rectangleEnemy->setSize(sf::Vector2f(64, 64));
 	foeList->push_back(enemy);
 }
@@ -63,7 +62,6 @@ void EnemySpawner::SpawnEnemy(int i) {
 	enemy->SetPosition(sf::Vector2f(64+64*i, 0));
 	enemy->SetDirection(sf::Vector2f(0, 1));
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
-	enemy->SetWindow(*window);
 	rectangleEnemy->setSize(sf::Vector2f(64, 64));
 	foeList->push_back(enemy);
 }
@@ -95,7 +93,7 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 	}
 	if (enemy != nullptr) {
 		enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
-		enemy->SetWindow(*window);
+		enemy->SetGameManager(gameManager);
 		foeList->push_back(enemy);
 	}
 

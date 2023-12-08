@@ -10,7 +10,7 @@ namespace Entities
 	void LinearFoe::Update(float deltaTime) {
 		this->Move(direction * speed, deltaTime);
 		sf::Vector2f pos = shape.getPosition();
-		if (pos.y > this->windowHeight + shape.getGlobalBounds().height) {
+		if (pos.y > this->windowDimension.y + shape.getGlobalBounds().height) {
 			player->GetHit(1);
 		}
 		if (IsCollidingWithPlayer()) {
