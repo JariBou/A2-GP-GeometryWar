@@ -25,6 +25,10 @@ public:
 
 	float clock = 0;
 	bool doClock = false;
+	int maxEnemyEachSpawn = 1;
+	bool bossWave;
+	float healthMultiplier = 1;
+	float speedMultiplier = 1;
 	float timeBetweenSpawns = 3;
 
 	EnemySpawner(std::vector<Entities::Foe*>* foeList, sf::RenderWindow* window, GameManager* pGameManager);
@@ -36,6 +40,7 @@ public:
 	void SpawnEnemy();
 	void SpawnEnemy(int i);
 	void SpawnEnemy(sf::Vector2f position, EnemyType enemyType);
+	void SpawnBoss(sf::Vector2f position);
 	
 	void setSpawnPoints(std::vector<Spawnpoint*> points) {
 		for (Spawnpoint* point : spawnPoints) {
@@ -44,6 +49,8 @@ public:
 		spawnPoints.clear();
 		spawnPoints = points;
 	}
+
+	void SetValuesFromWaves(float speedMultiplier, float healthMultiplier, int maxEnemySpawn);
 	
 	void Update(float deltaTime);
 

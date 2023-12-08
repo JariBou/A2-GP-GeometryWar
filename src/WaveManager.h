@@ -15,6 +15,7 @@ public:
 	float waveCooldown = 3;
 	int wave = 0;
 	bool anouncing = false;
+	bool bossKilled = false;
 	sf::Text* anouncingText;
 	WaveManager(EnemySpawner* spawner, sf::Text* anouncingWaveText, GameManager* pGameManager);
 

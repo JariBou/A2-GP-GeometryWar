@@ -10,4 +10,6 @@ enum UpgradeType {
 enum EnemyType {
 	LinearShootingFoe,
 	NonLinearFoe,
+	LinearFoe,
+	Boss1,
 };

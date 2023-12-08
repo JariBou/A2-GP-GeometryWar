@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "../GameManager.h"
 #include "../utils.h"
+#include "../WaveManager.h"
 
 Entities::Boss1::Boss1(sf::Shape& shape, float speed, float health, GameManager* gameManager) : Foe(shape, speed, gameManager)
 {
@@ -49,6 +50,7 @@ bool Entities::Boss1::isDead()
 
 void Entities::Boss1::OnKilledByPlayer()
 {
+	this->gameManager->GetWaveManager()->bossKilled = true;
 }
 
 bool Entities::Boss1::IsOutOfBounds()

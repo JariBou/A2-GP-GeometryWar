@@ -98,7 +98,7 @@ namespace States {
 		waveManager->waveCooldown = 3;
 		waveManager->wave = 0;
 		waveManager->anouncing = false;
-		waveManager->SetWave(0, 30);
+		waveManager->SetWave(0, 10 /*30*/);
 
 		//On reset le score
 		score = 0;
