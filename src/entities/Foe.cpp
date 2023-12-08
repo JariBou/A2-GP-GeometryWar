@@ -19,7 +19,7 @@ namespace Entities {
 
 	void Foe::OnDestroyed()
 	{
-		this->gameManager->GetParticleSystem()->CreateExplosionAt(Utils::GetShapeCenter(this->shape), this->shape.getOutlineColor(), 3.0, 20, this->shape.getLocalBounds().width/2, 20);
+		this->gameManager->GetParticleSystem()->CreateExplosionAt(Utils::GetShapeCenter(this->shape), this->shape.getOutlineColor(), 7.0, 20, this->shape.getLocalBounds().width/2, 15);
 		// TODO
 	}
 

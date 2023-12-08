@@ -2,6 +2,7 @@
 #include "entities/Entites.h"
 #include "Spawnpoint.h"
 #include "GameManager.h"
+#include "WaveManager.h"
 #include <cmath>
 
 
@@ -90,6 +91,7 @@ void EnemySpawner::SpawnBoss(sf::Vector2f pos) {
 	bossFoe->SetPosition(pos);
 	Entities::Foe* enemy = bossFoe;
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
+	enemy->health* (1 + gameManager->GetWaveManager()->wave / 5);
 	foeList->push_back(enemy);
 }
 

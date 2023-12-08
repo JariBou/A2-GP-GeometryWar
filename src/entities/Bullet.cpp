@@ -63,7 +63,7 @@ namespace Entities {
 
 				if (enemyRect.intersects(selfRect)) {
 					foe->GetHit(this->damage);
-					this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), foe->shape.getOutlineColor(), 4., 12);
+					this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), foe->shape.getOutlineColor(), 5., 12);
 					shouldDestroy = true;
 					return true;
 				}
@@ -73,7 +73,7 @@ namespace Entities {
 		else {
 			if (player->shape.getGlobalBounds().intersects(selfRect)) {
 				player->GetHit(this->damage);
-				this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), player->shape.getOutlineColor(), 4., 12);
+				this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), player->shape.getOutlineColor(), 5., 12);
 				shouldDestroy = true;
 				return true;
 			}
