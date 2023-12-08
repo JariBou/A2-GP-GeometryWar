@@ -33,7 +33,7 @@ namespace Entities
 	}
 
 	void NonLinearFoe::OnKilledByPlayer() {
-		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
+		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
 
 	//TODO

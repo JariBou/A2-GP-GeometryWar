@@ -62,8 +62,8 @@ namespace SFX {
 			particleShape->setPosition(position);
 			particleShape->setFillColor(color);
 
-			float speed = ((rand() % 300) / 100.) + 35;
-			Particle* pNewParticle = new Particle(*particleShape, 1., sf::Vector2f(x, y), speed);
+			float speed = ((rand() % 1000) / 100.) + 50;
+			Particle* pNewParticle = new Particle(*particleShape, 0.6, sf::Vector2f(x, y), speed);
 
 			explosionCompound->AddParticle(pNewParticle);
 
