@@ -17,6 +17,8 @@ namespace SFX {
 
 		void AddParticleCompound(ParticleCompound* compound);
 
+		void Reset();
+
 
 #pragma region Prefabs
 

@@ -14,6 +14,8 @@ namespace SFX{
 
 		void AddParticle(Particle* pParticle);
 
+		void Delete();
+
 		/// <summary>
 		/// Returns true if the compound has active Particles
 		/// </summary>

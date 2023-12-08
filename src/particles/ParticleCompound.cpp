@@ -44,6 +44,15 @@ namespace SFX {
 		this->particlesList.push_back(pParticle);
 	}
 
+	void ParticleCompound::Delete()
+	{
+		auto it = this->particlesList.begin();
+		while (it != this->particlesList.end())
+		{
+			it = this->particlesList.erase(it);
+		}
+	}
+
 	bool ParticleCompound::IsActive()
 	{
 		return this->particlesList.size() > 0;

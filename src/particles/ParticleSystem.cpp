@@ -43,6 +43,16 @@ namespace SFX {
 		this->particleCompoundList.push_back(compound);
 	}
 
+	void ParticleSystem::Reset()
+	{
+		auto it = this->particleCompoundList.begin();
+		while (it != this->particleCompoundList.end())
+		{
+			(*it)->Delete();
+			it = this->particleCompoundList.erase(it);
+		}
+	}
+
 	void ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size, int numberOfParticles)
 	{
 		ParticleCompound* explosionCompound = new ParticleCompound();
