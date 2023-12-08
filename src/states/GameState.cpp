@@ -5,7 +5,6 @@
 #include "../WaveManager.h"
 #include "../GameManager.h"
 #include "../particles/ParticleSystem.h"
-#include <SFML/Audio.hpp>
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
@@ -124,13 +123,7 @@ namespace States {
 		grid = sf::VertexArray(sf::Lines);
 		CreateNeonGrid(window.getSize().x, window.getSize().y);
 
-		//MUSIC
-		if (!music.openFromFile("music.ogg")) {
-			std::cout << "Erreur lors du chargement de la musique\n";
-		}
-
-		music.setLoop(true);
-		music.play();
+		
 	}
 
 	void States::GameState::CreateNeonGrid(int windowWidth, int windowHeight)
@@ -185,9 +178,6 @@ namespace States {
 		//On reset le score
 		score = 0;
 
-		music.setLoop(true);
-		music.play();
-
 		window.clear();
 	}
 
@@ -211,11 +201,6 @@ namespace States {
 			default:
 				break;
 			}
-		}
-
-		if (player->lives == 0)
-		{
-			music.stop();
 		}
 
 		float deltaTime = frameClock.restart().asSeconds();

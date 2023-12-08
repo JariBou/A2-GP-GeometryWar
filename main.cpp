@@ -2,6 +2,7 @@
 #include <iostream>
 #include "src/states/States.h"
 #include <windows.h>
+#include <SFML/Audio.hpp>
 
 int main()
 {
@@ -32,6 +33,8 @@ int main()
 	int _scene = 0;
 	int score = 0;
 
+	sf::Music music;
+
 	States::MenuState menuState(window, MyFont, frameClock);
 	States::GameState gameState(window, MyFont, frameClock, score);
 	States::DeathState deathState(window, MyFont, frameClock, score);
@@ -39,7 +42,19 @@ int main()
 	while (window.isOpen())
 	{
 		if (_previousScene != _scene) {
-			if (_previousScene == 2 || _previousScene == 0) gameState.Restart(window);
+			if (_previousScene == 2 || _previousScene == 0) {
+				gameState.Restart(window);
+				//MUSIC
+				if (!music.openFromFile("../src/resources/Chop Suey [8 Bit Cover Tribute to System of a Down] - 8 Bit Universe.mp3")) {
+					std::cout << "Erreur lors du chargement de la musique\n";
+				}
+
+				music.setLoop(true);
+				music.play();
+			}
+			else {
+				music.stop();
+			}
 			_previousScene = _scene;
 		}
 		if (_scene == 0) {
