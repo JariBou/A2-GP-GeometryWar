@@ -28,12 +28,12 @@ namespace States {
 
 
 		sf::FloatRect buttonBounds = restartButton.getLocalBounds();
-		restartButton.setPosition((window.getSize().x - buttonBounds.width) / 2.0f + 25,
-			(window.getSize().y - buttonBounds.height) / 2.0f);
+		restartButton.setPosition((window.getSize().x - buttonBounds.width) / 2.0f + 10,
+			(window.getSize().y - buttonBounds.height) / 2.0f - 25);
 
 		sf::FloatRect restartButtonBounds = restartButtonText.getLocalBounds();
-		restartButtonText.setPosition((window.getSize().x - restartButtonBounds.width) / 2.0f - 200,
-			(window.getSize().y - restartButtonBounds.height) / 2.0f - 50);
+		restartButtonText.setPosition((window.getSize().x - restartButtonBounds.width) / 2.0f - 225,
+			(window.getSize().y - restartButtonBounds.height) / 2.0f - 70);
 
 		restartButtonText.setCharacterSize(60);
 		gameOvertextList.push_back(&restartButtonText);
@@ -56,12 +56,12 @@ namespace States {
 
 
 		sf::FloatRect mainMenubuttonBounds = mainMenuButton.getLocalBounds();
-		mainMenuButton.setPosition((window.getSize().x - mainMenubuttonBounds.width) / 2.0f + 25,
-			(window.getSize().y - mainMenubuttonBounds.height) / 2.0f + 130);
+		mainMenuButton.setPosition((window.getSize().x - mainMenubuttonBounds.width) / 2.0f + 10,
+			(window.getSize().y - mainMenubuttonBounds.height) / 2.0f + 115);
 
 		sf::FloatRect mainMenuButtons = mainMenuText.getLocalBounds();
 		mainMenuText.setPosition((window.getSize().x - mainMenuButtons.width) / 2.0f - 150,
-			(window.getSize().y - mainMenuButtons.height) / 2.0f + 90);
+			(window.getSize().y - mainMenuButtons.height) / 2.0f + 70);
 
 		mainMenuText.setCharacterSize(60);
 		gameOvertextList.push_back(&mainMenuText);
@@ -69,7 +69,7 @@ namespace States {
 		//Score
 
 		sf::FloatRect scoreTextBounds = endScoreText.getLocalBounds();
-		endScoreText.setPosition((window.getSize().x - scoreTextBounds.width) / 2.0f - 100,
+		endScoreText.setPosition((window.getSize().x - scoreTextBounds.width) / 2.0f - 125,
 			(window.getSize().y - scoreTextBounds.height) / 2.0f - 170);
 
 		endScoreText.setCharacterSize(40);
