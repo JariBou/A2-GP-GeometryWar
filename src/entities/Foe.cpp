@@ -1,5 +1,6 @@
 #include "Foe.h"
 #include "Player.h"
+#include "../particles/ParticleSystem.h"
 
 namespace Entities {
 

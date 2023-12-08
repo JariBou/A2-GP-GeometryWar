@@ -25,11 +25,4 @@ namespace Entities
 	void LinearFoe::OnKilledByPlayer() {
 		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
-
-	void LinearFoe::GetHit(float value) {
-		this->health -= value;
-		if (health <= 0) {
-			//Die();
-		}
-	}
 }

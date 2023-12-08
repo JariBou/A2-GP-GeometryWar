@@ -24,7 +24,6 @@ namespace Entities
 		/// Function called when destroyed by PLAYER by "normal" means (i.e bullets)
 		/// </summary>
 		virtual void OnKilledByPlayer();
-		virtual void GetHit(float value);
 
 	};
 }

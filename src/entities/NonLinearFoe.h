@@ -28,12 +28,6 @@ namespace Entities
 		/// </summary>
 		virtual void OnKilledByPlayer();
 
-		/// <summary>
-		/// Returns False if the entity should be removes
-		/// </summary>
-		/// <returns></returns>
-		virtual void GetHit(float value);
-
 		bool IsOutOfBounds();
 
 	};

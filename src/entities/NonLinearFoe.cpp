@@ -36,10 +36,6 @@ namespace Entities
 		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
 
-	void NonLinearFoe::GetHit(float value) {
-		this->health -= value;
-	}
-
 	//TODO
 	bool NonLinearFoe::IsOutOfBounds() {
 		if (shape.getPosition().y > this->windowHeight + shape.getGlobalBounds().height) {

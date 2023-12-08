@@ -1,4 +1,5 @@
 #include "ParticleSystem.h"
+#include <cmath>
 #include "Particle.h"
 #include "ParticleCompound.h"
 
@@ -42,18 +43,34 @@ namespace SFX {
 		this->particleCompoundList.push_back(compound);
 	}
 
-	ParticleCompound ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size = 4.)
+	void ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size, int numberOfParticles)
 	{
-		std::vector<Particle*> particles;
+		ParticleCompound* explosionCompound = new ParticleCompound();
 
-		sf::RectangleShape particleShape(sf::Vector2f(size, size));
-		Particle* pNewParticle = new Particle(particleShape, 1., sf::Vector2f(1, 0));
+		int directionAngle = 360 / numberOfParticles;
 
-		particles.push_back(pNewParticle);
+		float testingAngle = 0;
 
+		for (int i = 0; i < numberOfParticles; i++)
+		{
+			float angle = testingAngle + (rand() % directionAngle) - directionAngle / 2.;
 
+			float x = cos(angle);
+			float y = sin(angle);
 
-		return ParticleCompound();
+			sf::RectangleShape* particleShape = new sf::RectangleShape(sf::Vector2f(size, size));
+			particleShape->setPosition(position);
+			particleShape->setFillColor(color);
+
+			float speed = ((rand() % 300) / 100.) + 35;
+			Particle* pNewParticle = new Particle(*particleShape, 1., sf::Vector2f(x, y), speed);
+
+			explosionCompound->AddParticle(pNewParticle);
+
+			testingAngle += directionAngle;
+		}
+
+		AddParticleCompound(explosionCompound);
 	}
 
 }

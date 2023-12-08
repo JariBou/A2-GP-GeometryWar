@@ -12,6 +12,8 @@ namespace SFX{
 		void Draw(sf::RenderWindow& window);
 		void CheckLifetimes();
 
+		void AddParticle(Particle* pParticle);
+
 		/// <summary>
 		/// Returns true if the compound has active Particles
 		/// </summary>
@@ -19,6 +21,7 @@ namespace SFX{
 		bool IsActive();
 	private:
 		std::vector<Particle*> particlesList;
+
 	};
 
 }

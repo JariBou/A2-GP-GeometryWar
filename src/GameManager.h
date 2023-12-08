@@ -7,6 +7,10 @@ namespace Entities {
 	class Bullet;
 }
 
+namespace SFX {
+	class ParticleSystem;
+}
+
 class WaveManager;
 class EnemySpawner;
 class UpgradeBoxSpawner;
@@ -19,6 +23,7 @@ public:
 	void SetWaveManager(WaveManager* pWaveManager) { waveManager = pWaveManager; }
 	void SetEnemySpawner(EnemySpawner* pEnemySpawner) { enemySpawner = pEnemySpawner; }
 	void SetUpgradeBoxSpawner(UpgradeBoxSpawner* pUpgradeBoxSpawner) { UpgradeBoxSpawner = pUpgradeBoxSpawner; }
+	void SetParticleSystem(SFX::ParticleSystem* pParticleSystem) { particleSystem = pParticleSystem; }
 
 	void AddBullet(Entities::Bullet* bullet);
 	std::vector<Entities::Bullet*>* GetBullets();
@@ -28,9 +33,11 @@ public:
 	WaveManager* GetWaveManager() { return waveManager; }
 	EnemySpawner* GetEnemySpawner() { return enemySpawner; }
 	UpgradeBoxSpawner* GetUpgradeBoxSpawner() { return UpgradeBoxSpawner; }
+	SFX::ParticleSystem* GetParticleSystem() { return particleSystem; }
 
 	Entities::Player* player = nullptr;
 	WaveManager* waveManager = nullptr;
 	EnemySpawner* enemySpawner = nullptr;
 	UpgradeBoxSpawner* UpgradeBoxSpawner = nullptr;
+	SFX::ParticleSystem* particleSystem = nullptr;
 };

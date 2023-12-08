@@ -20,7 +20,7 @@ namespace SFX {
 
 #pragma region Prefabs
 
-		ParticleCompound CreateExplosionAt(sf::Vector2f position, sf::Color color, float size = 4.);
+		void CreateExplosionAt(sf::Vector2f position, sf::Color color, float size = 3., int numberOfParticles=10);
 
 #pragma endregion
 

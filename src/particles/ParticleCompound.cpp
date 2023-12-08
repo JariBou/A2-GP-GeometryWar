@@ -3,9 +3,11 @@
 
 
 namespace SFX {
+
 	ParticleCompound::ParticleCompound()
 	{
 	}
+
 	void ParticleCompound::Update(float deltaTime) {
 
 		this->CheckLifetimes();
@@ -15,11 +17,10 @@ namespace SFX {
 		}
 	}
 
-	
-
 	void ParticleCompound::Draw(sf::RenderWindow& window) {
 		for (Particle* pParticle : this->particlesList) {
-			pParticle->UpdateAlpha(1 - pParticle->GetLifePercentage());
+			float newAlpha = 1 - pParticle->GetLifePercentage();
+			pParticle->UpdateAlpha(newAlpha);
 			pParticle->Draw(window);
 		}
 	}
@@ -36,6 +37,11 @@ namespace SFX {
 				it = this->particlesList.erase(it);
 			}
 		}
+	}
+
+	void ParticleCompound::AddParticle(Particle* pParticle)
+	{
+		this->particlesList.push_back(pParticle);
 	}
 
 	bool ParticleCompound::IsActive()

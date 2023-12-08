@@ -4,11 +4,13 @@
 #include "../EnemySpawner.h"
 #include "../WaveManager.h"
 #include "../GameManager.h"
+#include "../particles/ParticleSystem.h"
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
 	{
 		this->gameManager = new GameManager();
+		this->gameManager->SetParticleSystem(new SFX::ParticleSystem());
 
 		scoreText.setCharacterSize(40);
 		scoreText.setPosition(5, 5);
@@ -147,6 +149,7 @@ namespace States {
 
 		enemySpawner->Update(deltaTime);
 		waveManager->Update(deltaTime);
+ 		this->gameManager->GetParticleSystem()->Update(deltaTime);
 
 		// Affichage
 
@@ -172,6 +175,8 @@ namespace States {
 		for (Entities::UpgradeBox* box : upgradeBoxSpawner->GetUpgradeBoxList()) {
 			box->Draw(window);
 		}
+
+		this->gameManager->GetParticleSystem()->Draw(window);
 
 		// On pr�sente la fen�tre sur l'�cran
 		window.display();

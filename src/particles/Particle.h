@@ -9,6 +9,8 @@ namespace SFX {
 
 	public:
 		Particle(sf::Shape& shape, float maxLifetime, sf::Vector2f direction);
+
+		Particle(sf::Shape& shape, float maxLifetime, sf::Vector2f direction, float speed);
 		/// <summary>
 		/// Returns lifetime / maxLifetime of the particle (clamped to [0, 1])
 		/// </summary>
@@ -23,6 +25,8 @@ namespace SFX {
 		sf::Vector2f direction;
 		float lifetime = 0;
 		float maxLifetime;
+		float speed = 1;
+		sf::Color currColor;
 
 	};
 
