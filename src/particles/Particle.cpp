@@ -41,7 +41,7 @@ namespace SFX {
 			return 1;
 		}
 		else if (percent < 0) {
-			ret
+			return 0;
 		}
 		return lifetime / maxLifetime;
 	}
