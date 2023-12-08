@@ -4,11 +4,13 @@
 #include "../EnemySpawner.h"
 #include "../WaveManager.h"
 #include "../GameManager.h"
+#include "../particles/ParticleSystem.h"
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
 	{
 		this->gameManager = new GameManager();
+		this->gameManager->SetParticleSystem(new SFX::ParticleSystem());
 
 		scoreText.setCharacterSize(40);
 		scoreText.setPosition(5, 5);
@@ -130,23 +132,24 @@ namespace States {
 
 		player->Update(deltaTime); // This needs to change
 
-		for (Entities::Bullet* bullet : player->GetBullets())
+		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
 			bullet->Update(deltaTime);
 		}
 
 		upgradeBoxSpawner->Update(deltaTime);
 
-		for (Entities::Foe* en : foeList) {
+		for (Entities::Foe* en : *(enemySpawner->GetFoes())) {
 			en->Update(deltaTime);
 		}
 
-		Utils::CheckBulletListLife(player->GetBullets());
+		Utils::CheckBulletListLife(*gameManager->GetBullets());
 		score += Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
 		Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
 
 		enemySpawner->Update(deltaTime);
 		waveManager->Update(deltaTime);
+ 		this->gameManager->GetParticleSystem()->Update(deltaTime);
 
 		// Affichage
 
@@ -160,7 +163,7 @@ namespace States {
 		if (waveManager->anouncing) window.draw(anouncingWaveText);
 		player->Draw(window);
 
-		for (Entities::Bullet* bullet : player->GetBullets())
+		for (Entities::Bullet* bullet : *gameManager->GetBullets())
 		{
 			bullet->Draw(window);
 		}
@@ -172,6 +175,8 @@ namespace States {
 		for (Entities::UpgradeBox* box : upgradeBoxSpawner->GetUpgradeBoxList()) {
 			box->Draw(window);
 		}
+
+		this->gameManager->GetParticleSystem()->Draw(window);
 
 		// On pr�sente la fen�tre sur l'�cran
 		window.display();

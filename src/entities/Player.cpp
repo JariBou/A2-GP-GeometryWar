@@ -107,9 +107,10 @@ namespace Entities
 						}
 					}
 					// Créer une nouvelle balle avec les paramètres calculés
-					Bullet* bullet = new Bullet(*rectangleBullet, *this, bulletDamage, bulletSpeed, sf::Vector2f(angle, -1.0), windowWidth);
+					Bullet* bullet = new Bullet(*rectangleBullet, gameManager, bulletDamage, bulletSpeed, sf::Vector2f(angle, -1.0), windowWidth);
 					bullet->SetColor(sf::Color::Yellow);
 					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i * w - bulletSize.x / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
+					this->gameManager->AddBullet(bullet);
 					bullets.push_back(bullet);
 				}
 			}

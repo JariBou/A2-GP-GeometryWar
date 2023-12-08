@@ -5,23 +5,26 @@
 #include "Player.h"
 #include "Foe.h"
 #include "../EnemySpawner.h"
+#include "../GameManager.h"
+#include "../particles/ParticleSystem.h"
 #include <iostream>
 
 namespace Entities {
 
-	Bullet::Bullet(sf::Shape& shape, Player& Joueur) : DrawableEntity(shape), player(Joueur) {
+	/*Bullet::Bullet(sf::Shape& shape, Player& player) : DrawableEntity(shape), player(player) {
 		speed = 300.0f;
 		damage = 10;
 		//std::cout << "Bullet created" << std::endl;
 		std::cout << shape.getPosition().y << std::endl;
-	}
+	}*/
 
-	Bullet::Bullet(sf::Shape& shape, Player& Joueur, int damage, float speed, sf::Vector2f Direction, int WindowWidth) : DrawableEntity(shape), player(Joueur) {
+	Bullet::Bullet(sf::Shape& shape, GameManager* pGameManager, int damage, float speed, sf::Vector2f Direction, int WindowWidth) : DrawableEntity(shape), gameManager(pGameManager){
 		this->damage = damage;
 		this->speed = speed;
 		//std::cout << "Bullet created" << std::endl;
 		//std::cout << shape.getPosition().y << std::endl;
 		direction = Direction;
+		player = gameManager->GetPlayer();
 		windowWidth = WindowWidth;
 	}
 
@@ -38,8 +41,8 @@ namespace Entities {
 	bool Bullet::CheckLife() {
 		if (this->shouldDestroy) return false;
 
-		float windowWidth = player.windowWidth;
-		float windowHeight = player.windowHeight;
+		float windowWidth = player->windowWidth;
+		float windowHeight = player->windowHeight;
 
 		if (shape.getPosition().x < 0 - shape.getLocalBounds().width || shape.getPosition().y < 0 - shape.getLocalBounds().height 
 			|| shape.getPosition().x > windowWidth + shape.getLocalBounds().width || shape.getPosition().y > windowHeight + shape.getLocalBounds().height){
@@ -53,7 +56,7 @@ namespace Entities {
 		auto selfRect = this->shape.getGlobalBounds();
 
 		if (shotByPlayer) {
-			EnemySpawner* spawner = this->player.GetEnemySpawner();
+			EnemySpawner* spawner = gameManager->GetEnemySpawner();
 
 			for (Foe* foe : *(spawner->GetFoes())) {
 
@@ -61,6 +64,7 @@ namespace Entities {
 
 				if (enemyRect.intersects(selfRect)) {
 					foe->GetHit(this->damage);
+					this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), foe->shape.getOutlineColor(), 4., 12);
 					shouldDestroy = true;
 					return true;
 				}
@@ -68,8 +72,9 @@ namespace Entities {
 			}
 		}
 		else {
-			if (player.shape.getGlobalBounds().intersects(selfRect)) {
-				player.GetHit(this->damage);
+			if (player->shape.getGlobalBounds().intersects(selfRect)) {
+				player->GetHit(this->damage);
+				this->gameManager->GetParticleSystem()->CreateExplosionAt(shape.getPosition(), player->shape.getOutlineColor(), 4., 12);
 				shouldDestroy = true;
 				return true;
 			}

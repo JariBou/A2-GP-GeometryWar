@@ -1,11 +1,12 @@
 #include "Foe.h"
 #include "Player.h"
+#include "../particles/ParticleSystem.h"
 
 namespace Entities {
 
-	Foe::Foe(sf::Shape& shape, float speed, Player* player) : DrawableEntity(shape) {
+	Foe::Foe(sf::Shape& shape, float speed, GameManager* pGameManager) : DrawableEntity(shape), gameManager(pGameManager) {
 		this->speed = speed;
-		this->player = player;
+		this->player = gameManager->GetPlayer();
 	}
 	
 	

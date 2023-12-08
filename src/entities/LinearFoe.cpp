@@ -4,7 +4,7 @@
 
 namespace Entities
 {
-	LinearFoe::LinearFoe(sf::Shape& shape, float speed, Player* player) : Foe(shape, speed, player) {
+	LinearFoe::LinearFoe(sf::Shape& shape, float speed, GameManager* pGameManager) : Foe(shape, speed, pGameManager) {
 	}
 
 	void LinearFoe::Update(float deltaTime) {
@@ -23,13 +23,6 @@ namespace Entities
 	}
 
 	void LinearFoe::OnKilledByPlayer() {
-		player->GetBoxSpawner()->SpawnUpgradeBox(&shape);
-	}
-
-	void LinearFoe::GetHit(float value) {
-		this->health -= value;
-		if (health <= 0) {
-			//Die();
-		}
+		this->gameManager->GetUpgradeBoxSpawner()->SpawnUpgradeBox(&shape);
 	}
 }

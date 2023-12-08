@@ -87,6 +87,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\particles\Particle.cpp" />
+    <ClCompile Include="src\particles\ParticleCompound.cpp" />
+    <ClCompile Include="src\particles\ParticleSystem.cpp" />
     <ClCompile Include="src\states\DeathState.cpp" />
     <ClCompile Include="src\states\GameState.cpp" />
     <ClCompile Include="src\states\MenuState.cpp" />
@@ -105,6 +108,9 @@
     <ClCompile Include="src\UpgradeBoxSpawner.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClInclude Include="src\GameManager.h" />
+    <ClInclude Include="src\particles\Particle.h" />
+    <ClInclude Include="src\particles\ParticleCompound.h" />
+    <ClInclude Include="src\particles\ParticleSystem.h" />
     <ClInclude Include="src\states\States.h" />
     <ClInclude Include="src\WaveManager.h" />
   </ItemGroup>

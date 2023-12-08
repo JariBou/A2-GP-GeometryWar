@@ -48,7 +48,7 @@ void EnemySpawner::Update(float deltaTime) {
 
 void EnemySpawner::SpawnEnemy() {
 	sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, 1, this->player);
+	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, 1, this->gameManager);
 	enemy->SetPosition(sf::Vector2f(128, 0));
 	enemy->SetDirection(sf::Vector2f(0, 1));
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
@@ -59,7 +59,7 @@ void EnemySpawner::SpawnEnemy() {
 
 void EnemySpawner::SpawnEnemy(int i) {
 	sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1, this->player);
+	Entities::LinearFoe* enemy = new Entities::LinearFoe(*rectangleEnemy, i+1, this->gameManager);
 	enemy->SetPosition(sf::Vector2f(64+64*i, 0));
 	enemy->SetDirection(sf::Vector2f(0, 1));
 	enemy->SetColor(sf::Color::Transparent, sf::Color::Red);
@@ -74,7 +74,7 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 	{
 	case LinearShootingFoe: {
 		sf::RectangleShape* rectangleEnemy = new sf::RectangleShape();
-		Entities::LinearFoe* linearFoe = new Entities::LinearShootingFoe(*rectangleEnemy, 50 + rand() % 200, this->player);
+		Entities::LinearFoe* linearFoe = new Entities::LinearShootingFoe(*rectangleEnemy, 50 + rand() % 200, this->gameManager);
 		linearFoe->SetPosition(sf::Vector2f(position.x, position.y));
 		linearFoe->SetDirection(sf::Vector2f(0, 1));
 		rectangleEnemy->setSize(sf::Vector2f(64, 64));
@@ -83,7 +83,7 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f position, EnemyType enemySpawnedType)
 	}
 	case NonLinearFoe: {
 		sf::CircleShape* octogonalShape = new sf::CircleShape(8);
-		Entities::NonLinearFoe* nonlinearFoe = new Entities::NonLinearFoe(*octogonalShape, 50 + rand() % 200, this->player);
+		Entities::NonLinearFoe* nonlinearFoe = new Entities::NonLinearFoe(*octogonalShape, 50 + rand() % 200, this->gameManager);
 		nonlinearFoe->SetPosition(sf::Vector2f(position.x, position.y));
 		nonlinearFoe->SetDirection(sf::Vector2f(rand() % 2 == 0 ? -1 : 1, 1));
 		octogonalShape->setRadius(48);
