@@ -12,14 +12,15 @@ Entities::Boss1::Boss1(sf::Shape& shape, float speed, float health, GameManager*
 void Entities::Boss1::Update(float deltaTime)
 {
 	this->shootingClock += deltaTime;
+	this->BigShotClock += deltaTime;
 	if (this->BigShotClock >= this->BigShotCooldown) {
-		this->BigShotCooldown = 0;
+		this->BigShotClock = 0;
 
-		sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(20, 20));
+		sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(25, 25));
 		 
 		sf::Vector2f direction(Utils::GetShapeCenter(this->gameManager->GetPlayer()->shape) - Utils::GetShapeCenter(this->shape)); 
 
-		Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 5, 500.0, direction, windowDimension.x); 
+		Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 5, 500.0, Utils::NormalizeVector(direction), windowDimension.x);
 		(*bullet).SetColor(sf::Color::Green); 
 		auto selfRect = shape.getGlobalBounds();
 		bullet->SetPosition(sf::Vector2f(selfRect.left + selfRect.width / 2 - rectangleBullet->getSize().x / 2,
@@ -33,11 +34,11 @@ void Entities::Boss1::Update(float deltaTime)
 
 		sf::Vector2f direction(Utils::GetShapeCenter(this->gameManager->GetPlayer()->shape) - Utils::GetShapeCenter(this->shape));
 
-		Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 1, 700.0, direction, windowDimension.x);
-		(*bullet).SetColor(sf::Color::Green);
+		Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 1, 800.0, Utils::NormalizeVector(direction), windowDimension.x);
 		auto selfRect = shape.getGlobalBounds();
 		bullet->SetPosition(sf::Vector2f(selfRect.left + selfRect.width / 2 - rectangleBullet->getSize().x / 2,
 			selfRect.top + selfRect.height));
+		(*bullet).SetColor(sf::Color::Green); 
 		bullet->ShotByEnemy();
 		this->gameManager->AddBullet(bullet);
 	}
