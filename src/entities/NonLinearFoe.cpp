@@ -2,6 +2,7 @@
 #include "../UpgradeBoxSpawner.h"
 #include "Player.h"
 #include "../GameManager.h"
+#include "../particles/ParticleSystem.h"
 
 namespace Entities
 {
@@ -21,6 +22,13 @@ namespace Entities
 		if (clock >= changeDirectionCooldown || pos.x < 0 || pos.x>windowDimension.x) {
 			direction.x *= -1;
 			clock = 0;
+		}
+		thrustTimer += deltaTime;
+		if (thrustTimer >= 0.05) {
+			int randGen = rand() % 5 + 3;
+			gameManager->GetParticleSystem()->CreateDirectedExplosionAt(sf::Vector2f(Utils::GetShapeXCenter(this->shape), Utils::GetShapeYCenter(this->shape) - this->shape.getLocalBounds().height / 2),
+				sf::Color::Yellow, 80, 275, 2.2, randGen, 3, 60);
+			thrustTimer = 0;
 		}
 	}
 

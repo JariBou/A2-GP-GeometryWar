@@ -30,5 +30,8 @@ namespace Entities
 
 		bool IsOutOfBounds();
 
+	private:
+		float thrustTimer = 0;
+
 	};
 }

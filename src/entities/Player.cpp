@@ -4,6 +4,7 @@
 #include "../enum.h"
 #include "Bullet.h"
 #include "../GameManager.h"
+#include "../particles/ParticleSystem.h"
 
 
 namespace Entities
@@ -78,6 +79,7 @@ namespace Entities
 	void Player::Update(float deltaTime)
 	{
 		bulletClock += deltaTime;
+		thrustTimer += deltaTime;
 		if (bulletClock >= bulletCooldown) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				bulletClock = 0;
@@ -130,6 +132,16 @@ namespace Entities
 					bullets.push_back(bullet);
 				}
 			}
+		}
+
+		if (thrustTimer >= 0.05) {
+			int randGen = rand() % 5 + 3;
+			gameManager->GetParticleSystem()->CreateDirectedExplosionAt(sf::Vector2f(this->shape.getGlobalBounds().left + 3 * (this->shape.getLocalBounds().width / 10), Utils::GetShapeYCenter(this->shape) + this->shape.getLocalBounds().height / 2),
+				sf::Color::White, 80, 95, 2.2, randGen, 3, 60);
+			randGen = rand() % 5 + 3;
+			gameManager->GetParticleSystem()->CreateDirectedExplosionAt(sf::Vector2f(this->shape.getGlobalBounds().left + 7 * (this->shape.getLocalBounds().width / 10), Utils::GetShapeYCenter(this->shape) + this->shape.getLocalBounds().height / 2),
+				sf::Color::White, 80, 95, 2.2, randGen, 3, 60);
+			thrustTimer = 0;
 		}
 	}
 

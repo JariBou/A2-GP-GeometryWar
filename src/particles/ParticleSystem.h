@@ -23,6 +23,7 @@ namespace SFX {
 #pragma region Prefabs
 
 		void CreateExplosionAt(sf::Vector2f position, sf::Color color, float size = 3., int numberOfParticles=10, float distanceFromOrigin = 1, float minSpeed = 50);
+		void CreateDirectedExplosionAt(sf::Vector2f position, sf::Color color, float angle, float directionAngle, float size = 3., int numberOfParticles=10, float distanceFromOrigin = 1, float minSpeed = 50);
 
 #pragma endregion
 

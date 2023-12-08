@@ -25,5 +25,8 @@ namespace Entities
 		/// </summary>
 		virtual void OnKilledByPlayer();
 
+	private:
+		float thrustTimer = 0;
+
 	};
 }

@@ -20,4 +20,7 @@ namespace Utils {
 
 	sf::String toString(int integers);
 	sf::Vector2f GetShapeCenter(sf::Shape& shape);
+	float GetShapeXCenter(sf::Shape& shape);
+	float GetShapeYCenter(sf::Shape& shape);
+	double DegToRad(float deg);
 }
