@@ -17,7 +17,7 @@ namespace Entities
 		this->shootingClock += deltaTime;
 		if (this->shootingClock >= this->shootingCooldown) {
 			this->shootingClock = 0;
-			sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(5, 5));
+			sf::RectangleShape* rectangleBullet = new sf::RectangleShape(sf::Vector2f(10, 10));
 			Bullet* bullet = new Bullet(*rectangleBullet, this->gameManager, 1, 600.0, sf::Vector2f(0, 1), windowDimension.x);
 			(*bullet).SetColor(sf::Color::Green);
 			auto selfRect = shape.getGlobalBounds();

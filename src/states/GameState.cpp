@@ -160,7 +160,7 @@ namespace States {
 		//On reset les stats du joueur
 		player->bulletCooldown = 0.5f;
 		player->bulletDamage = 10;
-		player->bulletSize = sf::Vector2f(5, 5);
+		player->bulletSize = sf::Vector2f(10, 10);
 		player->bulletClock = 0;
 		player->nbBulletShot = 1;
 		player->speed = 450.0;

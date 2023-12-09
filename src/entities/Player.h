@@ -24,7 +24,7 @@ namespace Entities
 
 			//Upgradable Variables
 			float bulletCooldown = 0.5f;
-			sf::Vector2f bulletSize = sf::Vector2f(5, 5);
+			sf::Vector2f bulletSize = sf::Vector2f(10, 10);
 			float bulletClock = 0;
 			float nbBulletShot = 1;
 			float speed = 450.0;
