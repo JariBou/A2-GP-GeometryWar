@@ -126,7 +126,6 @@ namespace States {
 
 	void States::GameState::CreateNeonGrid(int windowWidth, int windowHeight)
 	{
-		const int gridSize = 150;
 		const int numberOfLines = 15; // Nombre de lignes verticales et horizontales
 
 		sf::Color color = sf::Color::Green;
@@ -179,6 +178,8 @@ namespace States {
 		window.clear();
 	}
 
+	float gridSpeed = 1.0f;
+
 	void GameState::Loop(sf::RenderWindow& window, int& sceneIndex)
 	{
 		if (!player->CheckLife()) {
@@ -199,6 +200,21 @@ namespace States {
 			default:
 				break;
 			}
+		}
+
+		gridSize = 25;
+
+		for (int i = 0; i < grid.getVertexCount(); ++i) {
+
+			if (i % 4 == 0 || i % 4 == 1) {
+				// Pour les lignes horizontal, déplacez-les vers le bas
+				grid[i].position.y += gridSpeed;
+
+				if (grid[i].position.y > window.getSize().y) {
+					grid[i].position.y = -gridSize; // Réinitialisation en haut de l'écran
+				}
+			}
+
 		}
 
 		float deltaTime = frameClock.restart().asSeconds();
