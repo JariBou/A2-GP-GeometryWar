@@ -1,5 +1,7 @@
 #pragma once
 
+// Safe to include in headers
+
 enum UpgradeType {
 	UpgradeSpeed,
 	UpgradeBulletDamage,

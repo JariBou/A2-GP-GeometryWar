@@ -5,6 +5,7 @@
 #include "entities/UpgradeBox.h"
 #include "entities/Player.h"
 #include "GameManager.h"
+#include "utils.h"
 
 UpgradeBoxSpawner::UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& UpgradeBoxList, int WindowWidth, GameManager* pGameManager) : gameManager(pGameManager) {
 	upgradeBoxList = UpgradeBoxList;
@@ -78,39 +79,10 @@ void UpgradeBoxSpawner::SpawnUpgradeBox(sf::Shape* shape)
 				break;
 			}
 	}
-	
-	//sf::RectangleShape* rectangleUpgradeBox = new sf::RectangleShape(sf::Vector2f(50, 50));
-	//Entities::UpgradeBox* UpgradeBox = new Entities::UpgradeBox(*rectangleUpgradeBox, *player, random_type);
 }
 
-//void UpgradeBoxSpawner::TrySpawning(float deltaTime) {
-//	spawnTimer += deltaTime;
-//
-//	if (spawnTimer >= spawnCooldown) {
-//		SpawnUpgradeBox();
-//		std::string boxUpgradeType = "";
-//		switch (upgradeBoxList.back()->upgradeType)
-//		{
-//			case 0:
-//				boxUpgradeType = "Speed";
-//				break;
-//			case 1:
-//				boxUpgradeType = "Bullet Damage";
-//				break;
-//			case 2:
-//				boxUpgradeType = "Bullet Speed";
-//				break;
-//			case 3:
-//				boxUpgradeType = "Bullet Number";
-//				break;
-//		}
-//		std::cout << "Upgrade Box spawned with type : "<< boxUpgradeType << std::endl;
-//		spawnTimer = 0;
-//	}
-//}
-
-std::vector<Entities::UpgradeBox*>& UpgradeBoxSpawner::GetUpgradeBoxList() {
-	return upgradeBoxList;
+std::vector<Entities::UpgradeBox*>* UpgradeBoxSpawner::GetUpgradeBoxList() {
+	return &upgradeBoxList;
 }
 
 std::vector<Entities::DrawableEntity*>& UpgradeBoxSpawner::GetUpgradeBoxEntities()

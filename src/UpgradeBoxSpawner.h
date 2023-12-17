@@ -3,11 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
-#include "utils.h"
 
 namespace Entities {
 	class DrawableEntity;
-	class UpgradeBoc;
+	class UpgradeBox;
 	class Player;
 }
 
@@ -17,9 +16,8 @@ class UpgradeBoxSpawner {
 	public :
 		UpgradeBoxSpawner(std::vector<Entities::UpgradeBox*>& upgradeBoxList, int WindowWidth, GameManager* pGameManager);
 		~UpgradeBoxSpawner() = default;
-		//virtual void SpawnUpgradeBox();
 		virtual void SpawnUpgradeBox(sf::Shape* shape);
-		std::vector<Entities::UpgradeBox*>& GetUpgradeBoxList();
+		std::vector<Entities::UpgradeBox*>* GetUpgradeBoxList();
 		std::vector<Entities::DrawableEntity*>& GetUpgradeBoxEntities();
 		int windowWidth; 
 		Entities::Player* player;
@@ -27,8 +25,6 @@ class UpgradeBoxSpawner {
 		float spawnCooldown = 2;
 		float spawnTimer = 0;
 
-		//void TrySpawning(float deltaTime);
-		
 	private:
 		GameManager* gameManager;
 		std::vector<Entities::UpgradeBox*> upgradeBoxList;

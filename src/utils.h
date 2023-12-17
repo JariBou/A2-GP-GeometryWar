@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+// Should be safe to include in headers but if possible please avoid
+
 namespace Entities {
 	class Bullet;
 	class Foe;

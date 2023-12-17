@@ -20,7 +20,8 @@ class GameManager {
 public:
 	GameManager(sf::RenderWindow& window, int& score);
 
-	void SetPlayer(Entities::Player* pPlayer) { player = pPlayer;  std::cout << "Player Set !";}
+	// Imo simple setters and getters can be defined in the .h to avoid flooding the .cpp
+	void SetPlayer(Entities::Player* pPlayer) { player = pPlayer;}
 	void SetWaveManager(WaveManager* pWaveManager) { waveManager = pWaveManager; }
 	void SetEnemySpawner(EnemySpawner* pEnemySpawner) { enemySpawner = pEnemySpawner; }
 	void SetUpgradeBoxSpawner(UpgradeBoxSpawner* pUpgradeBoxSpawner) { UpgradeBoxSpawner = pUpgradeBoxSpawner; }
@@ -28,9 +29,9 @@ public:
 	void Reset();
 	
 	void AddBullet(Entities::Bullet* bullet);
-	std::vector<Entities::Bullet*>* GetBullets();
-
 	std::vector<Entities::Bullet*> bulletList;
+	std::vector<Entities::Bullet*>* GetBullets() { return &bulletList; }
+
 	Entities::Player* GetPlayer() { return player; }
 	sf::Vector2f GetWindowDimension() { return windowDimension; }
 	WaveManager* GetWaveManager() { return waveManager; }
@@ -39,6 +40,8 @@ public:
 	SFX::ParticleSystem* GetParticleSystem() { return particleSystem; }
 
 	int& score;
+
+private:
 	sf::Vector2f windowDimension;
 	Entities::Player* player = nullptr;
 	WaveManager* waveManager = nullptr;

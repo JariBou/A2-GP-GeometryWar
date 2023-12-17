@@ -6,6 +6,12 @@
 
 namespace SFX {
 
+	/// <summary>
+	/// Creates a Particle system
+	/// Cascading style:
+	/// -> ParticleSystem Manages ParticleCompounds (basically a list of Particles that together create an effect)
+	/// -> ParticleCompound manages individual Particles
+	/// </summary>
 	ParticleSystem::ParticleSystem()
 	{
 
@@ -54,34 +60,11 @@ namespace SFX {
 		}
 	}
 
+#pragma region Prefabs
+
 	void ParticleSystem::CreateExplosionAt(sf::Vector2f position, sf::Color color, float size, int numberOfParticles, float distanceFromOrigin, float minSpeed)
 	{
-		ParticleCompound* explosionCompound = new ParticleCompound();
-
-		int directionAngle = 360 / numberOfParticles;
-
-		float testingAngle = 0;
-
-		for (int i = 0; i < numberOfParticles; i++)
-		{
-			float angle = Utils::DegToRad(testingAngle + (rand() % directionAngle) - directionAngle / 2.);
-
-			float x = cos(angle) * distanceFromOrigin;
-			float y = sin(angle) * distanceFromOrigin;
-
-			sf::RectangleShape* particleShape = new sf::RectangleShape(sf::Vector2f(size, size));
-			particleShape->setPosition(position);
-			particleShape->setFillColor(color);
-
-			float speed = ((rand() % 1000) / 100.) + minSpeed;
-			Particle* pNewParticle = new Particle(*particleShape, 0.6, sf::Vector2f(x, y), speed);
-
-			explosionCompound->AddParticle(pNewParticle);
-
-			testingAngle += directionAngle;
-		}
-
-		AddParticleCompound(explosionCompound);
+		CreateDirectedExplosionAt(position, color, 360, 180, size, numberOfParticles, distanceFromOrigin, minSpeed);
 	}
 
 	void ParticleSystem::CreateDirectedExplosionAt(sf::Vector2f position, sf::Color color, float angle, float directionAngle, float size, int numberOfParticles, float distanceFromOrigin, float minSpeed)
@@ -114,5 +97,7 @@ namespace SFX {
 
 		AddParticleCompound(explosionCompound);
 	}
+
+#pragma endregion
 
 }

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "../GameManager.h"
 #include "../particles/ParticleSystem.h"
+#include "../utils.h"
 
 namespace Entities
 {

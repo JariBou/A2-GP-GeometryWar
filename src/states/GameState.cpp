@@ -5,6 +5,7 @@
 #include "../WaveManager.h"
 #include "../GameManager.h"
 #include "../particles/ParticleSystem.h"
+#include "../utils.h"
 
 namespace States {
 	GameState::GameState(sf::RenderWindow& window, sf::Font& MyFont, sf::Clock& frameClock, int& score) : State(frameClock), score(score)
@@ -242,8 +243,8 @@ namespace States {
 		}
 
 		Utils::CheckBulletListLife(*gameManager->GetBullets());
-		Utils::CheckFoeListLife(*(enemySpawner->GetFoes()));
-		Utils::CheckUpgradeListLife(upgradeBoxSpawner->GetUpgradeBoxList());
+		Utils::CheckFoeListLife(*enemySpawner->GetFoes());
+		Utils::CheckUpgradeListLife(*upgradeBoxSpawner->GetUpgradeBoxList());
 
 		enemySpawner->Update(deltaTime);
 		waveManager->Update(deltaTime);
@@ -318,7 +319,7 @@ namespace States {
 			en->Draw(window);
 		}
 
-		for (Entities::UpgradeBox* box : upgradeBoxSpawner->GetUpgradeBoxList()) {
+		for (Entities::UpgradeBox* box : *upgradeBoxSpawner->GetUpgradeBoxList()) {
 			box->Draw(window);
 		}
 

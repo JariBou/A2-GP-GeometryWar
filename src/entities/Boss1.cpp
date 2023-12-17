@@ -3,6 +3,7 @@
 #include "../GameManager.h"
 #include "../utils.h"
 #include "../WaveManager.h"
+#include "Player.h"
 
 Entities::Boss1::Boss1(sf::Shape& shape, float speed, float health, GameManager* gameManager) : Foe(shape, speed, gameManager)
 {
