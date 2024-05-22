@@ -56,7 +56,6 @@ namespace Entities
 
 		private:
 			GameManager* gameManager = nullptr;
-			std::vector<Bullet*> bullets;
 			std::vector<float> bulletAngles;
 			float thrustTimer = 0;
 			int chanceCount = 3; // Toutes les trois erreurs (pris un dégât ou enemie passe en bas de l'écran) le joueur perd une vie

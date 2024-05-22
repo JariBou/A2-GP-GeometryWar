@@ -129,7 +129,6 @@ namespace Entities
 					bullet->SetColor(sf::Color::Yellow);
 					bullet->SetPosition(sf::Vector2f(shape.getPosition().x + i * w - bulletSize.x / 2, shape.getPosition().y - rectangleBullet->getSize().y * 1.5));
 					this->gameManager->AddBullet(bullet);
-					bullets.push_back(bullet);
 				}
 			}
 		}
