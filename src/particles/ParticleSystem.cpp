@@ -19,6 +19,8 @@ namespace SFX {
 
 	void ParticleSystem::Update(float deltaTime)
 	{
+		this->CheckLifetimes();
+
 		for (ParticleCompound* pParticleCompound : this->particleCompoundList) {
 			pParticleCompound->Update(deltaTime);
 		}
@@ -40,6 +42,8 @@ namespace SFX {
 				it++;
 			}
 			else {
+				(*it)->Delete();
+				delete* it;
 				it = this->particleCompoundList.erase(it);
 			}
 		}
@@ -56,6 +60,7 @@ namespace SFX {
 		while (it != this->particleCompoundList.end())
 		{
 			(*it)->Delete();
+			delete* it;
 			it = this->particleCompoundList.erase(it);
 		}
 	}

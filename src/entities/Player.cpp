@@ -12,18 +12,18 @@ namespace Entities
 	using namespace std;
 
 
-	Player::Player(sf::Shape& shape, GameManager* pGameManager) : DrawableEntity(shape), gameManager(pGameManager) {
+	Player::Player(sf::Shape& shape, GameManager* pGameManager) : DrawableEntity(shape), gameManager(pGameManager) 
+	{
 		gameManager->SetPlayer(this);
 		windowDimension = gameManager->GetWindowDimension();
+		sf::FloatRect boundingBox = shape.getLocalBounds();
+		playerWidth = boundingBox.width + shape.getOutlineThickness() / 2;
+		playerHeight = boundingBox.height + shape.getOutlineThickness() / 2;
 	}
 
 
 	void Player::MovePlayer(float deltaTime)
 	{
-		sf::FloatRect boundingBox = shape.getLocalBounds();
-		playerWidth = boundingBox.width + shape.getOutlineThickness() / 2;
-		playerHeight = boundingBox.height + shape.getOutlineThickness() / 2;
-
 		//cout << "player Witdh : " << playerHeight << ", player Height : " << playerHeight << endl;
 		//cout << "x : " << shape.getPosition().x << ", y :" << shape.getPosition().y << endl;
 		//cout << "Window Height : " << windowHeight << ", Window Width : " << windowWidth << endl << endl;
@@ -63,7 +63,8 @@ namespace Entities
 		Move(Utils::NormalizeVector(moveVector) * speed * (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ? 0.8f : 1), deltaTime);
 	}
 
-	void Player::Draw(sf::RenderWindow& window) {
+	void Player::Draw(sf::RenderWindow& window) 
+	{
 		window.draw(this->shape);
 
 		//Hitbox

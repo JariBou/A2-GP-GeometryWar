@@ -34,6 +34,7 @@ namespace SFX {
 				it++;
 			}
 			else {
+				delete* it;
 				it = this->particlesList.erase(it);
 			}
 		}
@@ -49,6 +50,7 @@ namespace SFX {
 		auto it = this->particlesList.begin();
 		while (it != this->particlesList.end())
 		{
+			delete *it;
 			it = this->particlesList.erase(it);
 		}
 	}

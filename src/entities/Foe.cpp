@@ -12,7 +12,6 @@ namespace Entities {
 		this->windowDimension = gameManager->GetWindowDimension();
 	}
 	
-	
 	bool Foe::isDead() {
 		return this->health <= 0;
 	}

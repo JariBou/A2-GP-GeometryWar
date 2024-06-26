@@ -18,7 +18,7 @@ namespace Entities
 		public:
 			DrawableEntity(sf::Shape& shape);
 
-			virtual ~DrawableEntity() = default;
+			virtual ~DrawableEntity();
 
 			virtual void Draw(sf::RenderWindow& window);
 

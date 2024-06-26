@@ -1,8 +1,14 @@
 #include "DrawableEntity.h"
+#include <iostream>
 
 namespace Entities
 {
 	DrawableEntity::DrawableEntity(sf::Shape& shape) : shape(shape){}
+
+	DrawableEntity::~DrawableEntity()
+	{
+		delete &shape;
+	}
 
 	void DrawableEntity::Draw(sf::RenderWindow& Window) {
 		Window.draw(this->shape);

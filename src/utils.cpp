@@ -29,6 +29,7 @@ namespace Utils {
 				bulletVectorIterator++;
 			}
 			else {
+				delete *bulletVectorIterator;
 				bulletVectorIterator = bullets.erase(bulletVectorIterator);
 				/*std::cout << "Bullet deleted" << std::endl;*/
 			}
@@ -46,6 +47,7 @@ namespace Utils {
 					(*foeVectorIterator)->OnKilledByPlayer();
 				}
 				(*foeVectorIterator)->OnDestroyed();
+				delete *foeVectorIterator;
 				foeVectorIterator = foes.erase(foeVectorIterator);
 				std::cout << "Foe deleted" << std::endl;
 			}
@@ -59,6 +61,7 @@ namespace Utils {
 				upgradeVectorIterator++;
 			}
 			else {
+				delete *upgradeVectorIterator;
 				upgradeVectorIterator = boxes.erase(upgradeVectorIterator);
 				std::cout << "Upgrade deleted" << std::endl;
 			}
@@ -73,6 +76,7 @@ namespace Utils {
 				upgradeVectorIterator++;
 			}
 			else {
+				delete *upgradeVectorIterator;
 				upgradeVectorIterator = boxes->erase(upgradeVectorIterator);
 				std::cout << "Upgrade deleted" << std::endl;
 			}

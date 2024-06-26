@@ -19,7 +19,6 @@ namespace Entities
 		public:
 
 			int upgradeLevel = 0;
-			bool upgraded;
 			int lives = 3;
 
 			//Upgradable Variables
